@@ -1,0 +1,13 @@
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\Puzzle_Image_Game.exe.config
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\Puzzle_Image_Game.exe
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\Puzzle_Image_Game.pdb
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.csproj.AssemblyReference.cache
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.Properties.Resources.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.csproj.GenerateResource.cache
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.csproj.CoreCompileInputs.cache
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.exe
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.pdb
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.ChooseLevelForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.PuzzleGameForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.ChooseImageForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.PowerModifier.resources
