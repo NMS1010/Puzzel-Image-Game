@@ -13,6 +13,10 @@ namespace Puzzle_Image_Game
 {
     public partial class PowerModifier : Form
     {
+
+        public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressStart;
+        public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressCancel;
+
         public PowerModifier()
         {
             InitializeComponent();
@@ -35,17 +39,19 @@ namespace Puzzle_Image_Game
                 lbHour.Text =FunctionInGame.HandleTime(countDownTime.Hours + countDownTime.Days*24);
                 lbMinute.Text = FunctionInGame.HandleTime(countDownTime.Minutes);
                 lbSecond.Text = FunctionInGame.HandleTime(countDownTime.Seconds);
-                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
-                FunctionInGame.isPowerStartClicked = true;
                 FunctionInGame.modePowerChosen = chooseModeCbx.Text;
+                FunctionInGame.isPowerStartClicked = true;
+                FunctionInGame.timeSet = timeCbx;
+                HandleTimeWhenPressStart?.Invoke(this, new ClosePowerModifierFormEvent(lbHour.Text, lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
+                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
             }
         }
 
         [Obsolete]
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            if(FunctionInGame.Ts.IsAlive)
-                FunctionInGame.Ts.Suspend();
+            HandleTimeWhenPressCancel?.Invoke(this, new ClosePowerModifierFormEvent());
+            FunctionInGame.StopThread();
             startBtn.Enabled = true;
             timePicker.Enabled = true;
             chooseModeCbx.Enabled = true;
@@ -65,13 +71,12 @@ namespace Puzzle_Image_Game
                 startBtn.Enabled = false;
                 timePicker.Enabled = false;
                 chooseModeCbx.Text= FunctionInGame.modePowerChosen;
+                timePicker.Value = FunctionInGame.timeSet;
                 chooseModeCbx.Enabled = false;
                 cancelBtn.Enabled = true;
                 lbHour.Text = FunctionInGame.timeList[0];
                 lbMinute.Text = FunctionInGame.timeList[1];
                 lbSecond.Text = FunctionInGame.timeList[2];
-                if (FunctionInGame.Ts.IsAlive) 
-                    FunctionInGame.Ts.Suspend();
                 FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
             }
         }

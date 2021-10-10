@@ -13,13 +13,18 @@ namespace Puzzle_Image_Game
     {
         public event EventHandler<CloseChooseLevelFormEvent> closeChooseLevelEvent;
         public event EventHandler<CloseChooseImageFormEvent> closeChooseImageEvent;
+        public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressStartEvent;
+        public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressCancelEvent;
 
         private ChooseLevelForm chooseLvForm;
         private ChooseImageForm chooseImgForm;
-        private static Thread ts;
+        private PowerModifier powerFm;
+        private static List<Thread> threads;
 
-        public static Thread Ts { get => ts; set => ts = value; }
-
+        public FunctionInGame()
+        {
+            threads = new List<Thread>();
+        }
         public List<Image> Mix(List<Image> imgList, int count)
         {
             List<Image> imgs = new List<Image>();
@@ -80,9 +85,21 @@ namespace Puzzle_Image_Game
                 }
             }
         }
+
+        [Obsolete]
+        public static void StopThread()
+        {
+            foreach(Thread thread in threads)
+            {
+                if (thread.IsAlive)
+                {
+                    thread.Suspend();
+                }
+            }
+        }
         public static void TimeCount(Label lbHour, Label lbMinute, Label lbSecond)
         {
-            Ts = new Thread(() =>
+            Thread Ts = new Thread(() =>
             {
                 while (true)
                 {
@@ -91,18 +108,18 @@ namespace Puzzle_Image_Game
                     int s = Convert.ToInt32(lbSecond.Text);
                     if (h == 0 && m == 0 && s == 0) return;
                     Timer(ref h, ref m, ref s);
-                    Thread.Sleep(1000);
-                    lbSecond.Text = HandleTime(s);
-                    lbMinute.Text = HandleTime(m);
-                    lbHour.Text = HandleTime(h);
                     timeList.Clear();
                     timeList.Add(lbHour.Text);
                     timeList.Add(lbMinute.Text);
                     timeList.Add(lbSecond.Text);
+                    Thread.Sleep(1000);
+                    lbSecond.Text = HandleTime(s);
+                    lbMinute.Text = HandleTime(m);
+                    lbHour.Text = HandleTime(h);
                 }
 
             });
-            Ts.IsBackground = true;
+            threads.Add(Ts);
             Ts.Start();
         }
         public void ChooseImage()
@@ -128,9 +145,11 @@ namespace Puzzle_Image_Game
         public static List<string> timeList = new List<string>();
         public static bool isPowerStartClicked = false;
         public static string modePowerChosen;
+        public static DateTime timeSet;
+        private bool flagPower = true;
         public void PowerModify()
         {
-            PowerModifier powerFm = new PowerModifier();
+            powerFm = new PowerModifier();
             if (Application.OpenForms[powerFm.Name] == null)
             {
                 powerFm.Show();
@@ -139,7 +158,25 @@ namespace Puzzle_Image_Game
             {
                 Application.OpenForms[powerFm.Name].Focus();
             }
+            if (flagPower)
+            {
+                powerFm.HandleTimeWhenPressStart += PowerFm_HandleTimeWhenPressStart;
+                powerFm.HandleTimeWhenPressCancel += PowerFm_HandleTimeWhenPressCancel;
+                flagPower = false;
+            }
+
         }
+
+        private void PowerFm_HandleTimeWhenPressCancel(object sender, ClosePowerModifierFormEvent e)
+        {
+            closePowerFormWhenPressCancelEvent?.Invoke(sender, new ClosePowerModifierFormEvent());
+        }
+
+        private void PowerFm_HandleTimeWhenPressStart(object sender, ClosePowerModifierFormEvent e)
+        {
+            closePowerFormWhenPressStartEvent?.Invoke(sender, new ClosePowerModifierFormEvent(e.Hour, e.Minute, e.Second, e.Mode));
+        }
+
         public void ChooseMode()
         {
 

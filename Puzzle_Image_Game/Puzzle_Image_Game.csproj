@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClosePowerModifierFormEvent.cs" />
     <Compile Include="ManageFileImage.cs" />
     <Compile Include="BlankBoard.cs" />
     <Compile Include="Board.cs" />

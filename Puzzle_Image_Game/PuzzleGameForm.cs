@@ -25,6 +25,7 @@ namespace Puzzle_Image_Game
         private CropImg crpImg;
         private FunctionInGame fncGame;
         private Thread t;
+        private Panel panelViewTime;
 
         public PuzzleGameForm()
         {
@@ -96,6 +97,7 @@ namespace Puzzle_Image_Game
             path = @"1.jpg";
             List<Image> imgList = new List<Image>();
             fncGame = new FunctionInGame();
+            panelViewTime = new Panel() {Location = new Point(100,100) };
             resizedImg = new Size(width, height);
             brdBlank = new BlankBoard(numberOfRow, numberOfCol, width, height);
             brdImage = new ImageBoard(numberOfRow, numberOfCol, width, height, brdBlank);
@@ -105,10 +107,43 @@ namespace Puzzle_Image_Game
             brdBlank.OnFilledPictureBox += Brd_OnFilledPictureBox;
             Start();
         }
+        private bool flagPower = true;
 
+        [Obsolete]
         private void powerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fncGame.PowerModify();
+            if (flagPower)
+            {
+                fncGame.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
+                fncGame.closePowerFormWhenPressStartEvent += FncGame_closePowerFormWhenPressStartEvent;
+                flagPower = false;
+            }
+
+        }
+
+        [Obsolete]
+        private void FncGame_closePowerFormWhenPressCancelEvent(object sender, ClosePowerModifierFormEvent e)
+        {
+            FunctionInGame.StopThread();
+        }
+
+        private void FncGame_closePowerFormWhenPressStartEvent(object sender, ClosePowerModifierFormEvent e)
+        {
+            lbTxt.Text = $"    Your PC will\n {e.Mode} about: ";
+            lbH.Text = e.Hour;
+            lbM.Text = e.Minute;
+            lbS.Text = e.Second;
+            lbNotation1.Text = ":";
+            lbNotation2.Text = ":";
+            FunctionInGame.TimeCount(lbH, lbM, lbS);
+            powerGrpBox.Visible = true;
+        }
+
+        private void Time_ChangeEvent(object sender, EventArgs e)
+        {
+            if (lbH.Text != "00" || lbM.Text != "00" || lbS.Text != "00") return;
+            Power.PowerManager(FunctionInGame.modePowerChosen);
         }
     }
 }
