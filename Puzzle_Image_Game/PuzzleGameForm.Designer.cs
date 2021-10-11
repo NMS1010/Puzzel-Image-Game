@@ -30,6 +30,13 @@ namespace Puzzle_Image_Game
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.powerGrpBox = new System.Windows.Forms.GroupBox();
+            this.lbS = new System.Windows.Forms.Label();
+            this.lbM = new System.Windows.Forms.Label();
+            this.lbNotation2 = new System.Windows.Forms.Label();
+            this.lbNotation1 = new System.Windows.Forms.Label();
+            this.lbH = new System.Windows.Forms.Label();
+            this.lbTxt = new System.Windows.Forms.Label();
             this.lbSecond = new System.Windows.Forms.Label();
             this.lbMinute = new System.Windows.Forms.Label();
             this.lbHour = new System.Windows.Forms.Label();
@@ -40,18 +47,11 @@ namespace Puzzle_Image_Game
             this.chooseImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.chooseLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.powerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.powerGrpBox = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.lbTxt = new System.Windows.Forms.Label();
-            this.lbH = new System.Windows.Forms.Label();
-            this.lbNotation1 = new System.Windows.Forms.Label();
-            this.lbNotation2 = new System.Windows.Forms.Label();
-            this.lbM = new System.Windows.Forms.Label();
-            this.lbS = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            this.powerGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginPtrb)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            this.powerGrpBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -68,6 +68,84 @@ namespace Puzzle_Image_Game
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Original Image";
+            // 
+            // powerGrpBox
+            // 
+            this.powerGrpBox.Controls.Add(this.lbS);
+            this.powerGrpBox.Controls.Add(this.lbM);
+            this.powerGrpBox.Controls.Add(this.lbNotation2);
+            this.powerGrpBox.Controls.Add(this.lbNotation1);
+            this.powerGrpBox.Controls.Add(this.lbH);
+            this.powerGrpBox.Controls.Add(this.lbTxt);
+            this.powerGrpBox.ForeColor = System.Drawing.Color.Red;
+            this.powerGrpBox.Location = new System.Drawing.Point(929, 177);
+            this.powerGrpBox.Name = "powerGrpBox";
+            this.powerGrpBox.Size = new System.Drawing.Size(208, 136);
+            this.powerGrpBox.TabIndex = 4;
+            this.powerGrpBox.TabStop = false;
+            this.powerGrpBox.Text = "Power";
+            this.powerGrpBox.Visible = false;
+            // 
+            // lbS
+            // 
+            this.lbS.AutoSize = true;
+            this.lbS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbS.Location = new System.Drawing.Point(170, 98);
+            this.lbS.Name = "lbS";
+            this.lbS.Size = new System.Drawing.Size(24, 18);
+            this.lbS.TabIndex = 5;
+            this.lbS.Text = "00";
+            this.lbS.TextChanged += new System.EventHandler(this.Time_ChangeEvent);
+            // 
+            // lbM
+            // 
+            this.lbM.AutoSize = true;
+            this.lbM.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbM.Location = new System.Drawing.Point(88, 98);
+            this.lbM.Name = "lbM";
+            this.lbM.Size = new System.Drawing.Size(24, 18);
+            this.lbM.TabIndex = 4;
+            this.lbM.Text = "00";
+            this.lbM.TextChanged += new System.EventHandler(this.Time_ChangeEvent);
+            // 
+            // lbNotation2
+            // 
+            this.lbNotation2.AutoSize = true;
+            this.lbNotation2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNotation2.Location = new System.Drawing.Point(129, 98);
+            this.lbNotation2.Name = "lbNotation2";
+            this.lbNotation2.Size = new System.Drawing.Size(0, 18);
+            this.lbNotation2.TabIndex = 3;
+            // 
+            // lbNotation1
+            // 
+            this.lbNotation1.AutoSize = true;
+            this.lbNotation1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNotation1.Location = new System.Drawing.Point(47, 98);
+            this.lbNotation1.Name = "lbNotation1";
+            this.lbNotation1.Size = new System.Drawing.Size(0, 18);
+            this.lbNotation1.TabIndex = 2;
+            // 
+            // lbH
+            // 
+            this.lbH.AutoSize = true;
+            this.lbH.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbH.Location = new System.Drawing.Point(6, 98);
+            this.lbH.Name = "lbH";
+            this.lbH.Size = new System.Drawing.Size(24, 18);
+            this.lbH.TabIndex = 1;
+            this.lbH.Text = "00";
+            this.lbH.TextChanged += new System.EventHandler(this.Time_ChangeEvent);
+            // 
+            // lbTxt
+            // 
+            this.lbTxt.AutoSize = true;
+            this.lbTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTxt.ForeColor = System.Drawing.Color.Red;
+            this.lbTxt.Location = new System.Drawing.Point(23, 20);
+            this.lbTxt.Name = "lbTxt";
+            this.lbTxt.Size = new System.Drawing.Size(0, 24);
+            this.lbTxt.TabIndex = 0;
             // 
             // lbSecond
             // 
@@ -153,81 +231,6 @@ namespace Puzzle_Image_Game
             this.powerToolStripMenuItem.Text = "Power";
             this.powerToolStripMenuItem.Click += new System.EventHandler(this.powerToolStripMenuItem_Click);
             // 
-            // powerGrpBox
-            // 
-            this.powerGrpBox.Controls.Add(this.lbS);
-            this.powerGrpBox.Controls.Add(this.lbM);
-            this.powerGrpBox.Controls.Add(this.lbNotation2);
-            this.powerGrpBox.Controls.Add(this.lbNotation1);
-            this.powerGrpBox.Controls.Add(this.lbH);
-            this.powerGrpBox.Controls.Add(this.lbTxt);
-            this.powerGrpBox.ForeColor = System.Drawing.Color.Red;
-            this.powerGrpBox.Location = new System.Drawing.Point(929, 177);
-            this.powerGrpBox.Name = "powerGrpBox";
-            this.powerGrpBox.Size = new System.Drawing.Size(208, 136);
-            this.powerGrpBox.TabIndex = 4;
-            this.powerGrpBox.TabStop = false;
-            this.powerGrpBox.Text = "Power";
-            this.powerGrpBox.Visible = false;
-            // 
-            // lbTxt
-            // 
-            this.lbTxt.AutoSize = true;
-            this.lbTxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTxt.ForeColor = System.Drawing.Color.Red;
-            this.lbTxt.Location = new System.Drawing.Point(23, 20);
-            this.lbTxt.Name = "lbTxt";
-            this.lbTxt.Size = new System.Drawing.Size(0, 24);
-            this.lbTxt.TabIndex = 0;
-            // 
-            // lbH
-            // 
-            this.lbH.AutoSize = true;
-            this.lbH.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbH.Location = new System.Drawing.Point(6, 98);
-            this.lbH.Name = "lbH";
-            this.lbH.Size = new System.Drawing.Size(0, 18);
-            this.lbH.TabIndex = 1;
-            this.lbH.TextChanged += new System.EventHandler(this.Time_ChangeEvent);
-            // 
-            // lbNotation1
-            // 
-            this.lbNotation1.AutoSize = true;
-            this.lbNotation1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNotation1.Location = new System.Drawing.Point(47, 98);
-            this.lbNotation1.Name = "lbNotation1";
-            this.lbNotation1.Size = new System.Drawing.Size(0, 18);
-            this.lbNotation1.TabIndex = 2;
-            // 
-            // lbNotation2
-            // 
-            this.lbNotation2.AutoSize = true;
-            this.lbNotation2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNotation2.Location = new System.Drawing.Point(129, 98);
-            this.lbNotation2.Name = "lbNotation2";
-            this.lbNotation2.Size = new System.Drawing.Size(0, 18);
-            this.lbNotation2.TabIndex = 3;
-            // 
-            // lbM
-            // 
-            this.lbM.AutoSize = true;
-            this.lbM.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbM.Location = new System.Drawing.Point(88, 98);
-            this.lbM.Name = "lbM";
-            this.lbM.Size = new System.Drawing.Size(0, 18);
-            this.lbM.TabIndex = 4;
-            this.lbM.TextChanged += new System.EventHandler(this.Time_ChangeEvent);
-            // 
-            // lbS
-            // 
-            this.lbS.AutoSize = true;
-            this.lbS.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbS.Location = new System.Drawing.Point(170, 98);
-            this.lbS.Name = "lbS";
-            this.lbS.Size = new System.Drawing.Size(0, 18);
-            this.lbS.TabIndex = 5;
-            this.lbS.TextChanged += new System.EventHandler(this.Time_ChangeEvent);
-            // 
             // PuzzleGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,11 +244,11 @@ namespace Puzzle_Image_Game
             this.Load += new System.EventHandler(this.PuzzleGameForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.powerGrpBox.ResumeLayout(false);
+            this.powerGrpBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginPtrb)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.powerGrpBox.ResumeLayout(false);
-            this.powerGrpBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

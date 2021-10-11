@@ -223,6 +223,7 @@ namespace Puzzle_Image_Game
             this.MaximizeBox = false;
             this.Name = "PowerModifier";
             this.Text = "BK AutoShutDown";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PowerModifier_FormClosing);
             this.Load += new System.EventHandler(this.PowerModifier_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

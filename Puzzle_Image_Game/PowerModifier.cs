@@ -16,6 +16,7 @@ namespace Puzzle_Image_Game
 
         public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressStart;
         public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressCancel;
+        public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenClosing;
 
         public PowerModifier()
         {
@@ -39,11 +40,11 @@ namespace Puzzle_Image_Game
                 lbHour.Text =FunctionInGame.HandleTime(countDownTime.Hours + countDownTime.Days*24);
                 lbMinute.Text = FunctionInGame.HandleTime(countDownTime.Minutes);
                 lbSecond.Text = FunctionInGame.HandleTime(countDownTime.Seconds);
+                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
                 FunctionInGame.modePowerChosen = chooseModeCbx.Text;
                 FunctionInGame.isPowerStartClicked = true;
                 FunctionInGame.timeSet = timeCbx;
                 HandleTimeWhenPressStart?.Invoke(this, new ClosePowerModifierFormEvent(lbHour.Text, lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
-                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
             }
         }
 
@@ -52,6 +53,7 @@ namespace Puzzle_Image_Game
         {
             HandleTimeWhenPressCancel?.Invoke(this, new ClosePowerModifierFormEvent());
             FunctionInGame.StopThread();
+            FunctionInGame.isPowerStartClicked = false;
             startBtn.Enabled = true;
             timePicker.Enabled = true;
             chooseModeCbx.Enabled = true;
@@ -66,19 +68,32 @@ namespace Puzzle_Image_Game
         [Obsolete]
         private void PowerModifier_Load(object sender, EventArgs e)
         {
-           if (FunctionInGame.isPowerStartClicked)
+            chooseModeCbx.Text = FunctionInGame.modePowerChosen;
+            timePicker.Value = FunctionInGame.timeSet;
+            lbHour.Text = FunctionInGame.timeList[0];
+            lbMinute.Text = FunctionInGame.timeList[1];
+            lbSecond.Text = FunctionInGame.timeList[2];
+            if (FunctionInGame.isPowerStartClicked)
             {
+                
                 startBtn.Enabled = false;
                 timePicker.Enabled = false;
-                chooseModeCbx.Text= FunctionInGame.modePowerChosen;
-                timePicker.Value = FunctionInGame.timeSet;
                 chooseModeCbx.Enabled = false;
                 cancelBtn.Enabled = true;
-                lbHour.Text = FunctionInGame.timeList[0];
-                lbMinute.Text = FunctionInGame.timeList[1];
-                lbSecond.Text = FunctionInGame.timeList[2];
                 FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
             }
+            else
+            {
+                startBtn.Enabled = true;
+                timePicker.Enabled = true;
+                chooseModeCbx.Enabled = true;
+            }
+        }
+
+        private void PowerModifier_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(!FunctionInGame.isPowerStartClicked)
+                HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent());
         }
     }
 }

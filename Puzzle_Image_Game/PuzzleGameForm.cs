@@ -109,17 +109,31 @@ namespace Puzzle_Image_Game
         }
         private bool flagPower = true;
 
+        private void SetTimeForPowerForm()
+        {
+            FunctionInGame.timeList.Clear();
+            FunctionInGame.timeList.Add(lbH.Text);
+            FunctionInGame.timeList.Add(lbM.Text);
+            FunctionInGame.timeList.Add(lbS.Text);
+        }
         [Obsolete]
         private void powerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SetTimeForPowerForm();
             fncGame.PowerModify();
             if (flagPower)
             {
                 fncGame.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
                 fncGame.closePowerFormWhenPressStartEvent += FncGame_closePowerFormWhenPressStartEvent;
+                fncGame.closePowerFormWhenClosingEvent += FncGame_closePowerFormWhenClosingEvent;
                 flagPower = false;
             }
 
+        }
+
+        private void FncGame_closePowerFormWhenClosingEvent(object sender, ClosePowerModifierFormEvent e)
+        {
+            powerGrpBox.Visible = false;
         }
 
         [Obsolete]

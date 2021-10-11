@@ -15,6 +15,7 @@ namespace Puzzle_Image_Game
         public event EventHandler<CloseChooseImageFormEvent> closeChooseImageEvent;
         public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressStartEvent;
         public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressCancelEvent;
+        public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenClosingEvent;
 
         private ChooseLevelForm chooseLvForm;
         private ChooseImageForm chooseImgForm;
@@ -96,6 +97,7 @@ namespace Puzzle_Image_Game
                     thread.Suspend();
                 }
             }
+            threads.Clear();
         }
         public static void TimeCount(Label lbHour, Label lbMinute, Label lbSecond)
         {
@@ -144,9 +146,8 @@ namespace Puzzle_Image_Game
 
         public static List<string> timeList = new List<string>();
         public static bool isPowerStartClicked = false;
-        public static string modePowerChosen;
-        public static DateTime timeSet;
-        private bool flagPower = true;
+        public static string modePowerChosen = "Shut Down";
+        public static DateTime timeSet = DateTime.Now;
         public void PowerModify()
         {
             powerFm = new PowerModifier();
@@ -158,13 +159,15 @@ namespace Puzzle_Image_Game
             {
                 Application.OpenForms[powerFm.Name].Focus();
             }
-            if (flagPower)
-            {
-                powerFm.HandleTimeWhenPressStart += PowerFm_HandleTimeWhenPressStart;
-                powerFm.HandleTimeWhenPressCancel += PowerFm_HandleTimeWhenPressCancel;
-                flagPower = false;
-            }
+            powerFm.HandleTimeWhenPressStart += PowerFm_HandleTimeWhenPressStart;
+            powerFm.HandleTimeWhenPressCancel += PowerFm_HandleTimeWhenPressCancel;
+            powerFm.HandleTimeWhenClosing += PowerFm_HandleTimeWhenClosing;
 
+        }
+
+        private void PowerFm_HandleTimeWhenClosing(object sender, ClosePowerModifierFormEvent e)
+        {
+            closePowerFormWhenClosingEvent?.Invoke(sender, new ClosePowerModifierFormEvent());
         }
 
         private void PowerFm_HandleTimeWhenPressCancel(object sender, ClosePowerModifierFormEvent e)
