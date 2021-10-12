@@ -67,6 +67,27 @@ namespace Puzzle_Image_Game
         {
             
         }
+        
+        public void ChooseImage()
+        {
+            chooseImgForm = new ChooseImageForm();
+            
+            if(Application.OpenForms[chooseImgForm.Name] == null)
+            {
+                chooseImgForm.Show();
+            }
+            else
+            {
+                Application.OpenForms[chooseImgForm.Name].Focus();
+            }
+            chooseImgForm.closeChooseImgForm += ChooseImgForm_closeChooseImgForm;
+        }
+
+        private void ChooseImgForm_closeChooseImgForm(object sender, CloseChooseImageFormEvent e)
+        {
+            closeChooseImageEvent?.Invoke(sender, new CloseChooseImageFormEvent(e.ImgPath));
+            chooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImgForm;
+        }
 
         public static string HandleTime(int i)
         {
@@ -90,7 +111,7 @@ namespace Puzzle_Image_Game
         [Obsolete]
         public static void StopThread()
         {
-            foreach(Thread thread in threads)
+            foreach (Thread thread in threads)
             {
                 if (thread.IsAlive)
                 {
@@ -124,26 +145,6 @@ namespace Puzzle_Image_Game
             threads.Add(Ts);
             Ts.Start();
         }
-        public void ChooseImage()
-        {
-            chooseImgForm = new ChooseImageForm();
-            
-            if(Application.OpenForms[chooseImgForm.Name] == null)
-            {
-                chooseImgForm.Show();
-            }
-            else
-            {
-                Application.OpenForms[chooseImgForm.Name].Focus();
-            }
-            chooseImgForm.closeChooseImgForm += ChooseImgForm_closeChooseImgForm;
-        }
-
-        private void ChooseImgForm_closeChooseImgForm(object sender, CloseChooseImageFormEvent e)
-        {
-            closeChooseImageEvent?.Invoke(sender, new CloseChooseImageFormEvent(e.ImgPath));
-        }
-
         public static List<string> timeList = new List<string>();
         public static bool isPowerStartClicked = false;
         public static string modePowerChosen = "Shut Down";

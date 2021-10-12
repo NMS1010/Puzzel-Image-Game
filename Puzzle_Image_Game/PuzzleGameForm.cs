@@ -57,32 +57,33 @@ namespace Puzzle_Image_Game
             brdBlank.DrawBoard(fncGame.Mix(imgList, numberOfCol * numberOfRow), this);
             brdImage.DrawBoard(fncGame.Mix(imgList, numberOfCol * numberOfRow), this);
         }
-        private bool flagLevel = true;
+        //private bool flagLevel = true;
         private void chooseLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fncGame.ChooseLevel(numberOfCol);
             
-            if (flagLevel)
-            {
+            //if (flagLevel)
+            //{
                 fncGame.closeChooseLevelEvent += FncGame_closeChooseLevelEvent;
-                flagLevel = false;
-            }
+                //flagLevel = false;
+            //}
         }
 
         private void FncGame_closeChooseLevelEvent(object sender, CloseChooseLevelFormEvent e)
         {
             numberOfRow = numberOfCol = Convert.ToInt32(e.Level);
             Start();
+            /**/fncGame.closeChooseLevelEvent -= FncGame_closeChooseLevelEvent;
         }
-        private bool flagImg = true;
+        //private bool flagImg = true;
         private void chooseImageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             fncGame.ChooseImage();
-            if (flagImg)
-            {
+            //if (flagImg)
+            //{
                 fncGame.closeChooseImageEvent += FncGame_closeChooseImageEvent;
-                flagImg = false;
-            }
+                //flagImg = false;
+            //}
         }
 
         private void FncGame_closeChooseImageEvent(object sender, CloseChooseImageFormEvent e)
@@ -90,6 +91,7 @@ namespace Puzzle_Image_Game
             path = e.ImgPath;
             OriginPtrb.Image = new Bitmap(Image.FromFile(path), resizedImg);
             Start();
+            /**/fncGame.closeChooseImageEvent -= FncGame_closeChooseImageEvent;
         }
 
         private void PuzzleGameForm_Load(object sender, EventArgs e)
@@ -121,25 +123,27 @@ namespace Puzzle_Image_Game
         {
             SetTimeForPowerForm();
             fncGame.PowerModify();
-            if (flagPower)
-            {
+            //if (flagPower)
+            //{
                 fncGame.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
                 fncGame.closePowerFormWhenPressStartEvent += FncGame_closePowerFormWhenPressStartEvent;
                 fncGame.closePowerFormWhenClosingEvent += FncGame_closePowerFormWhenClosingEvent;
                 flagPower = false;
-            }
+            //}
 
         }
 
         private void FncGame_closePowerFormWhenClosingEvent(object sender, ClosePowerModifierFormEvent e)
         {
             powerGrpBox.Visible = false;
+            //fncGame.closePowerFormWhenClosingEvent -= FncGame_closePowerFormWhenClosingEvent;
         }
 
         [Obsolete]
         private void FncGame_closePowerFormWhenPressCancelEvent(object sender, ClosePowerModifierFormEvent e)
         {
             FunctionInGame.StopThread();
+            //fncGame.closePowerFormWhenPressCancelEvent -= FncGame_closePowerFormWhenPressCancelEvent;
         }
 
         private void FncGame_closePowerFormWhenPressStartEvent(object sender, ClosePowerModifierFormEvent e)
@@ -152,6 +156,7 @@ namespace Puzzle_Image_Game
             lbNotation2.Text = ":";
             FunctionInGame.TimeCount(lbH, lbM, lbS);
             powerGrpBox.Visible = true;
+            //fncGame.closePowerFormWhenPressStartEvent -= FncGame_closePowerFormWhenPressStartEvent;
         }
 
         private void Time_ChangeEvent(object sender, EventArgs e)

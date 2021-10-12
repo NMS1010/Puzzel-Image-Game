@@ -75,7 +75,6 @@ namespace Puzzle_Image_Game
             lbSecond.Text = FunctionInGame.timeList[2];
             if (FunctionInGame.isPowerStartClicked)
             {
-                
                 startBtn.Enabled = false;
                 timePicker.Enabled = false;
                 chooseModeCbx.Enabled = false;
