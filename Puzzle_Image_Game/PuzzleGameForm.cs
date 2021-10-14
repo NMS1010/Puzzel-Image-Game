@@ -146,7 +146,7 @@ namespace Puzzle_Image_Game
 
         private void FncGame_closePowerFormWhenPressStartEvent(object sender, ClosePowerModifierFormEvent e)
         {
-            lbTxt.Text = $"    Your PC will\n {e.Mode} about: ";
+            lbTxt.Text = $"    Your PC will\n {e.Mode} in about: ";
             lbH.Text = e.Hour;
             lbM.Text = e.Minute;
             lbS.Text = e.Second;
