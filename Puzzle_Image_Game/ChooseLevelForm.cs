@@ -15,7 +15,7 @@ namespace Puzzle_Image_Game
         private Level lv;
 
         public  Level Lv { get => lv; set => lv = value; }
-        public event EventHandler<CloseChooseLevelFormEvent> CloseFormEvent;
+        public event EventHandler<CloseChooseLevelFormEvent> CloseLevelFormEvent;
 
         public ChooseLevelForm()
         {
@@ -32,7 +32,7 @@ namespace Puzzle_Image_Game
 
         private void btnOKForm2_Click(object sender, EventArgs e)
         {
-            CloseFormEvent?.Invoke(sender, new CloseChooseLevelFormEvent(Lv.LevelChoosen()));
+            CloseLevelFormEvent?.Invoke(sender, new CloseChooseLevelFormEvent(Lv.LevelChoosen()));
             Close();
         }
     }

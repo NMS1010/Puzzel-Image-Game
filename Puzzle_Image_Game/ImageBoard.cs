@@ -11,6 +11,7 @@ namespace Puzzle_Image_Game
     class ImageBoard : Board
     {
         public override event EventHandler<FilledPictureBoxEventArgs> OnFilledPictureBox;
+        public event EventHandler OnClickPictureBox;
         private Panel panelImgList;
         private BlankBoard brdBlank;
 
@@ -38,7 +39,10 @@ namespace Puzzle_Image_Game
         {
             Reset();
             int index = 0;
-
+            while (imgs[index] == null)
+            {
+                index++;
+            }
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
                 var prevPicImage = new PictureBox() { Size = new Size(0, 0), Location = new Point(0, i * imgs[index].Height) };
@@ -56,6 +60,7 @@ namespace Puzzle_Image_Game
 
         private void CurrPicImage_MouseDown(object sender, MouseEventArgs e)
         {
+            OnClickPictureBox?.Invoke(sender, e);
             var ptr = sender as PictureBox;
             if (ptr.Image == null) return;
             droppedImg = false;

@@ -62,11 +62,11 @@ namespace Puzzle_Image_Game
             this.radioButton8.AutoSize = true;
             this.radioButton8.Location = new System.Drawing.Point(299, 87);
             this.radioButton8.Name = "radioButton8";
-            this.radioButton8.Size = new System.Drawing.Size(110, 17);
+            this.radioButton8.Size = new System.Drawing.Size(170, 17);
             this.radioButton8.TabIndex = 0;
             this.radioButton8.TabStop = true;
             this.radioButton8.Tag = "10";
-            this.radioButton8.Text = "Challenger(10x10)";
+            this.radioButton8.Text = "Challenger(10x10) (10 minutes)";
             this.radioButton8.UseVisualStyleBackColor = true;
             // 
             // radioButton7
@@ -74,11 +74,11 @@ namespace Puzzle_Image_Game
             this.radioButton7.AutoSize = true;
             this.radioButton7.Location = new System.Drawing.Point(299, 64);
             this.radioButton7.Name = "radioButton7";
-            this.radioButton7.Size = new System.Drawing.Size(83, 17);
+            this.radioButton7.Size = new System.Drawing.Size(137, 17);
             this.radioButton7.TabIndex = 0;
             this.radioButton7.TabStop = true;
             this.radioButton7.Tag = "9";
-            this.radioButton7.Text = "Master (9x9)";
+            this.radioButton7.Text = "Master (9x9) (9 minutes)";
             this.radioButton7.UseVisualStyleBackColor = true;
             // 
             // radioButton6
@@ -86,11 +86,11 @@ namespace Puzzle_Image_Game
             this.radioButton6.AutoSize = true;
             this.radioButton6.Location = new System.Drawing.Point(299, 41);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(93, 17);
+            this.radioButton6.Size = new System.Drawing.Size(147, 17);
             this.radioButton6.TabIndex = 0;
             this.radioButton6.TabStop = true;
             this.radioButton6.Tag = "8";
-            this.radioButton6.Text = "Diamond (8x8)";
+            this.radioButton6.Text = "Diamond (8x8) (8 minutes)";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // radioButton5
@@ -98,11 +98,11 @@ namespace Puzzle_Image_Game
             this.radioButton5.AutoSize = true;
             this.radioButton5.Location = new System.Drawing.Point(299, 18);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(97, 17);
+            this.radioButton5.Size = new System.Drawing.Size(151, 17);
             this.radioButton5.TabIndex = 0;
             this.radioButton5.TabStop = true;
             this.radioButton5.Tag = "7";
-            this.radioButton5.Text = "Plantinum (7x7)";
+            this.radioButton5.Text = "Plantinum (7x7) (7 minutes)";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton3
@@ -110,11 +110,11 @@ namespace Puzzle_Image_Game
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(61, 64);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(77, 17);
+            this.radioButton3.Size = new System.Drawing.Size(131, 17);
             this.radioButton3.TabIndex = 0;
             this.radioButton3.TabStop = true;
             this.radioButton3.Tag = "5";
-            this.radioButton3.Text = "Silver (5x5)";
+            this.radioButton3.Text = "Silver (5x5) (5 minutes)";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // radioButton4
@@ -122,11 +122,11 @@ namespace Puzzle_Image_Game
             this.radioButton4.AutoSize = true;
             this.radioButton4.Location = new System.Drawing.Point(61, 87);
             this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(73, 17);
+            this.radioButton4.Size = new System.Drawing.Size(127, 17);
             this.radioButton4.TabIndex = 0;
             this.radioButton4.TabStop = true;
             this.radioButton4.Tag = "6";
-            this.radioButton4.Text = "Gold (6x6)";
+            this.radioButton4.Text = "Gold (6x6) (6 minutes)";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
             // radioButton2
@@ -134,11 +134,11 @@ namespace Puzzle_Image_Game
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(61, 41);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(84, 17);
+            this.radioButton2.Size = new System.Drawing.Size(138, 17);
             this.radioButton2.TabIndex = 0;
             this.radioButton2.TabStop = true;
             this.radioButton2.Tag = "4";
-            this.radioButton2.Text = "Bronze (4x4)";
+            this.radioButton2.Text = "Bronze (4x4) (4 minutes)";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
@@ -146,11 +146,11 @@ namespace Puzzle_Image_Game
             this.radioButton1.AutoSize = true;
             this.radioButton1.Location = new System.Drawing.Point(61, 18);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(69, 17);
+            this.radioButton1.Size = new System.Drawing.Size(123, 17);
             this.radioButton1.TabIndex = 0;
             this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "3";
-            this.radioButton1.Text = "Iron (3x3)";
+            this.radioButton1.Text = "Iron (3x3) (3 minutes)";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // btnOKForm2

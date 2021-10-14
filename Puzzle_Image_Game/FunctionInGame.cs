@@ -20,11 +20,13 @@ namespace Puzzle_Image_Game
         private ChooseLevelForm chooseLvForm;
         private ChooseImageForm chooseImgForm;
         private PowerModifier powerFm;
-        private static List<Thread> threads;
+        private static List<Thread> threadsOfPowerForm;
+        private static List<Thread> threadCountDown;
 
         public FunctionInGame()
         {
-            threads = new List<Thread>();
+            ThreadsOfPowerForm = new List<Thread>();
+            ThreadCountDown = new List<Thread>();
         }
         public List<Image> Mix(List<Image> imgList, int count)
         {
@@ -55,10 +57,10 @@ namespace Puzzle_Image_Game
             {
                 Application.OpenForms[chooseLvForm.Name].Focus();
             }
-            chooseLvForm.CloseFormEvent += ChooseLvForm_CloseFormEvent;
+            chooseLvForm.CloseLevelFormEvent += ChooseLvForm_CloseLevelFormEvent;
         }
 
-        private void ChooseLvForm_CloseFormEvent(object sender, CloseChooseLevelFormEvent e)
+        private void ChooseLvForm_CloseLevelFormEvent(object sender, CloseChooseLevelFormEvent e)
         {
             closeChooseLevelEvent?.Invoke(this, new CloseChooseLevelFormEvent(e.Level));
         }
@@ -109,7 +111,7 @@ namespace Puzzle_Image_Game
         }
 
         [Obsolete]
-        public static void StopThread()
+        public static void StopThreads(List<Thread> threads)
         {
             foreach (Thread thread in threads)
             {
@@ -118,9 +120,9 @@ namespace Puzzle_Image_Game
                     thread.Suspend();
                 }
             }
-            threads.Clear();
+            ThreadsOfPowerForm.Clear();
         }
-        public static void TimeCount(Label lbHour, Label lbMinute, Label lbSecond)
+        public static void TimeCount(Label lbHour, Label lbMinute, Label lbSecond, bool isInPowerForm)
         {
             Thread Ts = new Thread(() =>
             {
@@ -142,13 +144,20 @@ namespace Puzzle_Image_Game
                 }
 
             });
-            threads.Add(Ts);
+            if (isInPowerForm)
+                ThreadsOfPowerForm.Add(Ts);
+            else
+                ThreadCountDown.Add(Ts);
             Ts.Start();
         }
         public static List<string> timeList = new List<string>();
         public static bool isPowerStartClicked = false;
         public static string modePowerChosen = "Shut Down";
         public static DateTime timeSet = DateTime.Now;
+
+        public static List<Thread> ThreadsOfPowerForm { get => threadsOfPowerForm; set => threadsOfPowerForm = value; }
+        public static List<Thread> ThreadCountDown { get => threadCountDown; set => threadCountDown = value; }
+
         public void PowerModify(GroupBox powerGrpBox)
         {
             powerFm = new PowerModifier(powerGrpBox);

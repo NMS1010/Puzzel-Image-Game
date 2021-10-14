@@ -43,28 +43,28 @@ namespace Puzzle_Image_Game
             this.OriginPtrb = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStripOption = new System.Windows.Forms.ToolStripMenuItem();
-            this.mergeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mixToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.chooseImageToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.chooseLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.powerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.countDownPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.powerGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginPtrb)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.countDownPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.powerGrpBox);
-            this.groupBox1.Controls.Add(this.lbSecond);
-            this.groupBox1.Controls.Add(this.lbMinute);
-            this.groupBox1.Controls.Add(this.lbHour);
             this.groupBox1.Controls.Add(this.OriginPtrb);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(0, 379);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1148, 325);
+            this.groupBox1.Size = new System.Drawing.Size(1156, 325);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Original Image";
@@ -150,29 +150,35 @@ namespace Puzzle_Image_Game
             // lbSecond
             // 
             this.lbSecond.AutoSize = true;
-            this.lbSecond.Location = new System.Drawing.Point(627, 54);
+            this.lbSecond.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSecond.ForeColor = System.Drawing.Color.Red;
+            this.lbSecond.Location = new System.Drawing.Point(197, 94);
             this.lbSecond.Name = "lbSecond";
-            this.lbSecond.Size = new System.Drawing.Size(19, 13);
+            this.lbSecond.Size = new System.Drawing.Size(30, 24);
             this.lbSecond.TabIndex = 3;
-            this.lbSecond.Text = "01";
+            this.lbSecond.Text = "00";
             // 
             // lbMinute
             // 
             this.lbMinute.AutoSize = true;
-            this.lbMinute.Location = new System.Drawing.Point(561, 54);
+            this.lbMinute.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMinute.ForeColor = System.Drawing.Color.Red;
+            this.lbMinute.Location = new System.Drawing.Point(120, 94);
             this.lbMinute.Name = "lbMinute";
-            this.lbMinute.Size = new System.Drawing.Size(19, 13);
+            this.lbMinute.Size = new System.Drawing.Size(30, 24);
             this.lbMinute.TabIndex = 2;
-            this.lbMinute.Text = "59";
+            this.lbMinute.Text = "02";
             // 
             // lbHour
             // 
             this.lbHour.AutoSize = true;
-            this.lbHour.Location = new System.Drawing.Point(496, 55);
+            this.lbHour.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHour.ForeColor = System.Drawing.Color.Red;
+            this.lbHour.Location = new System.Drawing.Point(47, 94);
             this.lbHour.Name = "lbHour";
-            this.lbHour.Size = new System.Drawing.Size(19, 13);
+            this.lbHour.Size = new System.Drawing.Size(30, 24);
             this.lbHour.TabIndex = 1;
-            this.lbHour.Text = "01";
+            this.lbHour.Text = "00";
             // 
             // OriginPtrb
             // 
@@ -188,14 +194,14 @@ namespace Puzzle_Image_Game
             this.menuStripOption});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1148, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1156, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // menuStripOption
             // 
             this.menuStripOption.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mergeToolStripMenuItem1,
+            this.mixToolStripMenuItem1,
             this.chooseImageToolStripMenuItem1,
             this.chooseLevelToolStripMenuItem,
             this.powerToolStripMenuItem});
@@ -203,39 +209,62 @@ namespace Puzzle_Image_Game
             this.menuStripOption.Size = new System.Drawing.Size(56, 20);
             this.menuStripOption.Text = "Option";
             // 
-            // mergeToolStripMenuItem1
+            // mixToolStripMenuItem1
             // 
-            this.mergeToolStripMenuItem1.Name = "mergeToolStripMenuItem1";
-            this.mergeToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
-            this.mergeToolStripMenuItem1.Text = "Mix";
-            this.mergeToolStripMenuItem1.Click += new System.EventHandler(this.mergeToolStripMenuItem1_Click);
+            this.mixToolStripMenuItem1.Name = "mixToolStripMenuItem1";
+            this.mixToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.mixToolStripMenuItem1.Text = "Mix";
+            this.mixToolStripMenuItem1.Click += new System.EventHandler(this.mixToolStripMenuItem1_Click);
             // 
             // chooseImageToolStripMenuItem1
             // 
             this.chooseImageToolStripMenuItem1.Name = "chooseImageToolStripMenuItem1";
-            this.chooseImageToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
+            this.chooseImageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.chooseImageToolStripMenuItem1.Text = "Choose Image";
             this.chooseImageToolStripMenuItem1.Click += new System.EventHandler(this.chooseImageToolStripMenuItem1_Click);
             // 
             // chooseLevelToolStripMenuItem
             // 
             this.chooseLevelToolStripMenuItem.Name = "chooseLevelToolStripMenuItem";
-            this.chooseLevelToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.chooseLevelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.chooseLevelToolStripMenuItem.Text = "Choose Level";
             this.chooseLevelToolStripMenuItem.Click += new System.EventHandler(this.chooseLevelToolStripMenuItem_Click);
             // 
             // powerToolStripMenuItem
             // 
             this.powerToolStripMenuItem.Name = "powerToolStripMenuItem";
-            this.powerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.powerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.powerToolStripMenuItem.Text = "Power";
             this.powerToolStripMenuItem.Click += new System.EventHandler(this.powerToolStripMenuItem_Click);
+            // 
+            // countDownPanel
+            // 
+            this.countDownPanel.Controls.Add(this.label1);
+            this.countDownPanel.Controls.Add(this.lbSecond);
+            this.countDownPanel.Controls.Add(this.lbHour);
+            this.countDownPanel.Controls.Add(this.lbMinute);
+            this.countDownPanel.Location = new System.Drawing.Point(431, 44);
+            this.countDownPanel.Name = "countDownPanel";
+            this.countDownPanel.Size = new System.Drawing.Size(295, 148);
+            this.countDownPanel.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(6, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(286, 48);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Trò chơi sẽ bắt đầu khi bạn click \r\n    vào 1 ảnh bất kì ở bên phải";
             // 
             // PuzzleGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1148, 704);
+            this.ClientSize = new System.Drawing.Size(1156, 704);
+            this.Controls.Add(this.countDownPanel);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menuStrip1;
@@ -243,12 +272,13 @@ namespace Puzzle_Image_Game
             this.Text = "Puzzle Image Game";
             this.Load += new System.EventHandler(this.PuzzleGameForm_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.powerGrpBox.ResumeLayout(false);
             this.powerGrpBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginPtrb)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.countDownPanel.ResumeLayout(false);
+            this.countDownPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -260,7 +290,7 @@ namespace Puzzle_Image_Game
         private System.Windows.Forms.PictureBox OriginPtrb;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem menuStripOption;
-        private System.Windows.Forms.ToolStripMenuItem mergeToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mixToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem chooseImageToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem chooseLevelToolStripMenuItem;
         private System.Windows.Forms.Label lbHour;
@@ -275,6 +305,8 @@ namespace Puzzle_Image_Game
         private System.Windows.Forms.Label lbH;
         private System.Windows.Forms.Label lbTxt;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Panel countDownPanel;
+        private System.Windows.Forms.Label label1;
     }
 }
 

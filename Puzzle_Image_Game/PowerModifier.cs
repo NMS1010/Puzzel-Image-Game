@@ -47,7 +47,7 @@ namespace Puzzle_Image_Game
                 lbHour.Text =FunctionInGame.HandleTime(countDownTime.Hours + countDownTime.Days*24);
                 lbMinute.Text = FunctionInGame.HandleTime(countDownTime.Minutes);
                 lbSecond.Text = FunctionInGame.HandleTime(countDownTime.Seconds);
-                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
+                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond,true);
                 FunctionInGame.modePowerChosen = chooseModeCbx.Text;
                 FunctionInGame.isPowerStartClicked = true;
                 FunctionInGame.timeSet = timeCbx;
@@ -59,7 +59,7 @@ namespace Puzzle_Image_Game
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             HandleTimeWhenPressCancel?.Invoke(this, new ClosePowerModifierFormEvent());
-            FunctionInGame.StopThread();
+            FunctionInGame.StopThreads(FunctionInGame.ThreadsOfPowerForm);
             FunctionInGame.isPowerStartClicked = false;
             startBtn.Enabled = true;
             timePicker.Enabled = true;
@@ -87,7 +87,7 @@ namespace Puzzle_Image_Game
                 timePicker.Enabled = false;
                 chooseModeCbx.Enabled = false;
                 cancelBtn.Enabled = true;
-                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond);
+                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond,true);
             }
             else
             {

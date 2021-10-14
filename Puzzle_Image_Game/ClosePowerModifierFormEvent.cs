@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Puzzle_Image_Game
 {
-    public class ClosePowerModifierFormEvent
+    public class ClosePowerModifierFormEvent : EventArgs
     {
         private string hour;
         private string minute;

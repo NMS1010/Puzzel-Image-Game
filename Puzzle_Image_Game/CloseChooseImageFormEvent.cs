@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Puzzle_Image_Game
 {
-    public class CloseChooseImageFormEvent
+    public class CloseChooseImageFormEvent : EventArgs
     {
         private string imgPath;
 
