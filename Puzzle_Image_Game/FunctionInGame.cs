@@ -149,9 +149,9 @@ namespace Puzzle_Image_Game
         public static bool isPowerStartClicked = false;
         public static string modePowerChosen = "Shut Down";
         public static DateTime timeSet = DateTime.Now;
-        public void PowerModify()
+        public void PowerModify(GroupBox powerGrpBox)
         {
-            powerFm = new PowerModifier();
+            powerFm = new PowerModifier(powerGrpBox);
             if (Application.OpenForms[powerFm.Name] == null)
             {
                 powerFm.Show();
@@ -168,7 +168,7 @@ namespace Puzzle_Image_Game
 
         private void PowerFm_HandleTimeWhenClosing(object sender, ClosePowerModifierFormEvent e)
         {
-            closePowerFormWhenClosingEvent?.Invoke(sender, new ClosePowerModifierFormEvent());
+            closePowerFormWhenClosingEvent?.Invoke(sender, new ClosePowerModifierFormEvent(e.IsDisplay));
         }
 
         private void PowerFm_HandleTimeWhenPressCancel(object sender, ClosePowerModifierFormEvent e)

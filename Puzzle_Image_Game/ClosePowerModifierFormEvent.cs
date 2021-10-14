@@ -12,10 +12,16 @@ namespace Puzzle_Image_Game
         private string minute;
         private string second;
         private string mode;
+        private bool isDisplay;
+
 
         public ClosePowerModifierFormEvent()
         {
 
+        }
+        public ClosePowerModifierFormEvent(bool isDisplay)
+        {
+            IsDisplay = isDisplay;
         }
         public ClosePowerModifierFormEvent(string hour, string minute, string second, string mode)
         {
@@ -29,5 +35,6 @@ namespace Puzzle_Image_Game
         public string Minute { get => minute; set => minute = value; }
         public string Second { get => second; set => second = value; }
         public string Mode { get => mode; set => mode = value; }
+        public bool IsDisplay { get => isDisplay; set => isDisplay = value; }
     }
 }

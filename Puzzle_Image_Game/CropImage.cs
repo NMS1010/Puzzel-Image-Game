@@ -9,28 +9,7 @@ namespace Puzzle_Image_Game
 {
     class CropImg
     {
-        public Image ImgSource { get; set; }
-        public string Src { get; set; }
-        public int NumberOfColBoard { get; set; }
-        public int NumberOfRowBoard { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-
-        public CropImg()
-        {
-
-        }
-        public CropImg(int row, int col, Size sizeImg, string src)
-        {
-            Src = src;
-            ImgSource = new Bitmap(Image.FromFile(Src), sizeImg);
-            NumberOfColBoard = col;
-            NumberOfRowBoard = row;
-            Width = sizeImg.Width;
-            Height = sizeImg.Height;
-        }
-
-        public List<Image> CropIntoListImgs()
+        public static List<Image> CropIntoListImgs(int NumberOfRowBoard, int NumberOfColBoard, Bitmap ImgSource, int Width, int Height)
         {
             List<Image> imgs = new List<Image>();
             for (int i = 0; i < NumberOfRowBoard; i++)

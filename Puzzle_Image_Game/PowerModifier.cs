@@ -18,6 +18,13 @@ namespace Puzzle_Image_Game
         public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressCancel;
         public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenClosing;
 
+
+        private GroupBox powerGrpBox;
+        public PowerModifier(GroupBox powerGrpBox)
+        {
+            this.powerGrpBox = powerGrpBox;
+            InitializeComponent();
+        }
         public PowerModifier()
         {
             InitializeComponent();
@@ -73,6 +80,7 @@ namespace Puzzle_Image_Game
             lbHour.Text = FunctionInGame.timeList[0];
             lbMinute.Text = FunctionInGame.timeList[1];
             lbSecond.Text = FunctionInGame.timeList[2];
+            powerGrpBox.Visible = false;
             if (FunctionInGame.isPowerStartClicked)
             {
                 startBtn.Enabled = false;
@@ -91,8 +99,10 @@ namespace Puzzle_Image_Game
 
         private void PowerModifier_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(!FunctionInGame.isPowerStartClicked)
-                HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent());
+            if(FunctionInGame.isPowerStartClicked)
+                HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent(true));
+            else
+                HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent(false));
         }
     }
 }

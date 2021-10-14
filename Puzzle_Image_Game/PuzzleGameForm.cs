@@ -22,9 +22,7 @@ namespace Puzzle_Image_Game
         private List<Image> imgList;
         private BlankBoard brdBlank;
         private ImageBoard brdImage;
-        private CropImg crpImg;
         private FunctionInGame fncGame;
-        private Thread t;
         private Panel panelViewTime;
 
         public PuzzleGameForm()
@@ -35,10 +33,10 @@ namespace Puzzle_Image_Game
         
         private void Start()
         {
-            crpImg = new CropImg(numberOfRow, numberOfCol, resizedImg, path);
-            imgList = crpImg.CropIntoListImgs();
+            imgList = CropImg.CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(Image.FromFile(path),width,height),width,height);
             brdBlank.NumberOfColBoard = numberOfCol;
             brdBlank.NumberOfRowBoard = numberOfRow;
+
             brdImage.NumberOfColBoard = numberOfCol;
             brdImage.NumberOfRowBoard = numberOfRow;
             brdImage.DrawBoard(fncGame.Mix(imgList, numberOfCol * numberOfRow), this);
@@ -122,7 +120,7 @@ namespace Puzzle_Image_Game
         private void powerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetTimeForPowerForm();
-            fncGame.PowerModify();
+            fncGame.PowerModify(powerGrpBox);
             //if (flagPower)
             //{
                 fncGame.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
@@ -135,7 +133,7 @@ namespace Puzzle_Image_Game
 
         private void FncGame_closePowerFormWhenClosingEvent(object sender, ClosePowerModifierFormEvent e)
         {
-            powerGrpBox.Visible = false;
+            powerGrpBox.Visible = e.IsDisplay;
             //fncGame.closePowerFormWhenClosingEvent -= FncGame_closePowerFormWhenClosingEvent;
         }
 
@@ -155,7 +153,7 @@ namespace Puzzle_Image_Game
             lbNotation1.Text = ":";
             lbNotation2.Text = ":";
             FunctionInGame.TimeCount(lbH, lbM, lbS);
-            powerGrpBox.Visible = true;
+            //powerGrpBox.Visible = true;
             //fncGame.closePowerFormWhenPressStartEvent -= FncGame_closePowerFormWhenPressStartEvent;
         }
 
