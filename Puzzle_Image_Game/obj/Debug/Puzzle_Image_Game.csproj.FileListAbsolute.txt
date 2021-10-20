@@ -11,3 +11,4 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.PuzzleGameForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.ChooseImageForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.PowerModifier.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.SocketForm.resources

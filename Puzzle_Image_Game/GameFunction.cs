@@ -9,13 +9,14 @@ using System.Windows.Forms;
 
 namespace Puzzle_Image_Game
 {
-    public class FunctionInGame
+    public class GameFunction
     {
         public event EventHandler<CloseChooseLevelFormEvent> closeChooseLevelEvent;
         public event EventHandler<CloseChooseImageFormEvent> closeChooseImageEvent;
         public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressStartEvent;
         public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressCancelEvent;
         public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenClosingEvent;
+        public static event EventHandler<EventArgs> TimeEndEvent;
 
         private ChooseLevelForm chooseLvForm;
         private ChooseImageForm chooseImgForm;
@@ -23,25 +24,51 @@ namespace Puzzle_Image_Game
         private static List<Thread> threadsOfPowerForm;
         private static List<Thread> threadCountDown;
 
-        public FunctionInGame()
+        public GameFunction()
         {
             ThreadsOfPowerForm = new List<Thread>();
             ThreadCountDown = new List<Thread>();
         }
+        private int RandomNotRepeat(List<int> nums, int max)
+        {
+            Random rand = new Random();
+            int number;
+            do
+            {
+                number = rand.Next(0, max);
+            } while (nums.Contains(number));
+            return number;
+        }
         public List<Image> Mix(List<Image> imgList, int count)
         {
             List<Image> imgs = new List<Image>();
+            List<Image> imgsNotNull = new List<Image>();
+            List<Image> imgsTemp = new List<Image>();
+
+            foreach (var item in imgList)
+            {
+                imgs.Add(item);
+                if (item != null)
+                {
+                    imgsNotNull.Add(item);
+                }
+            }
             List<int> numbersRandom = new List<int>();
             Random rand = new Random();
             int number;
-            for(int i = 0; i < count; i++)
+            for(int i = 0; i < imgsNotNull.Count; i++)
             {
-                do
-                {
-                   number = rand.Next(0,count);
-                } while (numbersRandom.Contains(number));
+                number = RandomNotRepeat(numbersRandom, imgsNotNull.Count);
                 numbersRandom.Add(number);
-                imgs.Add(imgList[number]);
+                imgsTemp.Add(imgsNotNull[number]);
+            }
+            int index = 0;
+            for(int i = 0; i < imgList.Count; i++)
+            {
+                if (imgs[i] != null)
+                {
+                    imgs[i] = imgsTemp[index++];
+                }
             }
             return imgs;
         }
@@ -120,7 +147,7 @@ namespace Puzzle_Image_Game
                     thread.Suspend();
                 }
             }
-            ThreadsOfPowerForm.Clear();
+            threads.Clear();
         }
         public static void TimeCount(Label lbHour, Label lbMinute, Label lbSecond, bool isInPowerForm)
         {
@@ -137,10 +164,17 @@ namespace Puzzle_Image_Game
                     timeList.Add(lbHour.Text);
                     timeList.Add(lbMinute.Text);
                     timeList.Add(lbSecond.Text);
+
                     Thread.Sleep(1000);
+                    
                     lbSecond.Text = HandleTime(s);
                     lbMinute.Text = HandleTime(m);
                     lbHour.Text = HandleTime(h);
+                    if (h == 0 && m == 0 && s == 0)
+                    {
+                        TimeEndEvent(new object(),new EventArgs());
+                        return;
+                    }
                 }
 
             });

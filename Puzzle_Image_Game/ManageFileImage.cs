@@ -33,11 +33,18 @@ namespace Puzzle_Image_Game
         }
         public Bitmap GetImageFromFile(string path)
         {
-            if (String.IsNullOrEmpty(path))
+            try
             {
-                return new Bitmap(Image.FromFile(fileName), new Size(270, 270));
+                if (String.IsNullOrEmpty(path))
+                {
+                    return new Bitmap(Image.FromFile(fileName), new Size(270, 270));
+                }
+                return new Bitmap(Image.FromFile(path), new Size(270, 270));
+            }catch(Exception e)
+            {
+                MessageBox.Show("Vui lòng chọn file ảnh", "Error", MessageBoxButtons.OK);
+                return null;
             }
-            return new Bitmap(Image.FromFile(path), new Size(270, 270));
         }
         private void AddImageToFolder()
         {
@@ -47,34 +54,6 @@ namespace Puzzle_Image_Game
             bmp.Save(path, ImageFormat.Jpeg);
             ListPath.Add(path);
         }
-        /*
-        private bool Compare(Bitmap img, Bitmap bmp)
-        {
-            string img1Pixel;
-            string img2Pixel;
-
-            if (img.Width != bmp.Width || img.Height != bmp.Height) return false;
-            for (int i = 0; i < img.Width; i++)
-            {
-                for (int j = 0; j < img.Height; j++)
-                {
-                    img1Pixel = img.GetPixel(i, j).ToString();
-                    img2Pixel = bmp.GetPixel(i, j).ToString();
-                    if (img1Pixel != img2Pixel) return false;
-                }
-            }
-            return true;
-        }
-        private bool IsAlreadyInImageList(Bitmap img)
-        {
-            foreach (string item in listPath)
-            {
-                if (Compare(img, GetImageFromFile(item))) return true;
-            }
-            return false;
-        }
-
-        */
 
         public void AddImageToListView(ListView lsv, ImageList imgList, string path)
         {
@@ -87,6 +66,7 @@ namespace Puzzle_Image_Game
             {
                 img = GetImageFromFile(path);
             }
+            if (img == null) return;
             imgList.ImageSize = new Size(100, 100);
             imgList.Images.Add(img);
             lsv.LargeImageList = imgList;

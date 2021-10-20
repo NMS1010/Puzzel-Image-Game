@@ -43,20 +43,20 @@ namespace Puzzle_Image_Game
             }
             return true;
         }
-        public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm)
+        public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
         {
             Reset();
             int index = 0;
 
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
-                var prevPicBlank = new PictureBox() { Size = new Size(0, 0), Location = new Point(0, i * imgs[index].Height) };
+                var prevPicBlank = new PictureBox() { Size = new Size(0, 0), Location = new Point(0, i * sizeOfPtr.Height) };
                 for (int j = 0; j < NumberOfColBoard; j++)
                 {
-                    PictureBox currPicBlank = new PictureBox() { Size = new Size(imgs[index].Width, imgs[index].Height), Location = new Point(prevPicBlank.Location.X + prevPicBlank.Size.Width, prevPicBlank.Location.Y), BackColor = Color.LightGray };
+                    PictureBox currPicBlank = new PictureBox() { Size = new Size(sizeOfPtr.Width, sizeOfPtr.Height), Location = new Point(prevPicBlank.Location.X + prevPicBlank.Size.Width, prevPicBlank.Location.Y), BackColor = Color.LightGray };
                     currPicBlank.Paint += CurrPicBlank_Paint;
                     currPicBlank.MouseDown += CurrPicBlank_MouseDown;
-                    this.AddImgToPanel(currPicBlank, PanelBlank, index, BorderStyle.FixedSingle);
+                    this.AddImgToPanel(fm,currPicBlank, PanelBlank, index++, BorderStyle.FixedSingle);
                     prevPicBlank = currPicBlank;
                 }
             }

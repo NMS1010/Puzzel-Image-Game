@@ -94,6 +94,7 @@ namespace Puzzle_Image_Game
             this.Name = "ChooseImageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choose Image Form";
+            this.Load += new System.EventHandler(this.ChooseImageForm_Load);
             this.ResumeLayout(false);
 
         }

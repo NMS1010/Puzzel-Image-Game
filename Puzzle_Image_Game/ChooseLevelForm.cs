@@ -35,5 +35,10 @@ namespace Puzzle_Image_Game
             CloseLevelFormEvent?.Invoke(sender, new CloseChooseLevelFormEvent(Lv.LevelChoosen()));
             Close();
         }
+
+        private void ChooseLevelForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

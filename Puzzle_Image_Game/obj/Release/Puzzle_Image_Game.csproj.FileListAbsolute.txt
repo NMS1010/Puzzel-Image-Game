@@ -11,3 +11,4 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Imag
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.csproj.CoreCompileInputs.cache
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.exe
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.pdb
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.SocketForm.resources

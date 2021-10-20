@@ -172,6 +172,7 @@ namespace Puzzle_Image_Game
             this.Controls.Add(this.pnlForm2);
             this.Name = "ChooseLevelForm";
             this.Text = "Choose Level";
+            this.Load += new System.EventHandler(this.ChooseLevelForm_Load);
             this.pnlForm2.ResumeLayout(false);
             this.pnlForm2.PerformLayout();
             this.ResumeLayout(false);

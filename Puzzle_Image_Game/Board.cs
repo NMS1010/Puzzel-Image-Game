@@ -46,7 +46,7 @@ namespace Puzzle_Image_Game
             panelAdded.Anchor = style;
             fm.Controls.Add(panelAdded);
         }
-        protected void AddImgToPanel(PictureBox ptrb, Panel panel, int index, BorderStyle style)
+        protected void AddImgToPanel(PuzzleGameForm fm, PictureBox ptrb, Panel panel, int index, BorderStyle style)
         {
             ptrb.AllowDrop = true;
             ptrb.DragEnter += PtrbDropped_DragEnter;
@@ -57,7 +57,11 @@ namespace Puzzle_Image_Game
             
             ptrb.BorderStyle = style;
             ptrb.Tag = index;
-            panel.Controls.Add(ptrb);
+            fm.Invoke((MethodInvoker)delegate
+            {
+                panel.Controls.Add(ptrb);
+            });
+            
         }
 
         private void Ptrb_MouseLeave(object sender, EventArgs e)
@@ -112,7 +116,7 @@ namespace Puzzle_Image_Game
                 item.Image = imgs[index++];
             }
         }
-        public virtual void DrawBoard(List<Image> imgs, PuzzleGameForm fm)
+        public virtual void DrawBoard(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
         {
            
         }  

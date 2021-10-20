@@ -35,22 +35,18 @@ namespace Puzzle_Image_Game
             PanelImgList.Controls.Clear();
             base.Reset();
         }
-        public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm)
+        public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
         {
             Reset();
             int index = 0;
-            while (imgs[index] == null)
-            {
-                index++;
-            }
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
-                var prevPicImage = new PictureBox() { Size = new Size(0, 0), Location = new Point(0, i * imgs[index].Height) };
+                var prevPicImage = new PictureBox() { Size = new Size(0, 0), Location = new Point(0, i * sizeOfPtr.Height) };
                 for (int j = 0; j < NumberOfColBoard; j++)
                 {
-                    PictureBox currPicImage = new PictureBox() { Size = new Size(imgs[index].Width, imgs[index].Height), Location = new Point(prevPicImage.Location.X + prevPicImage.Size.Width, prevPicImage.Location.Y) };
+                    PictureBox currPicImage = new PictureBox() { Size = new Size(sizeOfPtr.Width, sizeOfPtr.Height), Location = new Point(prevPicImage.Location.X + prevPicImage.Size.Width, prevPicImage.Location.Y) };
                     currPicImage.MouseDown += CurrPicImage_MouseDown;
-                    this.AddImgToPanel(currPicImage, PanelImgList, index, BorderStyle.FixedSingle);
+                    this.AddImgToPanel(fm,currPicImage, PanelImgList, index++, BorderStyle.FixedSingle);
                     prevPicImage = currPicImage;
                 }
             }

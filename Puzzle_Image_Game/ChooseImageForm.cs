@@ -21,9 +21,6 @@ namespace Puzzle_Image_Game
         public ChooseImageForm()
         {
             InitializeComponent();
-            fileImage = new ManageFileImage();
-            ManageFileImage.CountImage = 0;
-            LoadImageFromFolder();
         }
 
         private void LoadImageFromFolder()
@@ -81,6 +78,13 @@ namespace Puzzle_Image_Game
             {
                 e.Effect = DragDropEffects.Copy;
             }
+        }
+
+        private void ChooseImageForm_Load(object sender, EventArgs e)
+        {
+            fileImage = new ManageFileImage();
+            ManageFileImage.CountImage = 0;
+            LoadImageFromFolder();
         }
     }
 }

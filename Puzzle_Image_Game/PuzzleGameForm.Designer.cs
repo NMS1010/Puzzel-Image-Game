@@ -37,10 +37,10 @@ namespace Puzzle_Image_Game
             this.lbNotation1 = new System.Windows.Forms.Label();
             this.lbH = new System.Windows.Forms.Label();
             this.lbTxt = new System.Windows.Forms.Label();
+            this.OriginPtrb = new System.Windows.Forms.PictureBox();
             this.lbSecond = new System.Windows.Forms.Label();
             this.lbMinute = new System.Windows.Forms.Label();
             this.lbHour = new System.Windows.Forms.Label();
-            this.OriginPtrb = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuStripOption = new System.Windows.Forms.ToolStripMenuItem();
             this.mixToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -147,6 +147,14 @@ namespace Puzzle_Image_Game
             this.lbTxt.Size = new System.Drawing.Size(0, 24);
             this.lbTxt.TabIndex = 0;
             // 
+            // OriginPtrb
+            // 
+            this.OriginPtrb.Location = new System.Drawing.Point(21, 43);
+            this.OriginPtrb.Name = "OriginPtrb";
+            this.OriginPtrb.Size = new System.Drawing.Size(270, 270);
+            this.OriginPtrb.TabIndex = 0;
+            this.OriginPtrb.TabStop = false;
+            // 
             // lbSecond
             // 
             this.lbSecond.AutoSize = true;
@@ -180,14 +188,6 @@ namespace Puzzle_Image_Game
             this.lbHour.TabIndex = 1;
             this.lbHour.Text = "00";
             // 
-            // OriginPtrb
-            // 
-            this.OriginPtrb.Location = new System.Drawing.Point(21, 43);
-            this.OriginPtrb.Name = "OriginPtrb";
-            this.OriginPtrb.Size = new System.Drawing.Size(270, 270);
-            this.OriginPtrb.TabIndex = 0;
-            this.OriginPtrb.TabStop = false;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -212,28 +212,28 @@ namespace Puzzle_Image_Game
             // mixToolStripMenuItem1
             // 
             this.mixToolStripMenuItem1.Name = "mixToolStripMenuItem1";
-            this.mixToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.mixToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
             this.mixToolStripMenuItem1.Text = "Mix";
             this.mixToolStripMenuItem1.Click += new System.EventHandler(this.mixToolStripMenuItem1_Click);
             // 
             // chooseImageToolStripMenuItem1
             // 
             this.chooseImageToolStripMenuItem1.Name = "chooseImageToolStripMenuItem1";
-            this.chooseImageToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.chooseImageToolStripMenuItem1.Size = new System.Drawing.Size(150, 22);
             this.chooseImageToolStripMenuItem1.Text = "Choose Image";
             this.chooseImageToolStripMenuItem1.Click += new System.EventHandler(this.chooseImageToolStripMenuItem1_Click);
             // 
             // chooseLevelToolStripMenuItem
             // 
             this.chooseLevelToolStripMenuItem.Name = "chooseLevelToolStripMenuItem";
-            this.chooseLevelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.chooseLevelToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.chooseLevelToolStripMenuItem.Text = "Choose Level";
             this.chooseLevelToolStripMenuItem.Click += new System.EventHandler(this.chooseLevelToolStripMenuItem_Click);
             // 
             // powerToolStripMenuItem
             // 
             this.powerToolStripMenuItem.Name = "powerToolStripMenuItem";
-            this.powerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.powerToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.powerToolStripMenuItem.Text = "Power";
             this.powerToolStripMenuItem.Click += new System.EventHandler(this.powerToolStripMenuItem_Click);
             // 

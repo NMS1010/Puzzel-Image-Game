@@ -44,13 +44,13 @@ namespace Puzzle_Image_Game
                 chooseModeCbx.Enabled = false;
                 cancelBtn.Enabled = true;
                 TimeSpan countDownTime = timeCbx - DateTime.Now;
-                lbHour.Text =FunctionInGame.HandleTime(countDownTime.Hours + countDownTime.Days*24);
-                lbMinute.Text = FunctionInGame.HandleTime(countDownTime.Minutes);
-                lbSecond.Text = FunctionInGame.HandleTime(countDownTime.Seconds);
-                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond,true);
-                FunctionInGame.modePowerChosen = chooseModeCbx.Text;
-                FunctionInGame.isPowerStartClicked = true;
-                FunctionInGame.timeSet = timeCbx;
+                lbHour.Text =GameFunction.HandleTime(countDownTime.Hours + countDownTime.Days*24);
+                lbMinute.Text = GameFunction.HandleTime(countDownTime.Minutes);
+                lbSecond.Text = GameFunction.HandleTime(countDownTime.Seconds);
+                GameFunction.TimeCount(lbHour, lbMinute, lbSecond,true);
+                GameFunction.modePowerChosen = chooseModeCbx.Text;
+                GameFunction.isPowerStartClicked = true;
+                GameFunction.timeSet = timeCbx;
                 HandleTimeWhenPressStart?.Invoke(this, new ClosePowerModifierFormEvent(lbHour.Text, lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
             }
         }
@@ -59,8 +59,8 @@ namespace Puzzle_Image_Game
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             HandleTimeWhenPressCancel?.Invoke(this, new ClosePowerModifierFormEvent());
-            FunctionInGame.StopThreads(FunctionInGame.ThreadsOfPowerForm);
-            FunctionInGame.isPowerStartClicked = false;
+            GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
+            GameFunction.isPowerStartClicked = false;
             startBtn.Enabled = true;
             timePicker.Enabled = true;
             chooseModeCbx.Enabled = true;
@@ -75,19 +75,19 @@ namespace Puzzle_Image_Game
         [Obsolete]
         private void PowerModifier_Load(object sender, EventArgs e)
         {
-            chooseModeCbx.Text = FunctionInGame.modePowerChosen;
-            timePicker.Value = FunctionInGame.timeSet;
-            lbHour.Text = FunctionInGame.timeList[0];
-            lbMinute.Text = FunctionInGame.timeList[1];
-            lbSecond.Text = FunctionInGame.timeList[2];
+            chooseModeCbx.Text = GameFunction.modePowerChosen;
+            timePicker.Value = GameFunction.timeSet;
+            lbHour.Text = GameFunction.timeList[0];
+            lbMinute.Text = GameFunction.timeList[1];
+            lbSecond.Text = GameFunction.timeList[2];
             powerGrpBox.Visible = false;
-            if (FunctionInGame.isPowerStartClicked)
+            if (GameFunction.isPowerStartClicked)
             {
                 startBtn.Enabled = false;
                 timePicker.Enabled = false;
                 chooseModeCbx.Enabled = false;
                 cancelBtn.Enabled = true;
-                FunctionInGame.TimeCount(lbHour, lbMinute, lbSecond,true);
+                GameFunction.TimeCount(lbHour, lbMinute, lbSecond,true);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Puzzle_Image_Game
 
         private void PowerModifier_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(FunctionInGame.isPowerStartClicked)
+            if(GameFunction.isPowerStartClicked)
                 HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent(true));
             else
                 HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent(false));
