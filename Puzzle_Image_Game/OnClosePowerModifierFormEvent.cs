@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Puzzle_Image_Game
 {
-    public class ClosePowerModifierFormEvent : EventArgs
+    public class OnClosePowerModifierFormEvent : EventArgs
     {
         private string hour;
         private string minute;
@@ -15,15 +15,15 @@ namespace Puzzle_Image_Game
         private bool isDisplay;
 
 
-        public ClosePowerModifierFormEvent()
+        public OnClosePowerModifierFormEvent()
         {
 
         }
-        public ClosePowerModifierFormEvent(bool isDisplay)
+        public OnClosePowerModifierFormEvent(bool isDisplay)
         {
             IsDisplay = isDisplay;
         }
-        public ClosePowerModifierFormEvent(string hour, string minute, string second, string mode)
+        public OnClosePowerModifierFormEvent(string hour, string minute, string second, string mode)
         {
             Hour = hour;
             Minute = minute;

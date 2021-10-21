@@ -10,7 +10,7 @@ namespace Puzzle_Image_Game
 {
     class Board
     {
-        public virtual event EventHandler<FilledPictureBoxEventArgs> OnFilledPictureBox;
+        public virtual event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
 
         protected static bool droppedImg = false;
         protected static Image holdImg = null;
@@ -19,25 +19,27 @@ namespace Puzzle_Image_Game
         private int numberOfRowBoard;
         private int width;
         private int height;
-
+        private Point position;
 
         public List<PictureBox> PtrbList { get => ptrbList; }
         public int NumberOfColBoard { get => numberOfColBoard; set => numberOfColBoard = value; }
         public int NumberOfRowBoard { get => numberOfRowBoard; set => numberOfRowBoard = value; }
         public int Width { get => width; set => width = value; }
         public int Height { get => height; set => height = value; }
+        public Point Position { get => position; set => position = value; }
 
         public Board()
         {
 
         }
 
-        public Board(int row, int col, int width, int height)
+        public Board(int row, int col, int width, int height, Point position)
         {
             NumberOfColBoard = col;
             NumberOfRowBoard = row;
             Width = width;
             Height = height;
+            Position = position;
         }
 
         protected void AddPanelToForm(PuzzleGameForm fm, Point pointPanel, AnchorStyles style, Panel panelAdded)

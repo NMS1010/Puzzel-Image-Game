@@ -11,21 +11,21 @@ using System.Windows.Forms;
 
 namespace Puzzle_Image_Game
 {
-    public partial class PowerModifier : Form
+    public partial class PowerModifierForm : Form
     {
 
-        public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressStart;
-        public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenPressCancel;
-        public event EventHandler<ClosePowerModifierFormEvent> HandleTimeWhenClosing;
+        public event EventHandler<OnClosePowerModifierFormEvent> HandleTimeWhenPressStart;
+        public event EventHandler<OnClosePowerModifierFormEvent> HandleTimeWhenPressCancel;
+        public event EventHandler<OnClosePowerModifierFormEvent> HandleTimeWhenClosing;
 
 
         private GroupBox powerGrpBox;
-        public PowerModifier(GroupBox powerGrpBox)
+        public PowerModifierForm(GroupBox powerGrpBox)
         {
             this.powerGrpBox = powerGrpBox;
             InitializeComponent();
         }
-        public PowerModifier()
+        public PowerModifierForm()
         {
             InitializeComponent();
         }
@@ -51,14 +51,14 @@ namespace Puzzle_Image_Game
                 GameFunction.modePowerChosen = chooseModeCbx.Text;
                 GameFunction.isPowerStartClicked = true;
                 GameFunction.timeSet = timeCbx;
-                HandleTimeWhenPressStart?.Invoke(this, new ClosePowerModifierFormEvent(lbHour.Text, lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
+                HandleTimeWhenPressStart?.Invoke(this, new OnClosePowerModifierFormEvent(lbHour.Text, lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
             }
         }
 
         [Obsolete]
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            HandleTimeWhenPressCancel?.Invoke(this, new ClosePowerModifierFormEvent());
+            HandleTimeWhenPressCancel?.Invoke(this, new OnClosePowerModifierFormEvent());
             GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
             GameFunction.isPowerStartClicked = false;
             startBtn.Enabled = true;
@@ -100,9 +100,9 @@ namespace Puzzle_Image_Game
         private void PowerModifier_FormClosing(object sender, FormClosingEventArgs e)
         {
             if(GameFunction.isPowerStartClicked)
-                HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent(true));
+                HandleTimeWhenClosing?.Invoke(this, new OnClosePowerModifierFormEvent(true));
             else
-                HandleTimeWhenClosing?.Invoke(this, new ClosePowerModifierFormEvent(false));
+                HandleTimeWhenClosing?.Invoke(this, new OnClosePowerModifierFormEvent(false));
         }
     }
 }

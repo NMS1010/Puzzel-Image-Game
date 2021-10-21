@@ -1,7 +1,7 @@
 ﻿
 namespace Puzzle_Image_Game
 {
-    partial class PowerModifier
+    partial class PowerModifierForm
     {
         /// <summary>
         /// Required designer variable.
@@ -27,6 +27,7 @@ namespace Puzzle_Image_Game
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        [System.Obsolete]
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();

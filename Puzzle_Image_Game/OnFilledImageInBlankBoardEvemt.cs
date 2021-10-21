@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace Puzzle_Image_Game
 {
-    class FilledPictureBoxEventArgs: EventArgs
+    class OnFilledImageInBlankBoardEvemt: EventArgs
     {
         private List<PictureBox> ptrbList;
         
-        public FilledPictureBoxEventArgs(List<PictureBox> ptrbs)
+        public OnFilledImageInBlankBoardEvemt(List<PictureBox> ptrbs)
         {
             PtrbList = new List<PictureBox>();
             PtrbList = ptrbs;

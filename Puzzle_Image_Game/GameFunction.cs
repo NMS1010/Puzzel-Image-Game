@@ -9,27 +9,27 @@ using System.Windows.Forms;
 
 namespace Puzzle_Image_Game
 {
-    public class GameFunction
+    public static class GameFunction
     {
-        public event EventHandler<CloseChooseLevelFormEvent> closeChooseLevelEvent;
-        public event EventHandler<CloseChooseImageFormEvent> closeChooseImageEvent;
-        public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressStartEvent;
-        public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenPressCancelEvent;
-        public event EventHandler<ClosePowerModifierFormEvent> closePowerFormWhenClosingEvent;
+        public static event EventHandler<OnCloseChooseLevelFormEvent> closeChooseLevelEvent;
+        public static event EventHandler<OnCloseChooseImageFormEvent> closeChooseImageEvent;
+        public static event EventHandler<OnClosePowerModifierFormEvent> closePowerFormWhenPressStartEvent;
+        public static event EventHandler<OnClosePowerModifierFormEvent> closePowerFormWhenPressCancelEvent;
+        public static event EventHandler<OnClosePowerModifierFormEvent> closePowerFormWhenClosingEvent;
         public static event EventHandler<EventArgs> TimeEndEvent;
 
-        private ChooseLevelForm chooseLvForm;
-        private ChooseImageForm chooseImgForm;
-        private PowerModifier powerFm;
+        private static ChooseLevelForm chooseLvForm;
+        private static ChooseImageForm chooseImgForm;
+        private static PowerModifierForm powerFm;
         private static List<Thread> threadsOfPowerForm;
         private static List<Thread> threadCountDown;
 
-        public GameFunction()
+        static GameFunction()
         {
             ThreadsOfPowerForm = new List<Thread>();
             ThreadCountDown = new List<Thread>();
         }
-        private int RandomNotRepeat(List<int> nums, int max)
+        private static int RandomNotRepeat(List<int> nums, int max)
         {
             Random rand = new Random();
             int number;
@@ -39,7 +39,7 @@ namespace Puzzle_Image_Game
             } while (nums.Contains(number));
             return number;
         }
-        public List<Image> Mix(List<Image> imgList, int count)
+        public static List<Image> Mix(List<Image> imgList, int count)
         {
             List<Image> imgs = new List<Image>();
             List<Image> imgsNotNull = new List<Image>();
@@ -54,7 +54,7 @@ namespace Puzzle_Image_Game
                 }
             }
             List<int> numbersRandom = new List<int>();
-            Random rand = new Random();
+
             int number;
             for(int i = 0; i < imgsNotNull.Count; i++)
             {
@@ -73,7 +73,7 @@ namespace Puzzle_Image_Game
             return imgs;
         }
 
-        public void ChooseLevel(int numberOfCol)
+        public static void ChooseLevel(int numberOfCol)
         {
             chooseLvForm = new ChooseLevelForm(numberOfCol);
             if (Application.OpenForms[chooseLvForm.Name] == null)
@@ -87,17 +87,17 @@ namespace Puzzle_Image_Game
             chooseLvForm.CloseLevelFormEvent += ChooseLvForm_CloseLevelFormEvent;
         }
 
-        private void ChooseLvForm_CloseLevelFormEvent(object sender, CloseChooseLevelFormEvent e)
+        private static void ChooseLvForm_CloseLevelFormEvent(object sender, OnCloseChooseLevelFormEvent e)
         {
-            closeChooseLevelEvent?.Invoke(this, new CloseChooseLevelFormEvent(e.Level));
+            closeChooseLevelEvent?.Invoke(sender, new OnCloseChooseLevelFormEvent(e.Level));
         }
 
-        public void PlayMusic()
+        public static void PlayMusic()
         {
             
         }
         
-        public void ChooseImage()
+        public static void ChooseImage()
         {
             chooseImgForm = new ChooseImageForm();
             
@@ -112,9 +112,9 @@ namespace Puzzle_Image_Game
             chooseImgForm.closeChooseImgForm += ChooseImgForm_closeChooseImgForm;
         }
 
-        private void ChooseImgForm_closeChooseImgForm(object sender, CloseChooseImageFormEvent e)
+        private static void ChooseImgForm_closeChooseImgForm(object sender, OnCloseChooseImageFormEvent e)
         {
-            closeChooseImageEvent?.Invoke(sender, new CloseChooseImageFormEvent(e.ImgPath));
+            closeChooseImageEvent?.Invoke(sender, new OnCloseChooseImageFormEvent(e.ImgPath));
             chooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImgForm;
         }
 
@@ -192,9 +192,9 @@ namespace Puzzle_Image_Game
         public static List<Thread> ThreadsOfPowerForm { get => threadsOfPowerForm; set => threadsOfPowerForm = value; }
         public static List<Thread> ThreadCountDown { get => threadCountDown; set => threadCountDown = value; }
 
-        public void PowerModify(GroupBox powerGrpBox)
+        public static void PowerModify(GroupBox powerGrpBox)
         {
-            powerFm = new PowerModifier(powerGrpBox);
+            powerFm = new PowerModifierForm(powerGrpBox);
             if (Application.OpenForms[powerFm.Name] == null)
             {
                 powerFm.Show();
@@ -209,26 +209,26 @@ namespace Puzzle_Image_Game
 
         }
 
-        private void PowerFm_HandleTimeWhenClosing(object sender, ClosePowerModifierFormEvent e)
+        private static void PowerFm_HandleTimeWhenClosing(object sender, OnClosePowerModifierFormEvent e)
         {
-            closePowerFormWhenClosingEvent?.Invoke(sender, new ClosePowerModifierFormEvent(e.IsDisplay));
+            closePowerFormWhenClosingEvent?.Invoke(sender, new OnClosePowerModifierFormEvent(e.IsDisplay));
         }
 
-        private void PowerFm_HandleTimeWhenPressCancel(object sender, ClosePowerModifierFormEvent e)
+        private static void PowerFm_HandleTimeWhenPressCancel(object sender, OnClosePowerModifierFormEvent e)
         {
-            closePowerFormWhenPressCancelEvent?.Invoke(sender, new ClosePowerModifierFormEvent());
+            closePowerFormWhenPressCancelEvent?.Invoke(sender, new OnClosePowerModifierFormEvent());
         }
 
-        private void PowerFm_HandleTimeWhenPressStart(object sender, ClosePowerModifierFormEvent e)
+        private static void PowerFm_HandleTimeWhenPressStart(object sender, OnClosePowerModifierFormEvent e)
         {
-            closePowerFormWhenPressStartEvent?.Invoke(sender, new ClosePowerModifierFormEvent(e.Hour, e.Minute, e.Second, e.Mode));
+            closePowerFormWhenPressStartEvent?.Invoke(sender, new OnClosePowerModifierFormEvent(e.Hour, e.Minute, e.Second, e.Mode));
         }
 
-        public void ChooseMode()
+        public static void ChooseMode()
         {
 
         }
-        public bool IsWin(List<PictureBox> ptrbList, int numberOfPiecesImg, List<Image> imgList)
+        public static bool IsWin(List<PictureBox> ptrbList, int numberOfPiecesImg, List<Image> imgList)
         {
             
             for (int i = 0; i < numberOfPiecesImg; i++)

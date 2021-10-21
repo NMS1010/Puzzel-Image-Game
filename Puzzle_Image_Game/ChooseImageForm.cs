@@ -16,7 +16,7 @@ namespace Puzzle_Image_Game
     {
         private ManageFileImage fileImage;
         private int imgIndexChoosen;
-        public event EventHandler<CloseChooseImageFormEvent> closeChooseImgForm;
+        public event EventHandler<OnCloseChooseImageFormEvent> closeChooseImgForm;
 
         public ChooseImageForm()
         {
@@ -56,7 +56,7 @@ namespace Puzzle_Image_Game
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
-            closeChooseImgForm?.Invoke(sender, new CloseChooseImageFormEvent(fileImage.ListPath[imgIndexChoosen]));
+            closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent(fileImage.ListPath[imgIndexChoosen]));
             Close();
         }
 

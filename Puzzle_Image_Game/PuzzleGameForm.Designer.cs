@@ -27,9 +27,13 @@ namespace Puzzle_Image_Game
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        [System.Obsolete]
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.recordPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.powerGrpBox = new System.Windows.Forms.GroupBox();
             this.lbS = new System.Windows.Forms.Label();
             this.lbM = new System.Windows.Forms.Label();
@@ -50,7 +54,13 @@ namespace Puzzle_Image_Game
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.countDownPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.recordLb3 = new System.Windows.Forms.Label();
+            this.recordLb2 = new System.Windows.Forms.Label();
+            this.recordLb1 = new System.Windows.Forms.Label();
+            this.levelCbx = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.recordPanel.SuspendLayout();
             this.powerGrpBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginPtrb)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -59,6 +69,7 @@ namespace Puzzle_Image_Game
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.powerGrpBox);
             this.groupBox1.Controls.Add(this.OriginPtrb);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -68,6 +79,37 @@ namespace Puzzle_Image_Game
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Original Image";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.levelCbx);
+            this.groupBox2.Controls.Add(this.recordPanel);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Location = new System.Drawing.Point(353, 88);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(138, 181);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Record";
+            // 
+            // recordPanel
+            // 
+            this.recordPanel.Controls.Add(this.recordLb1);
+            this.recordPanel.Controls.Add(this.recordLb2);
+            this.recordPanel.Controls.Add(this.recordLb3);
+            this.recordPanel.Location = new System.Drawing.Point(6, 55);
+            this.recordPanel.Name = "recordPanel";
+            this.recordPanel.Size = new System.Drawing.Size(126, 120);
+            this.recordPanel.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Level";
             // 
             // powerGrpBox
             // 
@@ -259,6 +301,49 @@ namespace Puzzle_Image_Game
             this.label1.TabIndex = 0;
             this.label1.Text = "Trò chơi sẽ bắt đầu khi bạn click \r\n    vào 1 ảnh bất kì ở bên phải";
             // 
+            // recordLb3
+            // 
+            this.recordLb3.AutoSize = true;
+            this.recordLb3.Location = new System.Drawing.Point(18, 88);
+            this.recordLb3.Name = "recordLb3";
+            this.recordLb3.Size = new System.Drawing.Size(0, 13);
+            this.recordLb3.TabIndex = 0;
+            // 
+            // recordLb2
+            // 
+            this.recordLb2.AutoSize = true;
+            this.recordLb2.Location = new System.Drawing.Point(18, 54);
+            this.recordLb2.Name = "recordLb2";
+            this.recordLb2.Size = new System.Drawing.Size(0, 13);
+            this.recordLb2.TabIndex = 1;
+            // 
+            // recordLb1
+            // 
+            this.recordLb1.AutoSize = true;
+            this.recordLb1.Location = new System.Drawing.Point(18, 16);
+            this.recordLb1.Name = "recordLb1";
+            this.recordLb1.Size = new System.Drawing.Size(0, 13);
+            this.recordLb1.TabIndex = 2;
+            // 
+            // levelCbx
+            // 
+            this.levelCbx.FormattingEnabled = true;
+            this.levelCbx.Items.AddRange(new object[] {
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.levelCbx.Location = new System.Drawing.Point(78, 24);
+            this.levelCbx.Name = "levelCbx";
+            this.levelCbx.Size = new System.Drawing.Size(43, 21);
+            this.levelCbx.TabIndex = 3;
+            this.levelCbx.Text = "3";
+            this.levelCbx.SelectedIndexChanged += new System.EventHandler(this.levelCbx_SelectedIndexChanged);
+            // 
             // PuzzleGameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +357,10 @@ namespace Puzzle_Image_Game
             this.Text = "Puzzle Image Game";
             this.Load += new System.EventHandler(this.PuzzleGameForm_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.recordPanel.ResumeLayout(false);
+            this.recordPanel.PerformLayout();
             this.powerGrpBox.ResumeLayout(false);
             this.powerGrpBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginPtrb)).EndInit();
@@ -307,6 +396,13 @@ namespace Puzzle_Image_Game
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Panel countDownPanel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Panel recordPanel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label recordLb1;
+        private System.Windows.Forms.Label recordLb2;
+        private System.Windows.Forms.Label recordLb3;
+        private System.Windows.Forms.ComboBox levelCbx;
     }
 }
 

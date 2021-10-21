@@ -11,43 +11,101 @@ using System.Windows.Forms;
 
 namespace Puzzle_Image_Game
 {
-    public partial class PuzzleGameForm : Form
+    public partial class PuzzleGameForm : Form, ICropImage
     {
         private int width = 270;
         private int height = 270;
         private Size resizedImg;
         private string path;
         private static int currentLevel = 3;
+        private int maxLevel = 10;
         private int numberOfRow = currentLevel;
         private int numberOfCol = currentLevel;
         private List<Image> imgList;
         private BlankBoard brdBlank;
         private ImageBoard brdImage;
-        private GameFunction fncGame;
 
+        private List<List<int>> records;
+
+        [Obsolete]
         public PuzzleGameForm()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
         }
+        [Obsolete]
+        private void PuzzleGameForm_Load(object sender, EventArgs e)
+        {
+            path = @"1.jpg";
+            List<Image> imgList = new List<Image>();
+            records = new List<List<int>>();
+            for(int i = 0; i < maxLevel - 2; i++)
+            {
+                records.Add(new List<int>());
+                records[i].Add(int.MaxValue);
+                records[i].Add(int.MaxValue);
+                records[i].Add(int.MaxValue);
+            }
+            resizedImg = new Size(width, height);
+            brdBlank = new BlankBoard(numberOfRow, numberOfCol, width, height, new Point(this.Width / 12, this.Height / 10));
+            brdImage = new ImageBoard(numberOfRow, numberOfCol, width, height, new Point(this.Width - width * 3 / 2, this.Height / 10), brdBlank);
+            OriginPtrb.Image = new Bitmap(Image.FromFile(path), resizedImg);
+            brdImage.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvemt;
+            brdBlank.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvemt;
+            Start();
+        }
 
+        private int ConvertTimeToSecond(string time)
+        {
+            string[] temp = time.Split(':');
+            int result = int.Parse(temp[0]) * 3600 + int.Parse(temp[1]) * 60 + int.Parse(temp[2]);
+            return result;
+        }
+        private string ConvertSecondToTime(int second)
+        {
+            int h, m, s;
+            h = (int)Math.Floor(second / (Double)3600);
+            m = (int)Math.Floor((second % 3600) / (Double)60);
+            s = second % 3600 % 60;
+            return $"{GameFunction.HandleTime(h)}:{GameFunction.HandleTime(m)}:{GameFunction.HandleTime(s)}";
+        }
+        private void UpdateRecordTable(int level)
+        {
+            int i = 0;
+            int number = 1;
+            foreach(Label item in recordPanel.Controls)
+            {
+                if(records[level - 3][i] != int.MaxValue)
+                {
+                    item.Text = $"{number}. " + ConvertSecondToTime(records[level - 3][i]);
+                    number++;
+                }
+                else
+                {
+                    item.Text = "";
+                }
+                i++;
+            }
+
+        }
         private void Start()
         {
-            imgList = CropImg.CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(Image.FromFile(path),width,height),width,height);
+            numberOfRow = numberOfCol = currentLevel;
+            imgList = CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(Image.FromFile(path),width,height),width,height);
             brdBlank.NumberOfColBoard = numberOfCol;
             brdBlank.NumberOfRowBoard = numberOfRow;
 
             brdImage.NumberOfColBoard = numberOfCol;
             brdImage.NumberOfRowBoard = numberOfRow;
 
+
             lbMinute.Text = GameFunction.HandleTime(currentLevel);
             lbSecond.Text = "00";
             lbHour.Text = "00";
 
-            brdImage.DrawBoard(fncGame.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
+            brdImage.DrawBoard(GameFunction.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
             brdImage.OnClickPictureBox += BrdImage_OnClickPictureBox;
-            brdBlank.DrawBoard(fncGame.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
-            
+            brdBlank.DrawBoard(GameFunction.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
         }
 
         private void BrdImage_OnClickPictureBox(object sender, EventArgs e)
@@ -57,15 +115,39 @@ namespace Puzzle_Image_Game
             brdImage.OnClickPictureBox -= BrdImage_OnClickPictureBox;
         }
 
-        [Obsolete]
-        private void Brd_OnFilledPictureBox(object sender, FilledPictureBoxEventArgs e)
+        private string TimeElapse(string hour, string minute, string second)
         {
-            if (fncGame.IsWin(e.PtrbList, numberOfCol * numberOfRow, imgList))
+            int totalSecondRemain = ConvertTimeToSecond($"{hour}:{minute}:{second}");
+
+            int timeElapse = currentLevel * 60 - totalSecondRemain;
+
+            return ConvertSecondToTime(timeElapse);
+        }
+
+        [Obsolete]
+        private void Brd_OnFilledImageInBlankBoardEvemt(object sender, OnFilledImageInBlankBoardEvemt e)
+        {
+            if (GameFunction.IsWin(e.PtrbList, numberOfCol * numberOfRow, imgList))
             {
                 GameFunction.StopThreads(GameFunction.ThreadCountDown);
-                MessageBox.Show("Win");
+                string time = TimeElapse(lbHour.Text, lbMinute.Text, lbSecond.Text);
+                records[currentLevel-3].Add(ConvertTimeToSecond(time));
+                records[currentLevel-3].Sort();
+                UpdateRecordTable(currentLevel);
+                if (MessageBox.Show($"Great! You won\nTime elapse: {time}\nClick OK to go to next challenge\nClick Cancel to play again","Result",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    currentLevel += 1;
+                }
+                levelCbx.Text = currentLevel.ToString();
+                if (currentLevel > 10)
+                {
+                    MessageBox.Show("There is no challenge for you! Congratulation!");
+                    currentLevel = 10;
+                }
+                Start();
             }
         }
+
         private List<Image> GetListImageFromCurrentListPtrb()
         {
             List<Image> res = new List<Image>();
@@ -75,58 +157,46 @@ namespace Puzzle_Image_Game
             }
             return res;
         }
+        
         private void mixToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            brdImage.DrawBoard(fncGame.Mix(GetListImageFromCurrentListPtrb(), numberOfCol * numberOfRow), this, imgList[0].Size);
+            brdImage.DrawBoard(GameFunction.Mix(GetListImageFromCurrentListPtrb(), numberOfCol * numberOfRow), this, imgList[0].Size);
         }
 
         [Obsolete]
         private void chooseLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fncGame.ChooseLevel(numberOfCol);
-            fncGame.closeChooseLevelEvent += FncGame_closeChooseLevelEvent;
+            GameFunction.ChooseLevel(numberOfCol);
+            GameFunction.closeChooseLevelEvent += FncGame_closeChooseLevelEvent;
         }
 
         [Obsolete]
-        private void FncGame_closeChooseLevelEvent(object sender, CloseChooseLevelFormEvent e)
+        private void FncGame_closeChooseLevelEvent(object sender, OnCloseChooseLevelFormEvent e)
         {
-            numberOfRow = numberOfCol = Convert.ToInt32(e.Level);
             currentLevel = int.Parse(e.Level);
             GameFunction.StopThreads(GameFunction.ThreadCountDown);
+            UpdateRecordTable(currentLevel);
+            levelCbx.Text = currentLevel.ToString();
             Start();
-            fncGame.closeChooseLevelEvent -= FncGame_closeChooseLevelEvent;
+            GameFunction.closeChooseLevelEvent -= FncGame_closeChooseLevelEvent;
         }
 
         
         [Obsolete]
         private void chooseImageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            fncGame.ChooseImage();
-            fncGame.closeChooseImageEvent += FncGame_closeChooseImageEvent;
+            GameFunction.ChooseImage();
+            GameFunction.closeChooseImageEvent += FncGame_closeChooseImageEvent;
         }
 
         [Obsolete]
-        private void FncGame_closeChooseImageEvent(object sender, CloseChooseImageFormEvent e)
+        private void FncGame_closeChooseImageEvent(object sender, OnCloseChooseImageFormEvent e)
         {
             path = e.ImgPath;
             OriginPtrb.Image = new Bitmap(Image.FromFile(path), resizedImg);
+            GameFunction.StopThreads(GameFunction.ThreadCountDown);
             Start();
-            fncGame.closeChooseImageEvent -= FncGame_closeChooseImageEvent;
-        }
-
-        
-        private void PuzzleGameForm_Load(object sender, EventArgs e)
-        {
-            path = @"1.jpg";
-            List<Image> imgList = new List<Image>();
-            fncGame = new GameFunction();
-            resizedImg = new Size(width, height);
-            brdBlank = new BlankBoard(numberOfRow, numberOfCol, width, height);
-            brdImage = new ImageBoard(numberOfRow, numberOfCol, width, height, brdBlank);
-            OriginPtrb.Image = new Bitmap(Image.FromFile(path), resizedImg);
-            brdImage.OnFilledPictureBox += Brd_OnFilledPictureBox;
-            brdBlank.OnFilledPictureBox += Brd_OnFilledPictureBox;
-            Start();
+            GameFunction.closeChooseImageEvent -= FncGame_closeChooseImageEvent;
         }
 
         private void SetTimeForPowerForm()
@@ -136,29 +206,30 @@ namespace Puzzle_Image_Game
             GameFunction.timeList.Add(lbM.Text);
             GameFunction.timeList.Add(lbS.Text);
         }
+        
         [Obsolete]
         private void powerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetTimeForPowerForm();
-            fncGame.PowerModify(powerGrpBox);
-            fncGame.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
-            fncGame.closePowerFormWhenPressStartEvent += FncGame_closePowerFormWhenPressStartEvent;
-            fncGame.closePowerFormWhenClosingEvent += FncGame_closePowerFormWhenClosingEvent;
+            GameFunction.PowerModify(powerGrpBox);
+            GameFunction.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
+            GameFunction.closePowerFormWhenPressStartEvent += FncGame_closePowerFormWhenPressStartEvent;
+            GameFunction.closePowerFormWhenClosingEvent += FncGame_closePowerFormWhenClosingEvent;
 
         }
 
-        private void FncGame_closePowerFormWhenClosingEvent(object sender, ClosePowerModifierFormEvent e)
+        private void FncGame_closePowerFormWhenClosingEvent(object sender, OnClosePowerModifierFormEvent e)
         {
             powerGrpBox.Visible = e.IsDisplay;
         }
 
         [Obsolete]
-        private void FncGame_closePowerFormWhenPressCancelEvent(object sender, ClosePowerModifierFormEvent e)
+        private void FncGame_closePowerFormWhenPressCancelEvent(object sender, OnClosePowerModifierFormEvent e)
         {
             GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
         }
 
-        private void FncGame_closePowerFormWhenPressStartEvent(object sender, ClosePowerModifierFormEvent e)
+        private void FncGame_closePowerFormWhenPressStartEvent(object sender, OnClosePowerModifierFormEvent e)
         {
             lbTxt.Text = $"    Your PC will\n {e.Mode} in about: ";
             lbH.Text = e.Hour;
@@ -186,5 +257,28 @@ namespace Puzzle_Image_Game
             }
         }
 
+        public List<Image> CropIntoListImgs(int NumberOfRowBoard, int NumberOfColBoard, Bitmap ImgSource, int Width, int Height)
+        {
+            List<Image> imgs = new List<Image>();
+            for (int i = 0; i < NumberOfRowBoard; i++)
+            {
+                for (int j = 0; j < NumberOfColBoard; j++)
+                {
+                    var img = new Bitmap(Width / NumberOfRowBoard, Height / NumberOfColBoard);
+                    using (var grp = Graphics.FromImage(img))
+                    {
+                        grp.DrawImage(ImgSource, new Rectangle(0, 0, Width / NumberOfRowBoard, Height / NumberOfColBoard), new Rectangle(j * Width / NumberOfRowBoard, i * Height / NumberOfColBoard, Width / NumberOfRowBoard, Height / NumberOfColBoard), GraphicsUnit.Pixel);
+                    }
+                    imgs.Add(img);
+                }
+            }
+            return imgs;
+        }
+
+        private void levelCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox cbx = sender as ComboBox;
+            UpdateRecordTable(int.Parse(cbx.Text));
+        }
     }
 }

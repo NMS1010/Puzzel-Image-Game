@@ -10,7 +10,7 @@ namespace Puzzle_Image_Game
 {
     class ImageBoard : Board
     {
-        public override event EventHandler<FilledPictureBoxEventArgs> OnFilledPictureBox;
+        public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
         public event EventHandler OnClickPictureBox;
         private Panel panelImgList;
         private BlankBoard brdBlank;
@@ -20,7 +20,7 @@ namespace Puzzle_Image_Game
             PanelImgList = new Panel();
             brdBlank = new BlankBoard();
         }
-        public ImageBoard(int row, int col, int width, int height, BlankBoard brdBlank) : base(row, col, width, height)
+        public ImageBoard(int row, int col, int width, int height, Point position, BlankBoard brdBlank) : base(row, col, width, height, position)
         {
             PanelImgList = new Panel();
             PanelImgList.Size = new Size(Width, Height);
@@ -51,7 +51,7 @@ namespace Puzzle_Image_Game
                 }
             }
             this.AddImageToPictureBox(imgs,PanelImgList);
-            this.AddPanelToForm(fm, new Point(fm.Width - Width * 3 / 2, fm.Height / 10), AnchorStyles.Right, PanelImgList);
+            this.AddPanelToForm(fm, Position, AnchorStyles.Right, PanelImgList);
         }
 
         private void CurrPicImage_MouseDown(object sender, MouseEventArgs e)
@@ -67,7 +67,7 @@ namespace Puzzle_Image_Game
             {
                 PtrbList.AddRange(BrdBlank.PanelBlank.Controls.OfType<PictureBox>());
 
-                OnFilledPictureBox?.Invoke(BrdBlank.PanelBlank, new FilledPictureBoxEventArgs(PtrbList));
+                OnFilledPictureBox?.Invoke(BrdBlank.PanelBlank, new OnFilledImageInBlankBoardEvemt(PtrbList));
             }
         }
     }

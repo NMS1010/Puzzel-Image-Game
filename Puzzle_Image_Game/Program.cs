@@ -12,6 +12,7 @@ namespace Puzzle_Image_Game
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
+        [Obsolete]
         static void Main()
         {
             Application.EnableVisualStyles();

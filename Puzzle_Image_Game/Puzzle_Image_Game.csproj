@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClosePowerModifierFormEvent.cs" />
+    <Compile Include="ICropImage.cs" />
+    <Compile Include="OnClosePowerModifierFormEvent.cs" />
     <Compile Include="ManageFileImage.cs" />
     <Compile Include="BlankBoard.cs" />
     <Compile Include="Board.cs" />
@@ -56,8 +57,8 @@
     <Compile Include="ChooseImageForm.Designer.cs">
       <DependentUpon>ChooseImageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CloseChooseImageFormEvent.cs" />
-    <Compile Include="CloseChooseLevelFormEvent.cs" />
+    <Compile Include="OnCloseChooseImageFormEvent.cs" />
+    <Compile Include="OnCloseChooseLevelFormEvent.cs" />
     <Compile Include="ChooseLevelForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,14 +66,14 @@
       <DependentUpon>ChooseLevelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CropImage.cs" />
-    <Compile Include="FilledPictureBoxEventArgs.cs" />
+    <Compile Include="OnFilledImageInBlankBoardEvemt.cs" />
     <Compile Include="ImageBoard.cs" />
     <Compile Include="Power.cs" />
-    <Compile Include="PowerModifier.cs">
+    <Compile Include="PowerModifierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PowerModifier.Designer.cs">
-      <DependentUpon>PowerModifier.cs</DependentUpon>
+    <Compile Include="PowerModifierForm.Designer.cs">
+      <DependentUpon>PowerModifierForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PuzzleGameForm.cs">
       <SubType>Form</SubType>
@@ -94,8 +95,8 @@
     <EmbeddedResource Include="ChooseImageForm.resx">
       <DependentUpon>ChooseImageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PowerModifier.resx">
-      <DependentUpon>PowerModifier.cs</DependentUpon>
+    <EmbeddedResource Include="PowerModifierForm.resx">
+      <DependentUpon>PowerModifierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PuzzleGameForm.resx">
       <DependentUpon>PuzzleGameForm.cs</DependentUpon>
@@ -115,8 +116,6 @@
     <EmbeddedResource Include="SocketForm.resx">
       <DependentUpon>SocketForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

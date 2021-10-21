@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Puzzle_Image_Game
 {
-    public class CloseChooseLevelFormEvent : EventArgs
+    public class OnCloseChooseLevelFormEvent : EventArgs
     {
         private string level;
-        public CloseChooseLevelFormEvent(string txt)
+        public OnCloseChooseLevelFormEvent(string txt)
         {
             Level = txt;
         }

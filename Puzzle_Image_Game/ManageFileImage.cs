@@ -40,7 +40,7 @@ namespace Puzzle_Image_Game
                     return new Bitmap(Image.FromFile(fileName), new Size(270, 270));
                 }
                 return new Bitmap(Image.FromFile(path), new Size(270, 270));
-            }catch(Exception e)
+            }catch
             {
                 MessageBox.Show("Vui lòng chọn file ảnh", "Error", MessageBoxButtons.OK);
                 return null;

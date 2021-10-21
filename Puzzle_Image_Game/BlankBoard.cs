@@ -10,7 +10,7 @@ namespace Puzzle_Image_Game
 {
     class BlankBoard: Board
     {
-        public override event EventHandler<FilledPictureBoxEventArgs> OnFilledPictureBox;
+        public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
 
         private Panel panelBlank;
 
@@ -18,7 +18,7 @@ namespace Puzzle_Image_Game
         {
             PanelBlank = new Panel();
         }
-        public BlankBoard(int row, int col, int width, int height):base(row,col,width,height)
+        public BlankBoard(int row, int col, int width, int height, Point position) :base(row,col,width,height,position)
         {
             PanelBlank = new Panel();
             PanelBlank.Size = new Size(Width, Height);
@@ -60,7 +60,7 @@ namespace Puzzle_Image_Game
                     prevPicBlank = currPicBlank;
                 }
             }
-            this.AddPanelToForm(fm, new Point(fm.Width / 12, fm.Height / 10), AnchorStyles.Left, PanelBlank);
+            this.AddPanelToForm(fm, Position, AnchorStyles.Left, PanelBlank);
         }
 
         private void CurrPicBlank_MouseDown(object sender, MouseEventArgs e)
@@ -75,7 +75,7 @@ namespace Puzzle_Image_Game
             {
                 PtrbList.AddRange(PanelBlank.Controls.OfType<PictureBox>());
 
-                OnFilledPictureBox?.Invoke(PanelBlank, new FilledPictureBoxEventArgs(PtrbList));
+                OnFilledPictureBox?.Invoke(PanelBlank, new OnFilledImageInBlankBoardEvemt(PtrbList));
             }
         }
     }
