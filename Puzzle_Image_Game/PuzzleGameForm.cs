@@ -133,6 +133,7 @@ namespace Puzzle_Image_Game
                 string time = TimeElapse(lbHour.Text, lbMinute.Text, lbSecond.Text);
                 records[currentLevel-3].Add(ConvertTimeToSecond(time));
                 records[currentLevel-3].Sort();
+                records[currentLevel].RemoveRange(3, records[currentLevel].Count - 3);
                 UpdateRecordTable(currentLevel);
                 if (MessageBox.Show($"Great! You won\nTime elapse: {time}\nClick OK to go to next challenge\nClick Cancel to play again","Result",MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {

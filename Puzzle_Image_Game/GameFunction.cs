@@ -184,6 +184,7 @@ namespace Puzzle_Image_Game
                 ThreadCountDown.Add(Ts);
             Ts.Start();
         }
+        
         public static List<string> timeList = new List<string>();
         public static bool isPowerStartClicked = false;
         public static string modePowerChosen = "Shut Down";
