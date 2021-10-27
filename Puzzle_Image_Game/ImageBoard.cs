@@ -10,34 +10,34 @@ namespace Puzzle_Image_Game
 {
     class ImageBoard : Board
     {
-        public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
-        public event EventHandler OnClickPictureBox;
+        //public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
+        //public event EventHandler OnClickPictureBox;
         private Panel panelImgList;
-        private BlankBoard brdBlank;
+        //private BlankBoard brdBlank;
 
         public ImageBoard()
         {
             PanelImgList = new Panel();
-            brdBlank = new BlankBoard();
+            //brdBlank = new BlankBoard();
         }
-        public ImageBoard(int row, int col, int width, int height, Point position, BlankBoard brdBlank) : base(row, col, width, height, position)
+        public ImageBoard(int row, int col, int width, int height, Point position/*, BlankBoard brdBlank*/) : base(row, col, width, height, position)
         {
             PanelImgList = new Panel();
             PanelImgList.Size = new Size(Width, Height);
-            BrdBlank = brdBlank;
+            //BrdBlank = brdBlank;
         }
 
         public Panel PanelImgList { get => panelImgList; set => panelImgList = value; }
-        internal BlankBoard BrdBlank { get => brdBlank; set => brdBlank = value; }
+        //internal BlankBoard BrdBlank { get => brdBlank; set => brdBlank = value; }
 
-        public override void Reset()
+        /*public override void Reset()
         {
             PanelImgList.Controls.Clear();
             base.Reset();
-        }
+        }*/
         public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
         {
-            Reset();
+            BoardManager.Reset(PanelImgList);//
             int index = 0;
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
@@ -45,18 +45,21 @@ namespace Puzzle_Image_Game
                 for (int j = 0; j < NumberOfColBoard; j++)
                 {
                     PictureBox currPicImage = new PictureBox() { Size = new Size(sizeOfPtr.Width, sizeOfPtr.Height), Location = new Point(prevPicImage.Location.X + prevPicImage.Size.Width, prevPicImage.Location.Y) };
-                    currPicImage.MouseDown += CurrPicImage_MouseDown;
-                    this.AddImgToPanel(fm,currPicImage, PanelImgList, index++, BorderStyle.FixedSingle);
+                    //currPicImage.MouseDown += BoardManager.CurrPicImage_MouseDown;
+                    BoardManager.AddImgToPanel(fm,currPicImage, PanelImgList, index++, BorderStyle.FixedSingle);//
                     prevPicImage = currPicImage;
                 }
             }
-            this.AddImageToPictureBox(imgs,PanelImgList);
-            this.AddPanelToForm(fm, Position, AnchorStyles.Right, PanelImgList);
+            BoardManager.AddImageToPictureBox(imgs,PanelImgList);//
+            BoardManager.AddPanelToForm(fm, Position, AnchorStyles.Right, PanelImgList);//
         }
-
+        /*
         private void CurrPicImage_MouseDown(object sender, MouseEventArgs e)
         {
+            //Start count down time
             OnClickPictureBox?.Invoke(sender, e);
+
+
             var ptr = sender as PictureBox;
             if (ptr.Image == null) return;
             droppedImg = false;
@@ -69,6 +72,6 @@ namespace Puzzle_Image_Game
 
                 OnFilledPictureBox?.Invoke(BrdBlank.PanelBlank, new OnFilledImageInBlankBoardEvemt(PtrbList));
             }
-        }
+        }*/
     }
 }

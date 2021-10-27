@@ -10,7 +10,7 @@ namespace Puzzle_Image_Game
 {
     class BlankBoard: Board
     {
-        public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
+        //public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
 
         private Panel panelBlank;
 
@@ -27,7 +27,7 @@ namespace Puzzle_Image_Game
         public Panel PanelBlank { get => panelBlank; set => panelBlank = value; }
 
 
-        public override void Reset()
+        /*public override void Reset()
         {
             PanelBlank.Controls.Clear();
             base.Reset();
@@ -42,10 +42,10 @@ namespace Puzzle_Image_Game
                 }
             }
             return true;
-        }
+        }*/
         public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
         {
-            Reset();
+            BoardManager.Reset(PanelBlank);//
             int index = 0;
 
             for (int i = 0; i < NumberOfRowBoard; i++)
@@ -54,15 +54,15 @@ namespace Puzzle_Image_Game
                 for (int j = 0; j < NumberOfColBoard; j++)
                 {
                     PictureBox currPicBlank = new PictureBox() { Size = new Size(sizeOfPtr.Width, sizeOfPtr.Height), Location = new Point(prevPicBlank.Location.X + prevPicBlank.Size.Width, prevPicBlank.Location.Y), BackColor = Color.LightGray };
-                    currPicBlank.Paint += CurrPicBlank_Paint;
-                    currPicBlank.MouseDown += CurrPicBlank_MouseDown;
-                    this.AddImgToPanel(fm,currPicBlank, PanelBlank, index++, BorderStyle.FixedSingle);
+                    //currPicBlank.Paint += BoardManager.CurrPicBlank_Paint;
+                    //currPicBlank.MouseDown += BoardManager.CurrPicBlank_MouseDown;
+                    BoardManager.AddImgToPanel(fm,currPicBlank, PanelBlank, index++, BorderStyle.FixedSingle);//
                     prevPicBlank = currPicBlank;
                 }
             }
-            this.AddPanelToForm(fm, Position, AnchorStyles.Left, PanelBlank);
+            BoardManager.AddPanelToForm(fm, Position, AnchorStyles.Left, PanelBlank);//
         }
-
+        /*
         private void CurrPicBlank_MouseDown(object sender, MouseEventArgs e)
         {
             var ptr = sender as PictureBox;
@@ -77,6 +77,6 @@ namespace Puzzle_Image_Game
 
                 OnFilledPictureBox?.Invoke(PanelBlank, new OnFilledImageInBlankBoardEvemt(PtrbList));
             }
-        }
+        }*/
     }
 }

@@ -14,8 +14,9 @@ namespace Puzzle_Image_Game
 {
     public partial class ChooseImageForm : Form
     {
-        private ManageFileImage fileImage;
+        private ImageFileManager imageFileManager;
         private int imgIndexChoosen;
+        private Image imgChose;
         public event EventHandler<OnCloseChooseImageFormEvent> closeChooseImgForm;
 
         public ChooseImageForm()
@@ -23,40 +24,75 @@ namespace Puzzle_Image_Game
             InitializeComponent();
         }
 
-        private void LoadImageFromFolder()
+        private void ChooseImageForm_Load(object sender, EventArgs e)
         {
-            fileImage.GetImageFromFolder();
-            if (fileImage.ListPath.Count == 0 ) return;
-            foreach(var item in fileImage.ListPath)
+            imageFileManager = new ImageFileManager();
+            ImageFileManager.CountImage = 0;
+            ImageFileManager.IndexImage = 0;
+            imageList.Images.Clear();
+            imageLsview.Items.Clear();
+            LoadImage();
+        }
+
+        private void LoadImage()
+        {
+            imageFileManager.GetListPathFromFile();
+            if (imageFileManager.ListPath.Count == 0) return;
+            ImageFileManager.CountImage = imageFileManager.GetNumberImageFromFolder();
+            
+            foreach (var item in imageFileManager.ListPath.ToList())
             {
-                fileImage.AddImageToListView(imageLsview, imageList, item);
+                imageFileManager.LoadImageBegin(imageLsview, imageList, item);
             }
+            
         }
         private void addImgFileBtn_Click(object sender, EventArgs e)
         {
+            openFileDlg.Multiselect = false;
             if (openFileDlg.ShowDialog() == DialogResult.OK)
             {
-                fileImage.FileName = openFileDlg.FileName;
-                fileImage.AddImageToListView(imageLsview,imageList,null);
+                imageFileManager.AddImageToListView(imageLsview,imageList, openFileDlg.FileName);
             }
         }
 
         private void imageLsview_SelectedIndexChanged(object sender, EventArgs e)
         {
             okBtn.Enabled = true;
-            var lsvItem = sender as ListViewItem;
+            delBtn.Enabled = true;
+
             foreach(ListViewItem item in imageLsview.SelectedItems)
             {
                 imgIndexChoosen = item.ImageIndex;
                 
                 if (imgIndexChoosen < 0 || imgIndexChoosen > imageList.Images.Count) break;
             }
+            imgChose = Image.FromFile(imageList.Images.Keys[imgIndexChoosen]); 
             okBtn.Click += OkBtn_Click;
+            delBtn.Click += DelBtn_Click;
+        }
+
+        private void DelBtn_Click(object sender, EventArgs e)
+        {
+            imageList.Images.RemoveAt(imgIndexChoosen);
+            imageLsview.Items.Clear();
+            ImageFileManager.IndexImage = 0;
+            List<string> paths = new List<string>();
+            foreach (var item in imageList.Images.Keys) {
+                paths.Add(item);
+            }
+            imageList.Images.Clear();
+            foreach (var item in paths)
+            {
+                imageFileManager.LoadImageBegin(imageLsview, imageList, item);
+            }
+            delBtn.Enabled = false ;
+            delBtn.Click -= DelBtn_Click;
         }
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
-            closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent(fileImage.ListPath[imgIndexChoosen]));
+            closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent(imgChose));
+
             Close();
         }
 
@@ -66,8 +102,7 @@ namespace Puzzle_Image_Game
             {
                 foreach(var path in filePaths)
                 {
-                    fileImage.FileName = path;
-                    fileImage.AddImageToListView(imageLsview, imageList, path);
+                    imageFileManager.AddImageToListView(imageLsview, imageList, path);
                 }
             }
         }
@@ -80,11 +115,16 @@ namespace Puzzle_Image_Game
             }
         }
 
-        private void ChooseImageForm_Load(object sender, EventArgs e)
+        private void ChooseImageForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            fileImage = new ManageFileImage();
-            ManageFileImage.CountImage = 0;
-            LoadImageFromFolder();
+            imageFileManager.ListPath.Clear();
+            foreach (var item in imageList.Images.Keys)
+            {
+                imageFileManager.ListPath.Add(item);
+            }
+            imageFileManager.WriteListPathToFile();
+            imageList.Images.Clear();
+            imageLsview.Items.Clear();
         }
     }
 }

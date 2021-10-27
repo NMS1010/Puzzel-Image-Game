@@ -16,7 +16,7 @@ namespace Puzzle_Image_Game
     {
         private static Random rd = new Random();
         //private static int port = rd.Next(6000, 7000); 
-        private static int port = 1000;
+        private static int port = 6899;
         public static CancellationTokenSource tokenCancel = new CancellationTokenSource();
         public static async Task ConncetToServer(string ipServer, int port)
         {
@@ -50,8 +50,7 @@ namespace Puzzle_Image_Game
 
             Action act = async () =>
             {
-                TcpListener listener = new TcpListener(IPAddress.Parse(GetPublicIpv4Address()),port);
-                listener.AllowNatTraversal(false);
+                TcpListener listener = new TcpListener(IPAddress.Parse(GetLocalIpv4Address()),port);
                 listener.Start();
                 while (true)
                 {
@@ -88,7 +87,7 @@ namespace Puzzle_Image_Game
                     ipV4.Add(ip);
                 }
             }
-            return ipV4.Last().ToString();
+            return ipV4[2].ToString();
         }
         public static string GetPublicIpv4Address()
         {

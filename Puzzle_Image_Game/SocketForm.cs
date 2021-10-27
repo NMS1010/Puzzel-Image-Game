@@ -27,7 +27,7 @@ namespace Puzzle_Image_Game
 
         private async void SocketForm_Load(object sender, EventArgs e)
         {
-            ipTxb.Text =  SocketManager.GetPublicIpv4Address();
+            ipTxb.Text =  SocketManager.GetLocalIpv4Address();
             await SocketManager.WaitForClientConnect();
         }
     }

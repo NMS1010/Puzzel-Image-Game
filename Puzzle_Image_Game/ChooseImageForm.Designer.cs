@@ -35,6 +35,7 @@ namespace Puzzle_Image_Game
             this.openFileDlg = new System.Windows.Forms.OpenFileDialog();
             this.imageLsview = new System.Windows.Forms.ListView();
             this.imageList = new System.Windows.Forms.ImageList(this.components);
+            this.delBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addImgFileBtn
@@ -82,11 +83,22 @@ namespace Puzzle_Image_Game
             this.imageList.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // delBtn
+            // 
+            this.delBtn.Enabled = false;
+            this.delBtn.Location = new System.Drawing.Point(671, 349);
+            this.delBtn.Name = "delBtn";
+            this.delBtn.Size = new System.Drawing.Size(194, 23);
+            this.delBtn.TabIndex = 4;
+            this.delBtn.Text = "Delete";
+            this.delBtn.UseVisualStyleBackColor = true;
+            // 
             // ChooseImageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(877, 450);
+            this.Controls.Add(this.delBtn);
             this.Controls.Add(this.okBtn);
             this.Controls.Add(this.addImgFileBtn);
             this.Controls.Add(this.imageLsview);
@@ -94,6 +106,7 @@ namespace Puzzle_Image_Game
             this.Name = "ChooseImageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choose Image Form";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChooseImageForm_FormClosing);
             this.Load += new System.EventHandler(this.ChooseImageForm_Load);
             this.ResumeLayout(false);
 
@@ -105,5 +118,6 @@ namespace Puzzle_Image_Game
         private System.Windows.Forms.OpenFileDialog openFileDlg;
         private System.Windows.Forms.ListView imageLsview;
         private System.Windows.Forms.ImageList imageList;
+        private System.Windows.Forms.Button delBtn;
     }
 }

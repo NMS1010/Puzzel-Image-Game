@@ -9,13 +9,13 @@ namespace Puzzle_Image_Game
 {
     public class OnCloseChooseImageFormEvent : EventArgs
     {
-        private string imgPath;
+        private Image img;
 
-        public OnCloseChooseImageFormEvent(string imgPath)
+        public OnCloseChooseImageFormEvent(Image img)
         {
-            ImgPath = imgPath;
+            Img = img;
         }
 
-        public string ImgPath { get => imgPath; set => imgPath = value; }
+        public Image Img { get => img; set => img = value; }
     }
 }
