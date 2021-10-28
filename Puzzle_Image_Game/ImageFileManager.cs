@@ -61,13 +61,17 @@ namespace Puzzle_Image_Game
             string path = $@"..\..\Image\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             var count = new List<string>(Directory.GetFiles(path));
-            return count.Count;
+            int res = int.Parse(Path.GetFileNameWithoutExtension(count[count.Count - 1])) + 1;
+            return res;
         }
         public Bitmap GetImageFromFile(string path)
         {
             try
             {
-                return new Bitmap(Image.FromFile(path), new Size(270, 270));
+                using (var img = Image.FromFile(path))
+                {
+                    return new Bitmap(img, new Size(270, 270));
+                }
             }
             catch
             {
@@ -77,32 +81,42 @@ namespace Puzzle_Image_Game
         }
         private string AddImageToFolderAndGetPath(string pth)
         {
+            
             string dir = $@"..\..\Image\";
             string name = $"{CountImage}.jpg";
-            Bitmap bmp = GetImageFromFile(pth);
-            bmp.Save(dir + name, ImageFormat.Jpeg);
+            using (Bitmap bmp = GetImageFromFile(pth))
+            {
+                bmp.Save(dir + name, ImageFormat.Jpeg);
+            }
             CountImage++;
+            
             return dir + name;
         }
         
         public void LoadImageBegin(ListView lsv, ImageList imgList, string path)
         {
-            Image img = GetImageFromFile(path);
-            if (img == null) return;
-            imgList.ImageSize = new Size(100, 100);
-            imgList.Images.Add(path, img);
-            lsv.LargeImageList = imgList;
-            lsv.Items.Add(String.Empty, IndexImage++);
+            using (Image img = GetImageFromFile(path))
+            {
+                if (img == null) return;
+
+                imgList.ImageSize = new Size(100, 100);
+                imgList.Images.Add(path, img);
+                lsv.LargeImageList = imgList;
+                lsv.Items.Add(String.Empty, IndexImage++);
+            }
         }
         public void AddImageToListView(ListView lsv, ImageList imgList, string path)
         {
-            Image img = GetImageFromFile(path);
-            if (img == null) return;
-            string pth = AddImageToFolderAndGetPath(path);
-            imgList.ImageSize = new Size(100, 100);
-            imgList.Images.Add(pth,img);
-            lsv.LargeImageList = imgList;
-            lsv.Items.Add(String.Empty, IndexImage++);
+            using (Image img = GetImageFromFile(path))
+            {
+                if (img == null) return;
+
+                string pth = AddImageToFolderAndGetPath(path);
+                imgList.ImageSize = new Size(100, 100);
+                imgList.Images.Add(pth, img);
+                lsv.LargeImageList = imgList;
+                lsv.Items.Add(String.Empty, IndexImage++);
+            }
         }
     }
 }

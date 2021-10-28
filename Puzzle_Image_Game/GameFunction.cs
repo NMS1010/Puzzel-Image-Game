@@ -114,7 +114,7 @@ namespace Puzzle_Image_Game
 
         private static void ChooseImgForm_closeChooseImgForm(object sender, OnCloseChooseImageFormEvent e)
         {
-            closeChooseImageEvent?.Invoke(sender, new OnCloseChooseImageFormEvent(e.Img));
+            closeChooseImageEvent?.Invoke(sender, new OnCloseChooseImageFormEvent(e.Path));
             chooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImgForm;
         }
 

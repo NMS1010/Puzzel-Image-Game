@@ -16,7 +16,8 @@ namespace Puzzle_Image_Game
     {
         private ImageFileManager imageFileManager;
         private int imgIndexChoosen;
-        private Image imgChose;
+        private string path;
+        private List<string> pathImgRemoved;
         public event EventHandler<OnCloseChooseImageFormEvent> closeChooseImgForm;
 
         public ChooseImageForm()
@@ -27,6 +28,7 @@ namespace Puzzle_Image_Game
         private void ChooseImageForm_Load(object sender, EventArgs e)
         {
             imageFileManager = new ImageFileManager();
+            pathImgRemoved = new List<string>();
             ImageFileManager.CountImage = 0;
             ImageFileManager.IndexImage = 0;
             imageList.Images.Clear();
@@ -66,14 +68,22 @@ namespace Puzzle_Image_Game
                 
                 if (imgIndexChoosen < 0 || imgIndexChoosen > imageList.Images.Count) break;
             }
-            imgChose = Image.FromFile(imageList.Images.Keys[imgIndexChoosen]); 
+            path = imageList.Images.Keys[imgIndexChoosen];
             okBtn.Click += OkBtn_Click;
             delBtn.Click += DelBtn_Click;
         }
 
         private void DelBtn_Click(object sender, EventArgs e)
         {
-            imageList.Images.RemoveAt(imgIndexChoosen);
+            try
+            {
+                File.Delete(imageList.Images.Keys[imgIndexChoosen]);
+                imageList.Images.RemoveAt(imgIndexChoosen);
+            }
+            catch
+            {
+                return;
+            }
             imageLsview.Items.Clear();
             ImageFileManager.IndexImage = 0;
             List<string> paths = new List<string>();
@@ -91,7 +101,7 @@ namespace Puzzle_Image_Game
 
         private void OkBtn_Click(object sender, EventArgs e)
         {
-            closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent(imgChose));
+            closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent(path));
 
             Close();
         }
@@ -125,6 +135,7 @@ namespace Puzzle_Image_Game
             imageFileManager.WriteListPathToFile();
             imageList.Images.Clear();
             imageLsview.Items.Clear();
+
         }
     }
 }

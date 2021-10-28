@@ -11,7 +11,7 @@ namespace Puzzle_Image_Game
     class BoardManager
     {
 
-        public static event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
+        public static event EventHandler<OnFilledImageInBlankBoardEvent> OnFilledPictureBox;
         public static event EventHandler OnClickPictureBox;
 
         //Đánh dấu ảnh đã được thả sang ô khác hay chưa
@@ -22,17 +22,19 @@ namespace Puzzle_Image_Game
         public static ImageBoard imgBoard;
         public static BlankBoard blankBoard;
 
-        public BoardManager(int row, int col, int width, int height, Point blankBoardPos, Point imgBoardPos)
+
+
+        public BoardManager(int row, int col, int width, int height, Point blankBoardPos, Point imgBoardPos, List<Image> imgs)
         {
-            imgBoard = new ImageBoard(row, col, width, height, imgBoardPos);
+            imgBoard = new ImageBoard(row, col, width, height, imgBoardPos,imgs);
             blankBoard = new BlankBoard(row, col, width, height, blankBoardPos);
         }
 
 
-        public void StartDraw(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
+        public void StartDraw(PuzzleGameForm fm, Size sizeOfPtr)
         {
-            imgBoard.DrawBoard(imgs, fm, sizeOfPtr);
-            blankBoard.DrawBoard(imgs, fm, sizeOfPtr);
+            imgBoard.DrawBoard( fm, sizeOfPtr);
+            blankBoard.DrawBoard(fm, sizeOfPtr);
         }
 
         public static void AddPanelToForm(PuzzleGameForm fm, Point pointPanel, AnchorStyles style, Panel panelAdded)
@@ -147,7 +149,7 @@ namespace Puzzle_Image_Game
             {
                 ptrbList.AddRange(blankBoard.PanelBlank.Controls.OfType<PictureBox>());
 
-                OnFilledPictureBox?.Invoke(blankBoard.PanelBlank, new OnFilledImageInBlankBoardEvemt(ptrbList));
+                OnFilledPictureBox?.Invoke(blankBoard.PanelBlank, new OnFilledImageInBlankBoardEvent(ptrbList));
             }
         }
     }

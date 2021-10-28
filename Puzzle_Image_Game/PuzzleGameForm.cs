@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -23,8 +24,6 @@ namespace Puzzle_Image_Game
         private int numberOfCol = currentLevel;
         private Image img;
         private List<Image> imgList;
-        //private BlankBoard brdBlank;
-        //private ImageBoard brdImage;
         private BoardManager boardManager;
         private List<List<int>> records;
 
@@ -48,14 +47,10 @@ namespace Puzzle_Image_Game
                 records[i].Add(int.MaxValue);
                 records[i].Add(int.MaxValue);
             }
+            boardManager = new BoardManager(numberOfRow, numberOfCol, width, height, new Point(this.Width / 12, this.Height / 10), new Point(this.Width - width * 3 / 2, this.Height / 10), CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(img, width, height), width, height));
+            img.Dispose();
             resizedImg = new Size(width, height);
-            //brdBlank = new BlankBoard(numberOfRow, numberOfCol, width, height, new Point(this.Width / 12, this.Height / 10));
-            //brdImage = new ImageBoard(numberOfRow, numberOfCol, width, height, new Point(this.Width - width * 3 / 2, this.Height / 10), brdBlank);
-            boardManager = new BoardManager(numberOfRow, numberOfCol, width, height, new Point(this.Width / 12, this.Height / 10), new Point(this.Width - width * 3 / 2, this.Height / 10));
-            OriginPtrb.Image = new Bitmap(img, resizedImg);
-            BoardManager.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvemt;
-            //brdImage.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvemt;
-            //brdBlank.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvemt;
+            BoardManager.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvent;
             Start();
         }
 
@@ -94,34 +89,30 @@ namespace Puzzle_Image_Game
         }
         private void Start()
         {
+            img = Image.FromFile(path);
             numberOfRow = numberOfCol = currentLevel;
             imgList = CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(img,width,height),width,height);
+            OriginPtrb.Image = new Bitmap(img, resizedImg);
+            BoardManager.imgBoard.Imgs = GameFunction.Mix(imgList,numberOfRow*numberOfCol);
+
             BoardManager.blankBoard.NumberOfRowBoard = numberOfRow;
             BoardManager.blankBoard.NumberOfColBoard = numberOfCol;
-            //brdBlank.NumberOfColBoard = numberOfCol;
-            //brdBlank.NumberOfRowBoard = numberOfRow;
             BoardManager.imgBoard.NumberOfRowBoard = numberOfRow;
             BoardManager.imgBoard.NumberOfColBoard = numberOfCol;
-            //brdImage.NumberOfColBoard = numberOfCol;
-            //brdImage.NumberOfRowBoard = numberOfRow;
-
 
             lbMinute.Text = GameFunction.HandleTime(currentLevel);
             lbSecond.Text = "00";
             lbHour.Text = "00";
 
-            //brdImage.DrawBoard(GameFunction.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
-            //brdImage.OnClickPictureBox += BrdImage_OnClickPictureBox;
-            //brdBlank.DrawBoard(GameFunction.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
-            boardManager.StartDraw(GameFunction.Mix(imgList, numberOfCol * numberOfRow), this, imgList[0].Size);
+            boardManager.StartDraw(this, imgList[0].Size);
             BoardManager.OnClickPictureBox += BrdImage_OnClickPictureBox;
+            img.Dispose();
         }
 
         private void BrdImage_OnClickPictureBox(object sender, EventArgs e)
         {
             GameFunction.TimeCount(lbHour, lbMinute, lbSecond,false);
             GameFunction.TimeEndEvent += CountDownTimeEvent;
-            //brdImage.OnClickPictureBox -= BrdImage_OnClickPictureBox;
             BoardManager.OnClickPictureBox -= BrdImage_OnClickPictureBox;
         }
 
@@ -135,7 +126,7 @@ namespace Puzzle_Image_Game
         }
 
         [Obsolete]
-        private void Brd_OnFilledImageInBlankBoardEvemt(object sender, OnFilledImageInBlankBoardEvemt e)
+        private void Brd_OnFilledImageInBlankBoardEvent(object sender, OnFilledImageInBlankBoardEvent e)
         {
             if (GameFunction.IsWin(e.PtrbList, numberOfCol * numberOfRow, imgList))
             {
@@ -171,8 +162,8 @@ namespace Puzzle_Image_Game
         
         private void mixToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            //brdImage.DrawBoard(GameFunction.Mix(GetListImageFromCurrentListPtrb(), numberOfCol * numberOfRow), this, imgList[0].Size);
-            BoardManager.imgBoard.DrawBoard(GameFunction.Mix(GetListImageFromCurrentListPtrb(), numberOfCol * numberOfRow), this, imgList[0].Size);
+            BoardManager.imgBoard.Imgs = GameFunction.Mix(GetListImageFromCurrentListPtrb(), numberOfRow * numberOfCol);
+            BoardManager.imgBoard.DrawBoard( this, imgList[0].Size);
         }
 
         [Obsolete]
@@ -204,8 +195,7 @@ namespace Puzzle_Image_Game
         [Obsolete]
         private void FncGame_closeChooseImageEvent(object sender, OnCloseChooseImageFormEvent e)
         {
-            img = e.Img;
-            OriginPtrb.Image = new Bitmap(img, resizedImg);
+            path = e.Path;
             GameFunction.StopThreads(GameFunction.ThreadCountDown);
             Start();
             GameFunction.closeChooseImageEvent -= FncGame_closeChooseImageEvent;
@@ -267,6 +257,7 @@ namespace Puzzle_Image_Game
                     Start();
                 }
             }
+            GameFunction.TimeEndEvent -= CountDownTimeEvent;
         }
 
         public List<Image> CropIntoListImgs(int NumberOfRowBoard, int NumberOfColBoard, Bitmap ImgSource, int Width, int Height)

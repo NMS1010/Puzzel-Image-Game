@@ -66,8 +66,7 @@
     <Compile Include="ChooseLevelForm.Designer.cs">
       <DependentUpon>ChooseLevelForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CropImage.cs" />
-    <Compile Include="OnFilledImageInBlankBoardEvemt.cs" />
+    <Compile Include="OnFilledImageInBlankBoardEvent.cs" />
     <Compile Include="ImageBoard.cs" />
     <Compile Include="Power.cs" />
     <Compile Include="PowerModifierForm.cs">

@@ -32,7 +32,11 @@ namespace Puzzle_Image_Game
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.levelCbx = new System.Windows.Forms.ComboBox();
             this.recordPanel = new System.Windows.Forms.Panel();
+            this.recordLb1 = new System.Windows.Forms.Label();
+            this.recordLb2 = new System.Windows.Forms.Label();
+            this.recordLb3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.powerGrpBox = new System.Windows.Forms.GroupBox();
             this.lbS = new System.Windows.Forms.Label();
@@ -54,10 +58,6 @@ namespace Puzzle_Image_Game
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.countDownPanel = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.recordLb3 = new System.Windows.Forms.Label();
-            this.recordLb2 = new System.Windows.Forms.Label();
-            this.recordLb1 = new System.Windows.Forms.Label();
-            this.levelCbx = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.recordPanel.SuspendLayout();
@@ -92,6 +92,25 @@ namespace Puzzle_Image_Game
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Record";
             // 
+            // levelCbx
+            // 
+            this.levelCbx.FormattingEnabled = true;
+            this.levelCbx.Items.AddRange(new object[] {
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10"});
+            this.levelCbx.Location = new System.Drawing.Point(78, 24);
+            this.levelCbx.Name = "levelCbx";
+            this.levelCbx.Size = new System.Drawing.Size(43, 21);
+            this.levelCbx.TabIndex = 3;
+            this.levelCbx.Text = "3";
+            this.levelCbx.SelectedIndexChanged += new System.EventHandler(this.levelCbx_SelectedIndexChanged);
+            // 
             // recordPanel
             // 
             this.recordPanel.Controls.Add(this.recordLb1);
@@ -101,6 +120,30 @@ namespace Puzzle_Image_Game
             this.recordPanel.Name = "recordPanel";
             this.recordPanel.Size = new System.Drawing.Size(126, 120);
             this.recordPanel.TabIndex = 2;
+            // 
+            // recordLb1
+            // 
+            this.recordLb1.AutoSize = true;
+            this.recordLb1.Location = new System.Drawing.Point(18, 16);
+            this.recordLb1.Name = "recordLb1";
+            this.recordLb1.Size = new System.Drawing.Size(0, 13);
+            this.recordLb1.TabIndex = 2;
+            // 
+            // recordLb2
+            // 
+            this.recordLb2.AutoSize = true;
+            this.recordLb2.Location = new System.Drawing.Point(18, 54);
+            this.recordLb2.Name = "recordLb2";
+            this.recordLb2.Size = new System.Drawing.Size(0, 13);
+            this.recordLb2.TabIndex = 1;
+            // 
+            // recordLb3
+            // 
+            this.recordLb3.AutoSize = true;
+            this.recordLb3.Location = new System.Drawing.Point(18, 88);
+            this.recordLb3.Name = "recordLb3";
+            this.recordLb3.Size = new System.Drawing.Size(0, 13);
+            this.recordLb3.TabIndex = 0;
             // 
             // label2
             // 
@@ -300,49 +343,6 @@ namespace Puzzle_Image_Game
             this.label1.Size = new System.Drawing.Size(286, 48);
             this.label1.TabIndex = 0;
             this.label1.Text = "Trò chơi sẽ bắt đầu khi bạn click \r\n    vào 1 ảnh bất kì ở bên phải";
-            // 
-            // recordLb3
-            // 
-            this.recordLb3.AutoSize = true;
-            this.recordLb3.Location = new System.Drawing.Point(18, 88);
-            this.recordLb3.Name = "recordLb3";
-            this.recordLb3.Size = new System.Drawing.Size(0, 13);
-            this.recordLb3.TabIndex = 0;
-            // 
-            // recordLb2
-            // 
-            this.recordLb2.AutoSize = true;
-            this.recordLb2.Location = new System.Drawing.Point(18, 54);
-            this.recordLb2.Name = "recordLb2";
-            this.recordLb2.Size = new System.Drawing.Size(0, 13);
-            this.recordLb2.TabIndex = 1;
-            // 
-            // recordLb1
-            // 
-            this.recordLb1.AutoSize = true;
-            this.recordLb1.Location = new System.Drawing.Point(18, 16);
-            this.recordLb1.Name = "recordLb1";
-            this.recordLb1.Size = new System.Drawing.Size(0, 13);
-            this.recordLb1.TabIndex = 2;
-            // 
-            // levelCbx
-            // 
-            this.levelCbx.FormattingEnabled = true;
-            this.levelCbx.Items.AddRange(new object[] {
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10"});
-            this.levelCbx.Location = new System.Drawing.Point(78, 24);
-            this.levelCbx.Name = "levelCbx";
-            this.levelCbx.Size = new System.Drawing.Size(43, 21);
-            this.levelCbx.TabIndex = 3;
-            this.levelCbx.Text = "3";
-            this.levelCbx.SelectedIndexChanged += new System.EventHandler(this.levelCbx_SelectedIndexChanged);
             // 
             // PuzzleGameForm
             // 

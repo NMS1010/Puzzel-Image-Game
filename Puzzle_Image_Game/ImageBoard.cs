@@ -10,34 +10,28 @@ namespace Puzzle_Image_Game
 {
     class ImageBoard : Board
     {
-        //public override event EventHandler<OnFilledImageInBlankBoardEvemt> OnFilledPictureBox;
-        //public event EventHandler OnClickPictureBox;
+
         private Panel panelImgList;
-        //private BlankBoard brdBlank;
+        private List<Image> imgs;
 
         public ImageBoard()
         {
             PanelImgList = new Panel();
-            //brdBlank = new BlankBoard();
+            Imgs = new List<Image>();
         }
-        public ImageBoard(int row, int col, int width, int height, Point position/*, BlankBoard brdBlank*/) : base(row, col, width, height, position)
+        public ImageBoard(int row, int col, int width, int height, Point position, List<Image> imgs) : base(row, col, width, height, position)
         {
             PanelImgList = new Panel();
             PanelImgList.Size = new Size(Width, Height);
-            //BrdBlank = brdBlank;
+            Imgs = imgs;
         }
 
         public Panel PanelImgList { get => panelImgList; set => panelImgList = value; }
-        //internal BlankBoard BrdBlank { get => brdBlank; set => brdBlank = value; }
+        public List<Image> Imgs { get => imgs; set => imgs = value; }
 
-        /*public override void Reset()
+        public override void DrawBoard( PuzzleGameForm fm, Size sizeOfPtr)
         {
-            PanelImgList.Controls.Clear();
-            base.Reset();
-        }*/
-        public override void DrawBoard(List<Image> imgs, PuzzleGameForm fm, Size sizeOfPtr)
-        {
-            BoardManager.Reset(PanelImgList);//
+            BoardManager.Reset(PanelImgList);
             int index = 0;
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
@@ -45,33 +39,13 @@ namespace Puzzle_Image_Game
                 for (int j = 0; j < NumberOfColBoard; j++)
                 {
                     PictureBox currPicImage = new PictureBox() { Size = new Size(sizeOfPtr.Width, sizeOfPtr.Height), Location = new Point(prevPicImage.Location.X + prevPicImage.Size.Width, prevPicImage.Location.Y) };
-                    //currPicImage.MouseDown += BoardManager.CurrPicImage_MouseDown;
                     BoardManager.AddImgToPanel(fm,currPicImage, PanelImgList, index++, BorderStyle.FixedSingle);//
                     prevPicImage = currPicImage;
                 }
             }
-            BoardManager.AddImageToPictureBox(imgs,PanelImgList);//
+            BoardManager.AddImageToPictureBox(Imgs,PanelImgList);//
             BoardManager.AddPanelToForm(fm, Position, AnchorStyles.Right, PanelImgList);//
         }
-        /*
-        private void CurrPicImage_MouseDown(object sender, MouseEventArgs e)
-        {
-            //Start count down time
-            OnClickPictureBox?.Invoke(sender, e);
-
-
-            var ptr = sender as PictureBox;
-            if (ptr.Image == null) return;
-            droppedImg = false;
-            ptr.DoDragDrop(ptr.Image, DragDropEffects.Move);
-            if (droppedImg)
-                ptr.Image = holdImg;
-            if (BrdBlank.CheckFilledPanel())
-            {
-                PtrbList.AddRange(BrdBlank.PanelBlank.Controls.OfType<PictureBox>());
-
-                OnFilledPictureBox?.Invoke(BrdBlank.PanelBlank, new OnFilledImageInBlankBoardEvemt(PtrbList));
-            }
-        }*/
+       
     }
 }
