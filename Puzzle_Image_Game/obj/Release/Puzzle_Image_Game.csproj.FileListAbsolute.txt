@@ -3,7 +3,6 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Puzzle_Imag
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Puzzle_Image_Game.pdb
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.csproj.AssemblyReference.cache
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.ChooseImageForm.resources
-E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.PowerModifier.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.PuzzleGameForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.ChooseLevelForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.Properties.Resources.resources
@@ -12,3 +11,8 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Imag
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.exe
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.pdb
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.SocketForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Newtonsoft.Json.dll
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Newtonsoft.Json.xml
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.InitialGameForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.MultiplayForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.PowerModifierForm.resources

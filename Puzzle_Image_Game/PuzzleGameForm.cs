@@ -10,15 +10,18 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Puzzle_Image_Game
 {
     public partial class PuzzleGameForm : Form, ICropImage
     {
+        private InitialGameForm startFm;
+
         private int width = 270;
         private int height = 270;
         private Size resizedImg;
         private string path;
-        private static int currentLevel = 3;
+        private static int currentLevel;
         private int maxLevel = 10;
         private int numberOfRow = currentLevel;
         private int numberOfCol = currentLevel;
@@ -28,14 +31,17 @@ namespace Puzzle_Image_Game
         private List<List<int>> records;
 
         [Obsolete]
-        public PuzzleGameForm()
+        public PuzzleGameForm(InitialGameForm startFm)
         {
             InitializeComponent();
+            this.startFm = startFm;
             Control.CheckForIllegalCrossThreadCalls = false;
         }
+
         [Obsolete]
         private void PuzzleGameForm_Load(object sender, EventArgs e)
         {
+            currentLevel = 3;
             path = @"1.jpg";
             img = Image.FromFile(path);
             List<Image> imgList = new List<Image>();
@@ -47,27 +53,14 @@ namespace Puzzle_Image_Game
                 records[i].Add(int.MaxValue);
                 records[i].Add(int.MaxValue);
             }
+
             boardManager = new BoardManager(numberOfRow, numberOfCol, width, height, new Point(this.Width / 12, this.Height / 10), new Point(this.Width - width * 3 / 2, this.Height / 10), CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(img, width, height), width, height));
             img.Dispose();
             resizedImg = new Size(width, height);
-            BoardManager.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvent;
+            boardManager.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvent;
             Start();
         }
 
-        private int ConvertTimeToSecond(string time)
-        {
-            string[] temp = time.Split(':');
-            int result = int.Parse(temp[0]) * 3600 + int.Parse(temp[1]) * 60 + int.Parse(temp[2]);
-            return result;
-        }
-        private string ConvertSecondToTime(int second)
-        {
-            int h, m, s;
-            h = (int)Math.Floor(second / (Double)3600);
-            m = (int)Math.Floor((second % 3600) / (Double)60);
-            s = second % 3600 % 60;
-            return $"{GameFunction.HandleTime(h)}:{GameFunction.HandleTime(m)}:{GameFunction.HandleTime(s)}";
-        }
         private void UpdateRecordTable(int level)
         {
             int i = 0;
@@ -76,7 +69,7 @@ namespace Puzzle_Image_Game
             {
                 if(records[level - 3][i] != int.MaxValue)
                 {
-                    item.Text = $"{number}. " + ConvertSecondToTime(records[level - 3][i]);
+                    item.Text = $"{number}. " + GameFunction.ConvertSecondToTime(records[level - 3][i]);
                     number++;
                 }
                 else
@@ -93,19 +86,19 @@ namespace Puzzle_Image_Game
             numberOfRow = numberOfCol = currentLevel;
             imgList = CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(img,width,height),width,height);
             OriginPtrb.Image = new Bitmap(img, resizedImg);
-            BoardManager.imgBoard.Imgs = GameFunction.Mix(imgList,numberOfRow*numberOfCol);
+            boardManager.imgBoard.Imgs = GameFunction.Mix(imgList);
 
-            BoardManager.blankBoard.NumberOfRowBoard = numberOfRow;
-            BoardManager.blankBoard.NumberOfColBoard = numberOfCol;
-            BoardManager.imgBoard.NumberOfRowBoard = numberOfRow;
-            BoardManager.imgBoard.NumberOfColBoard = numberOfCol;
+            boardManager.blankBoard.NumberOfRowBoard = numberOfRow;
+            boardManager.blankBoard.NumberOfColBoard = numberOfCol;
+            boardManager.imgBoard.NumberOfRowBoard = numberOfRow;
+            boardManager.imgBoard.NumberOfColBoard = numberOfCol;
 
             lbMinute.Text = GameFunction.HandleTime(currentLevel);
             lbSecond.Text = "00";
             lbHour.Text = "00";
 
             boardManager.StartDraw(this, imgList[0].Size);
-            BoardManager.OnClickPictureBox += BrdImage_OnClickPictureBox;
+            boardManager.OnClickPictureBox += BrdImage_OnClickPictureBox;
             img.Dispose();
         }
 
@@ -113,16 +106,7 @@ namespace Puzzle_Image_Game
         {
             GameFunction.TimeCount(lbHour, lbMinute, lbSecond,false);
             GameFunction.TimeEndEvent += CountDownTimeEvent;
-            BoardManager.OnClickPictureBox -= BrdImage_OnClickPictureBox;
-        }
-
-        private string TimeElapse(string hour, string minute, string second)
-        {
-            int totalSecondRemain = ConvertTimeToSecond($"{hour}:{minute}:{second}");
-
-            int timeElapse = currentLevel * 60 - totalSecondRemain;
-
-            return ConvertSecondToTime(timeElapse);
+            boardManager.OnClickPictureBox -= BrdImage_OnClickPictureBox;
         }
 
         [Obsolete]
@@ -131,21 +115,21 @@ namespace Puzzle_Image_Game
             if (GameFunction.IsWin(e.PtrbList, numberOfCol * numberOfRow, imgList))
             {
                 GameFunction.StopThreads(GameFunction.ThreadCountDown);
-                string time = TimeElapse(lbHour.Text, lbMinute.Text, lbSecond.Text);
-                records[currentLevel-3].Add(ConvertTimeToSecond(time));
+                string time = GameFunction.TimeElapse(lbHour.Text, lbMinute.Text, lbSecond.Text,currentLevel);
+                records[currentLevel-3].Add(GameFunction.ConvertTimeToSecond(time));
                 records[currentLevel-3].Sort();
-                records[currentLevel].RemoveRange(3, records[currentLevel].Count - 3);
+                records[currentLevel-3].RemoveRange(3, records[currentLevel-3].Count - 3);
                 UpdateRecordTable(currentLevel);
                 if (MessageBox.Show($"Great! You won\nTime elapse: {time}\nClick OK to go to next challenge\nClick Cancel to play again","Result",MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     currentLevel += 1;
                 }
-                levelCbx.Text = currentLevel.ToString();
                 if (currentLevel > 10)
                 {
                     MessageBox.Show("There is no challenge for you! Congratulation!");
                     currentLevel = 10;
                 }
+                levelCbx.Text = currentLevel.ToString();
                 Start();
             }
         }
@@ -153,7 +137,7 @@ namespace Puzzle_Image_Game
         private List<Image> GetListImageFromCurrentListPtrb()
         {
             List<Image> res = new List<Image>();
-            foreach(PictureBox ptrb in BoardManager.imgBoard.PanelImgList.Controls)
+            foreach(PictureBox ptrb in boardManager.imgBoard.PanelImgList.Controls)
             {
                 res.Add(ptrb.Image);
             }
@@ -162,8 +146,8 @@ namespace Puzzle_Image_Game
         
         private void mixToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            BoardManager.imgBoard.Imgs = GameFunction.Mix(GetListImageFromCurrentListPtrb(), numberOfRow * numberOfCol);
-            BoardManager.imgBoard.DrawBoard( this, imgList[0].Size);
+            boardManager.imgBoard.Imgs = GameFunction.Mix(GetListImageFromCurrentListPtrb());
+            boardManager.imgBoard.DrawBoard( this, imgList[0].Size, boardManager);
         }
 
         [Obsolete]
@@ -184,7 +168,6 @@ namespace Puzzle_Image_Game
             GameFunction.closeChooseLevelEvent -= FncGame_closeChooseLevelEvent;
         }
 
-        
         [Obsolete]
         private void chooseImageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -208,7 +191,7 @@ namespace Puzzle_Image_Game
             GameFunction.timeList.Add(lbM.Text);
             GameFunction.timeList.Add(lbS.Text);
         }
-        
+
         [Obsolete]
         private void powerToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -223,23 +206,26 @@ namespace Puzzle_Image_Game
         private void FncGame_closePowerFormWhenClosingEvent(object sender, OnClosePowerModifierFormEvent e)
         {
             powerGrpBox.Visible = e.IsDisplay;
+            GameFunction.closePowerFormWhenClosingEvent -= FncGame_closePowerFormWhenClosingEvent;
         }
 
         [Obsolete]
         private void FncGame_closePowerFormWhenPressCancelEvent(object sender, OnClosePowerModifierFormEvent e)
         {
             GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
+            GameFunction.closePowerFormWhenPressCancelEvent -= FncGame_closePowerFormWhenPressCancelEvent;
         }
 
         private void FncGame_closePowerFormWhenPressStartEvent(object sender, OnClosePowerModifierFormEvent e)
         {
-            lbTxt.Text = $"    Your PC will\n {e.Mode} in about: ";
+            lbTxt.Text = $"    Your PC will\n {e.Mode.ToLower()} in about: ";
             lbH.Text = e.Hour;
             lbM.Text = e.Minute;
             lbS.Text = e.Second;
             lbNotation1.Text = ":";
             lbNotation2.Text = ":";
             GameFunction.TimeCount(lbH, lbM, lbS,true);
+            GameFunction.closePowerFormWhenPressStartEvent -= FncGame_closePowerFormWhenPressStartEvent;
         }
 
         private void Time_ChangeEvent(object sender, EventArgs e)
@@ -263,6 +249,7 @@ namespace Puzzle_Image_Game
         public List<Image> CropIntoListImgs(int NumberOfRowBoard, int NumberOfColBoard, Bitmap ImgSource, int Width, int Height)
         {
             List<Image> imgs = new List<Image>();
+            int index = 0;
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
                 for (int j = 0; j < NumberOfColBoard; j++)
@@ -272,6 +259,7 @@ namespace Puzzle_Image_Game
                     {
                         grp.DrawImage(ImgSource, new Rectangle(0, 0, Width / NumberOfRowBoard, Height / NumberOfColBoard), new Rectangle(j * Width / NumberOfRowBoard, i * Height / NumberOfColBoard, Width / NumberOfRowBoard, Height / NumberOfColBoard), GraphicsUnit.Pixel);
                     }
+                    img.Tag = index.ToString();
                     imgs.Add(img);
                 }
             }
@@ -283,5 +271,110 @@ namespace Puzzle_Image_Game
             ComboBox cbx = sender as ComboBox;
             UpdateRecordTable(int.Parse(cbx.Text));
         }
+
+        [Obsolete]
+        private void PuzzleGameForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            GameFunction.StopThreads(GameFunction.ThreadCountDown);
+            GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
+            foreach (Form item in Application.OpenForms)
+            {
+                if (item.Name == "MusicPlayerForm")
+                {
+                    GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.stop();
+                    break;
+                }
+            }
+            GameFunction.isPowerStartClicked = false;
+            startFm.Show();
+        }
+
+
+        #region: Music Player
+        private bool isPressRepeatBtn = false;
+        private void repeatBtn_Click(object sender, EventArgs e)
+        {
+            if (!isPressRepeatBtn)
+                repeatBtn.BackColor = Color.FromArgb(128, 255, 128);
+            else
+                repeatBtn.BackColor = Color.FromArgb(255, 192, 192);
+            isPressRepeatBtn = !isPressRepeatBtn;
+
+        }
+
+        
+        private void musicPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GameFunction.MusicPlayer();
+            GameFunction.OnPressPlayButtonMusicPlayer += GameFunction_OnPressPlayButtonMusicPlayer;
+            GameFunction.MusicPlayerForm.OnEndedMusic += MusicPlayerForm_OnEndedMusic;
+        }
+
+        private void MusicPlayerForm_OnEndedMusic(object sender, EventArgs e)
+        {
+            timePlayNextSong.Enabled = true;
+            GameFunction.MusicPlayerForm.OnEndedMusic -= MusicPlayerForm_OnEndedMusic;
+
+        }
+        private void timePlayNextSong_Tick(object sender, EventArgs e)
+        {
+            timePlayNextSong.Enabled = false;
+            int index = GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying;
+            if (isPressRepeatBtn)
+            {
+                UpdataMusic(index);
+            }
+            else
+            {
+                UpdataMusic(index + 1 < GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count ? index + 1 : 0);
+            }
+            
+        }
+        private void GameFunction_OnPressPlayButtonMusicPlayer(object sender, Events.OnPressPlayButtonMusicPlayer e)
+        {
+            musicplayerPnl.Visible = true;
+            playBtn.Visible = false;
+            pauseBtn.Visible = true;
+            songLbl.Text = e.Name;
+        }
+
+        private void pauseBtn_Click(object sender, EventArgs e)
+        {
+            pauseBtn.Visible = false;
+            playBtn.Visible = true;
+            GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.pause();
+        }
+
+        private void playBtn_Click(object sender, EventArgs e)
+        {
+            pauseBtn.Visible = true;
+            playBtn.Visible = false;
+            GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.play();
+        }
+
+        private void UpdataMusic(int index)
+        {
+            GameFunction.MusicPlayerForm.WMPlayer.URL = Path.GetFullPath(GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path);
+            GameFunction.MusicPlayerForm.MusicPlayerManager.SongPlaying = GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path;
+            GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying = index;
+            songLbl.Text = GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Name;
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+            int index = GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying;
+            int nextIndex = index + 1 < GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count ? index + 1 : 0;
+            UpdataMusic(nextIndex);
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            int index = GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying;
+            int prevIndex = index - 1 < 0 ? GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count - 1 : index - 1;
+            UpdataMusic(prevIndex);
+        }
+        #endregion
+
+        
     }
 }

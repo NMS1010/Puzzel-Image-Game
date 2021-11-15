@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,33 +49,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardManager.cs" />
-    <Compile Include="ICropImage.cs" />
-    <Compile Include="OnClosePowerModifierFormEvent.cs" />
-    <Compile Include="ImageFileManager.cs" />
-    <Compile Include="BlankBoard.cs" />
-    <Compile Include="Board.cs" />
-    <Compile Include="ChooseImageForm.cs">
+    <Compile Include="Board\BoardManager.cs" />
+    <Compile Include="Events\OnPressPlayButtonMusicPlayer.cs" />
+    <Compile Include="Feature\Music Player\CompareSong.cs" />
+    <Compile Include="Feature\Music Player\MusicPlayerManager.cs" />
+    <Compile Include="Feature\Music Player\Song.cs" />
+    <Compile Include="Feature\ICropImage.cs" />
+    <Compile Include="Feature\Music Player\MusicPlayerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChooseImageForm.Designer.cs">
+    <Compile Include="Feature\Music Player\MusicPlayerForm.Designer.cs">
+      <DependentUpon>MusicPlayerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InitialGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InitialGameForm.Designer.cs">
+      <DependentUpon>InitialGameForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multiplay\MultiplayableData.cs" />
+    <Compile Include="Multiplay\MultiplayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Multiplay\MultiplayForm.Designer.cs">
+      <DependentUpon>MultiplayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Multiplay\MultiplayManager.cs" />
+    <Compile Include="Events\OnClosePowerModifierFormEvent.cs" />
+    <Compile Include="Feature\Choose Image\ImageFileManager.cs" />
+    <Compile Include="Board\BlankBoard.cs" />
+    <Compile Include="Board\Board.cs" />
+    <Compile Include="Feature\Choose Image\ChooseImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feature\Choose Image\ChooseImageForm.Designer.cs">
       <DependentUpon>ChooseImageForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OnCloseChooseImageFormEvent.cs" />
-    <Compile Include="OnCloseChooseLevelFormEvent.cs" />
-    <Compile Include="ChooseLevelForm.cs">
+    <Compile Include="Events\OnCloseChooseImageFormEvent.cs" />
+    <Compile Include="Events\OnCloseChooseLevelFormEvent.cs" />
+    <Compile Include="Feature\Choose Level\ChooseLevelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChooseLevelForm.Designer.cs">
+    <Compile Include="Feature\Choose Level\ChooseLevelForm.Designer.cs">
       <DependentUpon>ChooseLevelForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OnFilledImageInBlankBoardEvent.cs" />
-    <Compile Include="ImageBoard.cs" />
-    <Compile Include="Power.cs" />
-    <Compile Include="PowerModifierForm.cs">
+    <Compile Include="Events\OnFilledImageInBlankBoardEvent.cs" />
+    <Compile Include="Board\ImageBoard.cs" />
+    <Compile Include="Multiplay\PlayerInfo.cs" />
+    <Compile Include="Feature\Power\Power.cs" />
+    <Compile Include="Feature\Power\PowerModifierForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PowerModifierForm.Designer.cs">
+    <Compile Include="Feature\Power\PowerModifierForm.Designer.cs">
       <DependentUpon>PowerModifierForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PuzzleGameForm.cs">
@@ -81,27 +109,36 @@
     <Compile Include="PuzzleGameForm.Designer.cs">
       <DependentUpon>PuzzleGameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameFunction.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="Feature\GameFunction.cs" />
+    <Compile Include="Feature\Choose Level\Level.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SocketForm.cs">
+    <Compile Include="Multiplay\SocketForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SocketForm.Designer.cs">
+    <Compile Include="Multiplay\SocketForm.Designer.cs">
       <DependentUpon>SocketForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SocketManager.cs" />
-    <EmbeddedResource Include="ChooseImageForm.resx">
+    <Compile Include="Multiplay\SocketManager.cs" />
+    <EmbeddedResource Include="Feature\Choose Image\ChooseImageForm.resx">
       <DependentUpon>ChooseImageForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PowerModifierForm.resx">
+    <EmbeddedResource Include="Feature\Music Player\MusicPlayerForm.resx">
+      <DependentUpon>MusicPlayerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InitialGameForm.resx">
+      <DependentUpon>InitialGameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Multiplay\MultiplayForm.resx">
+      <DependentUpon>MultiplayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Feature\Power\PowerModifierForm.resx">
       <DependentUpon>PowerModifierForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PuzzleGameForm.resx">
       <DependentUpon>PuzzleGameForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChooseLevelForm.resx">
+    <EmbeddedResource Include="Feature\Choose Level\ChooseLevelForm.resx">
       <DependentUpon>ChooseLevelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -113,10 +150,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SocketForm.resx">
+    <EmbeddedResource Include="Multiplay\SocketForm.resx">
       <DependentUpon>SocketForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,6 +167,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
