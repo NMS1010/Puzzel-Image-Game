@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Puzzle_Image_Game
 {
-    public class Level
+    public class LevelManager
     {
         private string lvChoose;
         private int lvChoosing;
@@ -19,7 +19,7 @@ namespace Puzzle_Image_Game
         public Button BtnOkForm2 { get => btnOkForm2; set => btnOkForm2 = value; }
         public int LvChoosing { get => lvChoosing; set => lvChoosing = value; }
 
-        public Level(Panel pnlForm2, Button btnOkForm2)
+        public LevelManager(Panel pnlForm2, Button btnOkForm2)
         {
             PnlForm2 = pnlForm2;
             BtnOkForm2 = btnOkForm2;

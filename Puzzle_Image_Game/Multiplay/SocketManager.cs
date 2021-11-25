@@ -66,7 +66,6 @@ namespace Puzzle_Image_Game
         {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 return binaryFormatter.Deserialize(NetStream);
-            
         }
 
         [Obsolete]
@@ -121,21 +120,6 @@ namespace Puzzle_Image_Game
             }
             return ipV4[ipV4.Count - 1].ToString();
         }
-        public static string GetPublicIpv4Address()
-        {
-            String address = "";
-            WebRequest request = WebRequest.Create("http://checkip.dyndns.org/");
-            using (WebResponse response = request.GetResponse())
-            using (StreamReader stream = new StreamReader(response.GetResponseStream()))
-            {
-                address = stream.ReadToEnd();
-            }
 
-            int first = address.IndexOf("Address: ") + 9;
-            int last = address.LastIndexOf("</body>");
-            address = address.Substring(first, last - first);
-
-            return address;
-        }
     }
 }

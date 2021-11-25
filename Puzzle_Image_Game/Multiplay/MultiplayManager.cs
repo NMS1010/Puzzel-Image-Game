@@ -104,9 +104,12 @@ namespace Puzzle_Image_Game
         private void UpdateLevel(BoardManager boardManager, List<Image> imgList)
         {
             boardManager.imgBoard.Imgs = imgList;
-            boardManager.imgBoard.NumberOfColBoard = boardManager.imgBoard.NumberOfRowBoard = MultiplayForm.CurrentLevel;
-            boardManager.blankBoard.NumberOfColBoard = boardManager.blankBoard.NumberOfRowBoard = MultiplayForm.CurrentLevel;
-            boardManager.StartDraw(fm, new Size(fm.WidthBoard/MultiplayForm.CurrentLevel, fm.HeightBoard / MultiplayForm.CurrentLevel));
+            boardManager.imgBoard.NumberOfColBoard = boardManager.
+                imgBoard.NumberOfRowBoard = MultiplayForm.CurrentLevel;
+            boardManager.blankBoard.NumberOfColBoard = boardManager.
+                blankBoard.NumberOfRowBoard = MultiplayForm.CurrentLevel;
+            boardManager.StartDraw(fm, new Size(fm.WidthBoard/MultiplayForm.
+                CurrentLevel, fm.HeightBoard / MultiplayForm.CurrentLevel));
             
         }
 
@@ -125,7 +128,8 @@ namespace Puzzle_Image_Game
                             server.imgBoard.Imgs = dataReceive.InitialImgs;
                             if (dataReceive.Player != null)
                                 fm.lbServerPlayer.Text = dataReceive.Player.Name;
-                            server.StartDraw(fm, new Size(fm.WidthBoard / MultiplayForm.CurrentLevel, fm.HeightBoard / MultiplayForm.CurrentLevel));
+                            server.StartDraw(fm, new Size(fm.WidthBoard / MultiplayForm.CurrentLevel,
+                                fm.HeightBoard / MultiplayForm.CurrentLevel));
                             fm.DisablePtrbs(server);
                             fm.DisablePtrbs(client);
                             fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled = fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = true;
@@ -135,14 +139,17 @@ namespace Puzzle_Image_Game
                         else if (dataReceive.IsWin)
                         {
                             fm.lbServerPlayerScore.Text = dataReceive.Player.Score.ToString();
-                            fm.serverPlayerResultLb.Text = $"Completed! {dataReceive.Player.Name}'s elapsed time: {dataReceive.Player.ElaspedTime}";
+                            fm.serverPlayerResultLb.Text = $"Completed! {dataReceive.Player.Name}'s " +
+                            $"elapsed time: {dataReceive.Player.ElaspedTime}";
                         }
                         else if (dataReceive.IsLose) {
-                            fm.serverPlayerResultLb.Text = $"Oh no! Poor {dataReceive.Player.Name}'s :(((,\n{dataReceive.Player.Name}'s elapsed time: {dataReceive.Player.ElaspedTime}";
+                            fm.serverPlayerResultLb.Text = $"Oh no! Poor {dataReceive.Player.Name}'s" +
+                            $" :(((,\n{dataReceive.Player.Name}'s elapsed time: {dataReceive.Player.ElaspedTime}";
                         }
                         else if (dataReceive.IsPressButton)
                         {
-                            fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled = fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = false;
+                            fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled = 
+                            fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = false;
                             fm.statusLb.Text = dataReceive.Msg;
                         }
                         else if (dataReceive.IsPressStartBtn)
@@ -153,19 +160,22 @@ namespace Puzzle_Image_Game
                         }
                         else if(dataReceive.Status == "completelyChooseLevel")
                         {
-                            fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled = fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = true;
+                            fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled = 
+                            fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = true;
                             fm.statusLb.Text = "";
                         }
                         else if(dataReceive.Status == "completelyMix")
                         {
-                            fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled = fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = true;
+                            fm.mixBtn.Enabled = fm.chooseImgBtn.Enabled =
+                            fm.chooseLvBtn.Enabled = fm.startBtn.Enabled = true;
                             fm.statusLb.Text = "";
                         }
                         else if(dataReceive.Status == "disconnected")
                         {
                             if (socket.Client.Connected)
                             {
-                                MessageBox.Show($"{fm.lbServerPlayer.Text} has disconnected! Press OK to exit", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                                MessageBox.Show($"{fm.lbServerPlayer.Text} has disconnected! Press OK to exit",
+                                    "Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                                 fm.IsDisconnected = true;
                                 fm.Close();
                             }
@@ -176,7 +186,8 @@ namespace Puzzle_Image_Game
 
                             fm.statusLb.Text = "";
 
-                            fm.NumberOfRow = fm.NumberOfCol = MultiplayForm.CurrentLevel = dataReceive.Level;
+                            fm.NumberOfRow = fm.NumberOfCol = 
+                            MultiplayForm.CurrentLevel = dataReceive.Level;
 
                             fm.clientPlayerResultLb.Text = "";
                             fm.serverPlayerResultLb.Text = "";

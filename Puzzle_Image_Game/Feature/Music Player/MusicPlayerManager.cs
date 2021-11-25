@@ -49,13 +49,15 @@ namespace Puzzle_Image_Game.Feature.Music_Player
             UpdateListBox(songsLsbx);
         }
 
-        public void AddSongToListBoxAndSave(string[] names, string[] paths, ListBox songsLsbx)
+        public void AddSongToListBoxAndSave(string[] names,
+            string[] paths, ListBox songsLsbx)
         {
             int size = paths.Length;
             
             for (int i = 0; i < size; i++)
             {
-                if (!songsLsbx.Items.Contains(names[i]) && !Songs.Contains(new Song(paths[i], names[i])))
+                if (!songsLsbx.Items.Contains(names[i]) &&
+                    !Songs.Contains(new Song(paths[i], names[i])))
                 {
                     Songs.Add(new Song(paths[i], names[i]));
                     SaveIntoFolder(paths[i], names[i],Songs[i]);

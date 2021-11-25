@@ -15,6 +15,7 @@ namespace Puzzle_Image_Game
         PuzzleGameForm GameFm;
         SocketForm socketForm;
 
+        [Obsolete]
         public InitialGameForm()
         {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace Puzzle_Image_Game
             Hide();
         }
 
+        [Obsolete]
         private void multiplayBtn_Click(object sender, EventArgs e)
         {
             FormCollection fc = Application.OpenForms;
@@ -55,7 +57,8 @@ namespace Puzzle_Image_Game
 
         private void aboutBtn_Click(object sender, EventArgs e)
         {
-            string msg = "Puzzle Game là đồ án cuối kì môn OOP.\nThành viên đóng góp:\n 1.Nguyễn Minh Sơn\n 2.Nguyễn Đức Thành";
+            string msg = "Puzzle Game là đồ án cuối kì môn OOP." +
+                "\nThành viên đóng góp:\n 1.Nguyễn Minh Sơn\n 2.Nguyễn Đức Thành";
             MessageBox.Show(msg,"ABout",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 

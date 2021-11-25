@@ -9,6 +9,7 @@ namespace Puzzle_Image_Game
     public class OnCloseChooseLevelFormEvent : EventArgs
     {
         private string level;
+
         public OnCloseChooseLevelFormEvent(string txt)
         {
             Level = txt;

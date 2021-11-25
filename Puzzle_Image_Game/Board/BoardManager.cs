@@ -25,7 +25,8 @@ namespace Puzzle_Image_Game
 
         public Image HoldImg { get => holdImg; set => holdImg = value; }
 
-        public BoardManager(int row, int col, int width, int height, Point blankBoardPos, Point imgBoardPos, List<Image> imgs)
+        public BoardManager(int row, int col, int width, int height,
+            Point blankBoardPos, Point imgBoardPos, List<Image> imgs)
         {
             imgBoard = new ImageBoard(row, col, width, height, imgBoardPos,imgs);
             blankBoard = new BlankBoard(row, col, width, height, blankBoardPos);
@@ -39,22 +40,18 @@ namespace Puzzle_Image_Game
             blankBoard.DrawBoard(fm, sizeOfPtr,this);
         }
 
-        public  void AddPanelToForm(Form fm, Point pointPanel, AnchorStyles style, Panel panelAdded)
+        public  void AddPanelToForm(Form fm, Point pointPanel, 
+            AnchorStyles style, Panel panelAdded)
         {
             panelAdded.Location = pointPanel;
             panelAdded.Anchor = style;
             fm.Controls.Add(panelAdded);
         }
-        public  void AddImgToPanel(Form fm, PictureBox ptrb, Panel panel, int index, BorderStyle style)
+
+        public  void AddPictureBoxToPanel(Form fm, PictureBox ptrb,
+            Panel panel, int index, BorderStyle style)
         {
             ptrb.AllowDrop = true;
-            /*ptrb.MouseDown -= Ptrb_MouseDown;
-            ptrb.DragEnter -= PtrbDropped_DragEnter;
-            ptrb.DragDrop -= PtrbDropped_DragDrop;
-
-            ptrb.MouseEnter -= Ptrb_MouseEnter;
-            ptrb.MouseLeave -= Ptrb_MouseLeave;
-            */
             ptrb.MouseDown += Ptrb_MouseDown;
             ptrb.DragEnter += PtrbDropped_DragEnter;
             ptrb.DragDrop += PtrbDropped_DragDrop;
@@ -88,7 +85,8 @@ namespace Puzzle_Image_Game
 
         private  void Ptrb_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, e.ClipRectangle, Color.Red, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, e.ClipRectangle, 
+                Color.Red, ButtonBorderStyle.Solid);
         }
 
         private  void PtrbDropped_DragDrop(object sender, DragEventArgs e)
@@ -128,7 +126,8 @@ namespace Puzzle_Image_Game
 
         public  void CurrPicBlank_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, e.ClipRectangle, Color.White, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, e.ClipRectangle,
+                Color.White, ButtonBorderStyle.Solid);
         }
 
         public  bool CheckFilledPanel()

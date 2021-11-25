@@ -16,6 +16,7 @@ namespace Puzzle_Image_Game
         SocketManager sk;
         private InitialGameForm startFm;
 
+        [Obsolete]
         public SocketForm(InitialGameForm startFm)
         {
             InitializeComponent();
@@ -25,7 +26,6 @@ namespace Puzzle_Image_Game
         [Obsolete]
         private async void connectBtn_Click(object sender, EventArgs e)
         {
-            
             try
             {
                 await sk.ConnectToServer(ipTxb.Text, int.Parse(portTxb.Text));
@@ -33,9 +33,9 @@ namespace Puzzle_Image_Game
             }
             catch
             {
-                MessageBox.Show("Kết nối thất bại, vui lòng kiểm tra địa chỉ IP và Port","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Kết nối thất bại, vui lòng kiểm tra địa chỉ IP và Port",
+                    "Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
-            
         }
 
         private void clientBtn_Click(object sender, EventArgs e)

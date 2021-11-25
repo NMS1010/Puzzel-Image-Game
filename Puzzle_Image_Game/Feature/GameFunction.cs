@@ -13,12 +13,6 @@ namespace Puzzle_Image_Game
 {
     public static class GameFunction
     {
-        public static event EventHandler<OnCloseChooseLevelFormEvent> closeChooseLevelEvent;
-        public static event EventHandler<OnCloseChooseImageFormEvent> closeChooseImageEvent;
-        public static event EventHandler<OnClosePowerModifierFormEvent> closePowerFormWhenPressStartEvent;
-        public static event EventHandler<OnClosePowerModifierFormEvent> closePowerFormWhenPressCancelEvent;
-        public static event EventHandler<OnClosePowerModifierFormEvent> closePowerFormWhenClosingEvent;
-        public static event EventHandler<OnPressPlayButtonMusicPlayer> OnPressPlayButtonMusicPlayer;
         public static event EventHandler<EventArgs> TimeEndEvent;
 
         private static ChooseLevelForm chooseLvForm;
@@ -27,7 +21,7 @@ namespace Puzzle_Image_Game
         
 
         private static MusicPlayerForm musicPlayerForm;
-        public static MusicPlayerForm MusicPlayerForm { get => musicPlayerForm; set => musicPlayerForm = value; }
+        
 
         private static List<Thread> threadsOfPowerForm;
         private static List<Thread> threadCountDown;
@@ -40,6 +34,11 @@ namespace Puzzle_Image_Game
 
         public static List<Thread> ThreadsOfPowerForm { get => threadsOfPowerForm; set => threadsOfPowerForm = value; }
         public static List<Thread> ThreadCountDown { get => threadCountDown; set => threadCountDown = value; }
+        public static PowerModifierForm PowerFm { get => powerFm; set => powerFm = value; }
+        public static ChooseImageForm ChooseImgForm { get => chooseImgForm; set => chooseImgForm = value; }
+        public static ChooseLevelForm ChooseLvForm { get => chooseLvForm; set => chooseLvForm = value; }
+        public static MusicPlayerForm MusicPlayerForm { get => musicPlayerForm; set => musicPlayerForm = value; }
+
 
         private static int RandomNotRepeat(List<int> nums, int max)
         {
@@ -51,6 +50,7 @@ namespace Puzzle_Image_Game
             } while (nums.Contains(number));
             return number;
         }
+
         public static List<Image> Mix(List<Image> imgList)
         {
             List<Image> imgs = new List<Image>();
@@ -87,22 +87,15 @@ namespace Puzzle_Image_Game
 
         public static void ChooseLevel(int numberOfCol)
         {
-            chooseLvForm = new ChooseLevelForm(numberOfCol);
-            if (Application.OpenForms[chooseLvForm.Name] == null)
+            ChooseLvForm = new ChooseLevelForm(numberOfCol);
+            if (Application.OpenForms[ChooseLvForm.Name] == null)
             {
-                chooseLvForm.Show();
+                ChooseLvForm.Show();
             }
             else
             {
-                Application.OpenForms[chooseLvForm.Name].Focus();
+                Application.OpenForms[ChooseLvForm.Name].Focus();
             }
-            chooseLvForm.CloseLevelFormEvent += ChooseLvForm_CloseLevelFormEvent;
-        }
-
-        private static void ChooseLvForm_CloseLevelFormEvent(object sender, OnCloseChooseLevelFormEvent e)
-        {
-            closeChooseLevelEvent?.Invoke(sender, new OnCloseChooseLevelFormEvent(e.Level));
-            chooseLvForm.CloseLevelFormEvent -= ChooseLvForm_CloseLevelFormEvent;
         }
 
         public static void MusicPlayer()
@@ -118,34 +111,23 @@ namespace Puzzle_Image_Game
             MusicPlayerForm = new Feature.Music_Player.MusicPlayerForm();
             MusicPlayerForm.Show();
             
-            MusicPlayerForm.OnPressPlayButtonMusicPlayer += MusicPlayerForm_OnPressPlayButtonMusicPlayer;
         }
 
-        private static void MusicPlayerForm_OnPressPlayButtonMusicPlayer(object sender, Events.OnPressPlayButtonMusicPlayer e)
-        {
-            OnPressPlayButtonMusicPlayer?.Invoke(sender, e);
-        }
 
         public static void ChooseImage()
         {
-            chooseImgForm = new ChooseImageForm();
+            ChooseImgForm = new ChooseImageForm();
             
-            if(Application.OpenForms[chooseImgForm.Name] == null)
+            if(Application.OpenForms[ChooseImgForm.Name] == null)
             {
-                chooseImgForm.Show();
+                ChooseImgForm.Show();
             }
             else
             {
-                Application.OpenForms[chooseImgForm.Name].Focus();
+                Application.OpenForms[ChooseImgForm.Name].Focus();
             }
-            chooseImgForm.closeChooseImgForm += ChooseImgForm_closeChooseImgForm;
         }
 
-        private static void ChooseImgForm_closeChooseImgForm(object sender, OnCloseChooseImageFormEvent e)
-        {
-            closeChooseImageEvent?.Invoke(sender, new OnCloseChooseImageFormEvent(e.Path));
-            chooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImgForm;
-        }
 
         #region: time processing
 
@@ -205,6 +187,7 @@ namespace Puzzle_Image_Game
             }
             threads.Clear();
         }
+
         public static void TimeCount(Label lbHour, Label lbMinute, Label lbSecond, bool isInPowerForm)
         {
             Thread Ts = new Thread(() =>
@@ -253,42 +236,20 @@ namespace Puzzle_Image_Game
         [Obsolete]
         public static void PowerModify(GroupBox powerGrpBox)
         {
-            powerFm = new PowerModifierForm(powerGrpBox);
-            if (Application.OpenForms[powerFm.Name] == null)
+            PowerFm = new PowerModifierForm(powerGrpBox);
+            if (Application.OpenForms[PowerFm.Name] == null)
             {
-                powerFm.Show();
+                PowerFm.Show();
             }
             else
             {
-                Application.OpenForms[powerFm.Name].Focus();
+                Application.OpenForms[PowerFm.Name].Focus();
             }
-            powerFm.HandleTimeWhenPressStart += PowerFm_HandleTimeWhenPressStart;
-            powerFm.HandleTimeWhenPressCancel += PowerFm_HandleTimeWhenPressCancel;
-            powerFm.HandleTimeWhenClosing += PowerFm_HandleTimeWhenClosing;
-
         }
 
-        private static void PowerFm_HandleTimeWhenClosing(object sender, OnClosePowerModifierFormEvent e)
-        {
-            closePowerFormWhenClosingEvent?.Invoke(sender, new OnClosePowerModifierFormEvent(e.IsDisplay));
-            powerFm.HandleTimeWhenClosing -= PowerFm_HandleTimeWhenClosing;
-        }
-
-        private static void PowerFm_HandleTimeWhenPressCancel(object sender, OnClosePowerModifierFormEvent e)
-        {
-            closePowerFormWhenPressCancelEvent?.Invoke(sender, new OnClosePowerModifierFormEvent());
-            powerFm.HandleTimeWhenPressCancel -= PowerFm_HandleTimeWhenPressCancel;
-        }
-
-        private static void PowerFm_HandleTimeWhenPressStart(object sender, OnClosePowerModifierFormEvent e)
-        {
-            closePowerFormWhenPressStartEvent?.Invoke(sender, new OnClosePowerModifierFormEvent(e.Hour, e.Minute, e.Second, e.Mode));
-            powerFm.HandleTimeWhenPressStart -= PowerFm_HandleTimeWhenPressStart;
-        }
 
         public static bool IsWin(List<PictureBox> ptrbList, int numberOfPiecesImg, List<Image> imgList)
         {
-            
             for (int i = 0; i < numberOfPiecesImg; i++)
             {
                 if (ImagesAreDifferent(ptrbList[i].Image, imgList[i]))
@@ -298,6 +259,7 @@ namespace Puzzle_Image_Game
             }
             return true;
         }
+        
         private static bool ImagesAreDifferent(Image img1, Image img2)
         {
             Bitmap bmp1 = new Bitmap(img1);

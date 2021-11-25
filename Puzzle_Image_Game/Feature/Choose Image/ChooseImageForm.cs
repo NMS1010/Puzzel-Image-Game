@@ -44,7 +44,7 @@ namespace Puzzle_Image_Game
             
             foreach (var item in imageFileManager.ListPath.ToList())
             {
-                imageFileManager.LoadImageBegin(imageLsview, imageList, item);
+                imageFileManager.InitialImageList(imageLsview, imageList, item);
             }
             
         }
@@ -82,7 +82,8 @@ namespace Puzzle_Image_Game
             }
             catch
             {
-                MessageBox.Show("Có lỗi xảy ra khi đang xoá ảnh.\nVui lòng thử lại sau vài giây","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Có lỗi xảy ra khi đang xoá ảnh.\nVui lòng thử lại sau" +
+                    " vài giây","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 
@@ -92,7 +93,7 @@ namespace Puzzle_Image_Game
             imageList.Images.Clear();
             foreach (var path in paths)
             {
-                imageFileManager.LoadImageBegin(imageLsview, imageList, path);
+                imageFileManager.InitialImageList(imageLsview, imageList, path);
             }
             
             delBtn.Enabled = false ;
@@ -103,7 +104,8 @@ namespace Puzzle_Image_Game
         {
             try
             {
-                closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent(imageList.Images.Keys[imgIndexChoosen]));
+                closeChooseImgForm?.Invoke(sender, new OnCloseChooseImageFormEvent
+                    (imageList.Images.Keys[imgIndexChoosen]));
             }
             catch { };
             Close();

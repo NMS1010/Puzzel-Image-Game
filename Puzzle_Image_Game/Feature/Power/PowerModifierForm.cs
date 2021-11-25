@@ -38,7 +38,8 @@ namespace Puzzle_Image_Game
         {
             if(timePicker.Value < DateTime.Now)
             {
-                MessageBox.Show("Vui lòng chọn thời gian sau thời gian hiện tại", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Vui lòng chọn thời gian sau thời gian hiện tại"
+                    , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -55,7 +56,9 @@ namespace Puzzle_Image_Game
                 GameFunction.isPowerStartClicked = true;
                 GameFunction.timeSet = timePicker.Value;
 
-                HandleTimeWhenPressStart?.Invoke(this, new OnClosePowerModifierFormEvent(lbHour.Text, lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
+                HandleTimeWhenPressStart?.Invoke(this,
+                    new OnClosePowerModifierFormEvent(lbHour.Text,
+                    lbMinute.Text, lbSecond.Text, chooseModeCbx.Text));
             }
         }
 

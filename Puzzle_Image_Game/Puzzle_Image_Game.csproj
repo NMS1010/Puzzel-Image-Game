@@ -110,7 +110,7 @@
       <DependentUpon>PuzzleGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Feature\GameFunction.cs" />
-    <Compile Include="Feature\Choose Level\Level.cs" />
+    <Compile Include="Feature\Choose Level\LevelManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Multiplay\SocketForm.cs">

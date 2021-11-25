@@ -34,6 +34,7 @@ namespace Puzzle_Image_Game
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PuzzleGameForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.musicplayerPnl = new System.Windows.Forms.Panel();
+            this.repeatBtn = new System.Windows.Forms.PictureBox();
             this.pauseBtn = new System.Windows.Forms.PictureBox();
             this.songLbl = new System.Windows.Forms.Label();
             this.prevBtn = new System.Windows.Forms.PictureBox();
@@ -70,10 +71,10 @@ namespace Puzzle_Image_Game
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.repeatBtn = new System.Windows.Forms.PictureBox();
             this.timePlayNextSong = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.musicplayerPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repeatBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pauseBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextBtn)).BeginInit();
@@ -84,7 +85,6 @@ namespace Puzzle_Image_Game
             this.recordPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.countDownPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repeatBtn)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -116,6 +116,17 @@ namespace Puzzle_Image_Game
             this.musicplayerPnl.Size = new System.Drawing.Size(377, 130);
             this.musicplayerPnl.TabIndex = 6;
             this.musicplayerPnl.Visible = false;
+            // 
+            // repeatBtn
+            // 
+            this.repeatBtn.Image = ((System.Drawing.Image)(resources.GetObject("repeatBtn.Image")));
+            this.repeatBtn.Location = new System.Drawing.Point(205, 71);
+            this.repeatBtn.Name = "repeatBtn";
+            this.repeatBtn.Size = new System.Drawing.Size(50, 41);
+            this.repeatBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.repeatBtn.TabIndex = 3;
+            this.repeatBtn.TabStop = false;
+            this.repeatBtn.Click += new System.EventHandler(this.repeatBtn_Click);
             // 
             // pauseBtn
             // 
@@ -496,17 +507,6 @@ namespace Puzzle_Image_Game
             this.label1.TabIndex = 0;
             this.label1.Text = "Trò chơi sẽ bắt đầu khi bạn click \r\n               vào 1 ô bất kì ";
             // 
-            // repeatBtn
-            // 
-            this.repeatBtn.Image = ((System.Drawing.Image)(resources.GetObject("repeatBtn.Image")));
-            this.repeatBtn.Location = new System.Drawing.Point(205, 71);
-            this.repeatBtn.Name = "repeatBtn";
-            this.repeatBtn.Size = new System.Drawing.Size(50, 41);
-            this.repeatBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.repeatBtn.TabIndex = 3;
-            this.repeatBtn.TabStop = false;
-            this.repeatBtn.Click += new System.EventHandler(this.repeatBtn_Click);
-            // 
             // timePlayNextSong
             // 
             this.timePlayNextSong.Tick += new System.EventHandler(this.timePlayNextSong_Tick);
@@ -534,6 +534,7 @@ namespace Puzzle_Image_Game
             this.groupBox1.ResumeLayout(false);
             this.musicplayerPnl.ResumeLayout(false);
             this.musicplayerPnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.repeatBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pauseBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextBtn)).EndInit();
@@ -549,7 +550,6 @@ namespace Puzzle_Image_Game
             this.menuStrip1.PerformLayout();
             this.countDownPanel.ResumeLayout(false);
             this.countDownPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.repeatBtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

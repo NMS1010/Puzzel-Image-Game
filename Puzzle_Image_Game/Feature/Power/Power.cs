@@ -12,6 +12,7 @@ namespace Puzzle_Image_Game
         private static string processName;
         private static string typeName;
         private static ProcessStartInfo process;
+
         private static string GetPowerType(string type)
         {
             string name = "";
@@ -21,6 +22,7 @@ namespace Puzzle_Image_Game
             }
             return name;
         }
+
         public static void PowerManager(string type)
         {
             processName = "shutdown.exe";

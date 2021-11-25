@@ -4,153 +4,225 @@
     <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAABAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>BlankBoard.cs</FileName>
+      <FileName>Board\BlankBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.Board" Collapsed="true">
     <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>IAAAAAABBAAAAAQgQAAAIEAAAAAAAAAAAAAACAAAAAE=</HashCode>
-      <FileName>Board.cs</FileName>
+      <HashCode>IAAAAAABBAAAAAQgRAAAIEAAAAAAAAAAAAAACAAAAAE=</HashCode>
+      <FileName>Board\Board.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.BoardManager" Collapsed="true">
     <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAGABAAAAQgABAAQABAiAAAAAIAAAiIgQAAAAACAYAA=</HashCode>
-      <FileName>BoardManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Puzzle_Image_Game.ChooseImageForm" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAgAIAYIBCAQAAADgACCBAgCAIABAACCAQBAAAEAAAA=</HashCode>
-      <FileName>ChooseImageForm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Puzzle_Image_Game.ChooseLevelForm" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAAGBAAACAAAAAAAAAAAAAQAAFCM=</HashCode>
-      <FileName>ChooseLevelForm.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Puzzle_Image_Game.GameFunction" Collapsed="true">
-    <Position X="12.25" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AARoAggMAgAAAGAAEAJAAIFQwI4QAAAACgIgAIAEQAA=</HashCode>
-      <FileName>GameFunction.cs</FileName>
+      <HashCode>AAGABAAAAQgABAAUABAiAAAAAIAAAiIgQAAAIACAQAA=</HashCode>
+      <FileName>Board\BoardManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.ImageBoard" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAAAAQAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ImageBoard.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Puzzle_Image_Game.ImageFileManager" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AEAAAQAAAIAgAAAAIEAAACAgAAAIIAAAAAAAACAAACA=</HashCode>
-      <FileName>ImageFileManager.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Puzzle_Image_Game.Level" Collapsed="true">
-    <Position X="7" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAQAAiAEAAEAAAgAAAAAECAAAAAAAAAAAABAEAA=</HashCode>
-      <FileName>Level.cs</FileName>
+      <HashCode>AAAAAAAAAAABAAAAAQAAAEAAAAAAAAAAAAAAAgAAAAI=</HashCode>
+      <FileName>Board\ImageBoard.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.OnCloseChooseImageFormEvent" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+    <Position X="7" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAQAAAAEAIAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>OnCloseChooseImageFormEvent.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\OnCloseChooseImageFormEvent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.OnCloseChooseLevelFormEvent" Collapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+    <Position X="8.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAA=</HashCode>
-      <FileName>OnCloseChooseLevelFormEvent.cs</FileName>
+      <FileName>Events\OnCloseChooseLevelFormEvent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.OnClosePowerModifierFormEvent" Collapsed="true">
-    <Position X="12.25" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAIAACACgAAAAIAAAAAACIAAAAiAAAAAAA=</HashCode>
-      <FileName>OnClosePowerModifierFormEvent.cs</FileName>
+      <FileName>Events\OnClosePowerModifierFormEvent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.OnFilledImageInBlankBoardEvent" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Position X="12.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAACAAAAAAA=</HashCode>
-      <FileName>OnFilledImageInBlankBoardEvent.cs</FileName>
+      <FileName>Events\OnFilledImageInBlankBoardEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.ChooseImageForm" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAYIBCAQAAADgACAAAgCAIAAAACCAQAAAAEAAAA=</HashCode>
+      <FileName>Feature\Choose Image\ChooseImageForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.ImageFileManager" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAQAAAAAgAIAAIAAAACAgABAIIAAAAAAAAAAAACA=</HashCode>
+      <FileName>Feature\Choose Image\ImageFileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.ChooseLevelForm" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAAABAAAAGBAAACAAAAAAAAAAAAAAAAECI=</HashCode>
+      <FileName>Feature\Choose Level\ChooseLevelForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.LevelManager" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAiAEAAEAAAgAAAAAECAAAAAAAAAAAABAEAA=</HashCode>
+      <FileName>Feature\Choose Level\LevelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.GameFunction" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgIQAgcAgEAAGCAECAAgIBQgA4QAIABCgIgAAAEQAA=</HashCode>
+      <FileName>Feature\GameFunction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.Power" Collapsed="true">
-    <Position X="7" Y="2.5" Width="1.5" />
+    <Position X="7" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAgAAAAAAgAAIAAAAAAAAAAAAQAAAAAAA=</HashCode>
-      <FileName>Power.cs</FileName>
+      <FileName>Feature\Power\Power.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.PowerModifierForm" Collapsed="true">
-    <Position X="8.75" Y="2.5" Width="1.5" />
+    <Position X="8.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>DAAAAAAAAyAQEBEAAQGAAEAKAACAIAAAEAJQAAAAAAg=</HashCode>
-      <FileName>PowerModifierForm.cs</FileName>
+      <HashCode>DAAAAAAAAyAQEBEAAQGAAEAKAACAIAAAAAJQAEAQAAg=</HashCode>
+      <FileName>Feature\Power\PowerModifierForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.InitialGameForm" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQACAAAAgCAAABAAAACAAABCADAAAAAAAABAAgABQAA=</HashCode>
+      <FileName>InitialGameForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.MultiplayableData" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>DAQAgAgWAAAQEBEAAgQBAJICIAEQBCIBAAQiAYQCEYA=</HashCode>
+      <FileName>Multiplay\MultiplayableData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.MultiplayForm" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="7.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>TIZYcEwQQSQQEJKcPQKCABiCAgCEWAAQJCFQGkCRkBA=</HashCode>
+      <FileName>Multiplay\MultiplayForm.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Puzzle_Image_Game.MultiplayManager" Collapsed="true">
+    <Position X="14" Y="7.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAACAEACIAAgABAAAAAIAAAIAACQEABgAgAAY=</HashCode>
+      <FileName>Multiplay\MultiplayManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.PlayerInfo" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAIAAQAAAAEAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Multiplay\PlayerInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.SocketForm" Collapsed="true">
+    <Position X="12.25" Y="7" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAJAAAAAACAAABACAACAAAUCCAAAAQASQAAAEBAAAAA=</HashCode>
+      <FileName>Multiplay\SocketForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.SocketManager" Collapsed="true">
+    <Position X="10.25" Y="7" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>QQEAAAAAIEAAACAAAEEAAAQAAIhAAAgYKAgABCAAABQ=</HashCode>
+      <FileName>Multiplay\SocketManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.Program" Collapsed="true">
-    <Position X="10.5" Y="2.5" Width="1.5" />
+    <Position X="10.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.PuzzleGameForm" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="12.25" Y="2.5" Width="1.5" />
+    <Position X="12.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>DUQAIAQMCaAAFBSQQWCHgAgTIhAEARQBBCBFUGACQBI=</HashCode>
+      <HashCode>TUQgKAQACaAAFRRYZWDe0AwTAhKEQRQCBCAFUOCCQBY=</HashCode>
       <FileName>PuzzleGameForm.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="Puzzle_Image_Game.SocketForm" Collapsed="true">
-    <Position X="8.75" Y="3.5" Width="1.5" />
+  <Class Name="Puzzle_Image_Game.Events.OnPressPlayButtonMusicPlayer" Collapsed="true">
+    <Position X="14" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAgAACAACAAAACCAAAAAACAAAAEAAAAAA=</HashCode>
-      <FileName>SocketForm.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Events\OnPressPlayButtonMusicPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Puzzle_Image_Game.SocketManager" Collapsed="true">
-    <Position X="10.5" Y="3.5" Width="1.5" />
+  <Class Name="Puzzle_Image_Game.Feature.Music_Player.CompareSong" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAEAQAAAAgACAgAAAAAABA=</HashCode>
-      <FileName>SocketManager.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Feature\Music Player\CompareSong.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Puzzle_Image_Game.Feature.Music_Player.MusicPlayerForm" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABkIAAAACAgABACgACAAAACgAmAAAAIAAAAQARFAAA=</HashCode>
+      <FileName>Feature\Music Player\MusicPlayerForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.Feature.Music_Player.MusicPlayerManager" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAQAKAAkAggAAAAIQAAQAUAAAAAAAAA=</HashCode>
+      <FileName>Feature\Music Player\MusicPlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Puzzle_Image_Game.Feature.Music_Player.Song" Collapsed="true">
+    <Position X="10.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAACAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Feature\Music Player\Song.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.Properties.Resources" Collapsed="true">
-    <Position X="5.25" Y="3.5" Width="1.5" />
+    <Position X="14" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Class Name="Puzzle_Image_Game.Properties.Settings" Collapsed="true">
-    <Position X="7" Y="3.5" Width="1.5" />
+    <Position X="5.25" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
     </TypeIdentifier>
   </Class>
   <Interface Name="Puzzle_Image_Game.ICropImage" Collapsed="true">
-    <Position X="5.25" Y="4.75" Width="1.5" />
+    <Position X="5.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>ICropImage.cs</FileName>
+      <FileName>Feature\ICropImage.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

@@ -43,6 +43,7 @@ namespace Puzzle_Image_Game
             IsWin = isWin;
             IsLose = !isWin;
         }
+
         //Các status của cả 2 bên 
         public MultiplayableData(string status)
         {
@@ -67,8 +68,10 @@ namespace Puzzle_Image_Game
 
         
         //Khi server chọn level khác
-        public MultiplayableData(List<Image> mixedImgsClient, List<Image> mixedImgsServer,
-            int level,Image img, List<Image> imgsListClient, List<Image> imgsListServer, string h, string m, string s)
+        public MultiplayableData(List<Image> mixedImgsClient,
+            List<Image> mixedImgsServer,int level,Image img, 
+            List<Image> imgsListClient, List<Image> imgsListServer,
+            string h, string m, string s)
         {
             MixedImgsClient = mixedImgsClient;
             MixedImgsServer = mixedImgsServer;
@@ -93,7 +96,8 @@ namespace Puzzle_Image_Game
         }
 
         //Đồng bộ kéo thả giữa 2 phía
-        public MultiplayableData(Image desImg, int desPos, Image srcImg, int srcPos)
+        public MultiplayableData(Image desImg, int desPos,
+            Image srcImg, int srcPos)
         {
             DesImg = desImg;
             SrcImg = srcImg;

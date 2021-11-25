@@ -58,7 +58,8 @@ namespace Puzzle_Image_Game.Feature.Music_Player
         {
             if (songsLsbx.SelectedIndex < 0) return;
             playBtn.Enabled = delBtn.Enabled = true;
-            MusicPlayerManager.SongChoosen = MusicPlayerManager.Songs[songsLsbx.SelectedIndex].Path;
+            MusicPlayerManager.SongChoosen
+                = MusicPlayerManager.Songs[songsLsbx.SelectedIndex].Path;
 
             playBtn.Click -= PlayBtn_Click;
             playBtn.Click += PlayBtn_Click;
@@ -71,7 +72,8 @@ namespace Puzzle_Image_Game.Feature.Music_Player
         {
             try
             {
-                if (MusicPlayerManager.SongChoosen == MusicPlayerManager.SongPlaying) throw new Exception();
+                if (MusicPlayerManager.SongChoosen
+                    == MusicPlayerManager.SongPlaying) throw new Exception();
                 new Thread(() =>
                 {
                     File.Delete(MusicPlayerManager.SongChoosen);
@@ -83,7 +85,8 @@ namespace Puzzle_Image_Game.Feature.Music_Player
             }
             catch
             {
-                MessageBox.Show("File is running!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("File is running!",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -96,15 +99,20 @@ namespace Puzzle_Image_Game.Feature.Music_Player
         {
             WMPlayer.URL = Path.GetFullPath(MusicPlayerManager.SongChoosen);
             
-            OnPressPlayButtonMusicPlayer?.Invoke(sender,new Events.OnPressPlayButtonMusicPlayer(Path.GetFileNameWithoutExtension(MusicPlayerManager.SongChoosen)));
+            OnPressPlayButtonMusicPlayer?.Invoke(sender,
+                new Events.OnPressPlayButtonMusicPlayer(
+                    Path.GetFileNameWithoutExtension(MusicPlayerManager.SongChoosen)));
 
             MusicPlayerManager.SongPlaying = MusicPlayerManager.SongChoosen;
-            MusicPlayerManager.IndexSongPlaying = MusicPlayerManager.Songs.FindIndex((obj) => obj.Path == MusicPlayerManager.SongPlaying);
+            MusicPlayerManager.IndexSongPlaying
+                = MusicPlayerManager.Songs.FindIndex(
+                    (obj) => obj.Path == MusicPlayerManager.SongPlaying);
             playBtn.Enabled = false;
             playBtn.Click -= PlayBtn_Click;
         }
 
-        private void WMPlayer_PlayStateChange(object sender, AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
+        private void WMPlayer_PlayStateChange(object sender,
+            AxWMPLib._WMPOCXEvents_PlayStateChangeEvent e)
         {
             if(e.newState == 8)
             {
@@ -114,6 +122,20 @@ namespace Puzzle_Image_Game.Feature.Music_Player
             {
                 GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.play();
             }
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
         }
     }
 }

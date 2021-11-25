@@ -19,7 +19,8 @@ namespace Puzzle_Image_Game
             PanelBlank = new Panel();
         }
 
-        public BlankBoard(int row, int col, int width, int height, Point position) :base(row,col,width,height,position)
+        public BlankBoard(int row, int col, int width, int height, Point position)
+            :base(row,col,width,height,position)
         {
             PanelBlank = new Panel();
             PanelBlank.Size = new Size(Width, Height);
@@ -33,12 +34,14 @@ namespace Puzzle_Image_Game
 
             for (int i = 0; i < NumberOfRowBoard; i++)
             {
-                var prevPicBlank = new PictureBox() { Size = new Size(0, 0), Location = new Point(0, i * sizeOfPtr.Height) };
+                var prevPicBlank = new PictureBox() { Size = new Size(0, 0),
+                    Location = new Point(0, i * sizeOfPtr.Height) };
                 for (int j = 0; j < NumberOfColBoard; j++)
                 {
                     PictureBox currPicBlank = new PictureBox() { Size = new Size(sizeOfPtr.Width, sizeOfPtr.Height), 
-                        Location = new Point(prevPicBlank.Location.X + prevPicBlank.Size.Width, prevPicBlank.Location.Y), BackColor = Color.LightGray };
-                    manager.AddImgToPanel(fm,currPicBlank, PanelBlank, indexPtrb++, BorderStyle.FixedSingle);
+                        Location = new Point(prevPicBlank.Location.X + prevPicBlank.Size.Width,
+                        prevPicBlank.Location.Y), BackColor = Color.LightGray };
+                    manager.AddPictureBoxToPanel(fm,currPicBlank, PanelBlank, indexPtrb++, BorderStyle.FixedSingle);
                     prevPicBlank = currPicBlank;
                 }
             }

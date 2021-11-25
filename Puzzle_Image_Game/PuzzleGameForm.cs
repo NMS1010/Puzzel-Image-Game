@@ -54,7 +54,9 @@ namespace Puzzle_Image_Game
                 records[i].Add(int.MaxValue);
             }
 
-            boardManager = new BoardManager(numberOfRow, numberOfCol, width, height, new Point(this.Width / 12, this.Height / 10), new Point(this.Width - width * 3 / 2, this.Height / 10), CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(img, width, height), width, height));
+            boardManager = new BoardManager(numberOfRow, numberOfCol, width, height,
+                new Point(this.Width / 12, this.Height / 10), new Point(this.Width - width * 3 / 2, this.Height / 10)
+                , CropIntoListImgs(numberOfRow, numberOfCol, new Bitmap(img, width, height), width, height));
             img.Dispose();
             resizedImg = new Size(width, height);
             boardManager.OnFilledPictureBox += Brd_OnFilledImageInBlankBoardEvent;
@@ -73,12 +75,9 @@ namespace Puzzle_Image_Game
                     number++;
                 }
                 else
-                {
                     item.Text = "";
-                }
                 i++;
             }
-
         }
         private void Start()
         {
@@ -110,17 +109,21 @@ namespace Puzzle_Image_Game
         }
 
         [Obsolete]
-        private void Brd_OnFilledImageInBlankBoardEvent(object sender, OnFilledImageInBlankBoardEvent e)
+        private void Brd_OnFilledImageInBlankBoardEvent(object sender,
+            OnFilledImageInBlankBoardEvent e)
         {
             if (GameFunction.IsWin(e.PtrbList, numberOfCol * numberOfRow, imgList))
             {
                 GameFunction.StopThreads(GameFunction.ThreadCountDown);
-                string time = GameFunction.TimeElapse(lbHour.Text, lbMinute.Text, lbSecond.Text,currentLevel);
+                string time = GameFunction.TimeElapse(lbHour.Text,
+                    lbMinute.Text, lbSecond.Text,currentLevel);
                 records[currentLevel-3].Add(GameFunction.ConvertTimeToSecond(time));
                 records[currentLevel-3].Sort();
                 records[currentLevel-3].RemoveRange(3, records[currentLevel-3].Count - 3);
                 UpdateRecordTable(currentLevel);
-                if (MessageBox.Show($"Great! You won\nTime elapse: {time}\nClick OK to go to next challenge\nClick Cancel to play again","Result",MessageBoxButtons.OKCancel) == DialogResult.OK)
+                if (MessageBox.Show($"Great! You won\nTime elapse: {time}\nClick OK to" +
+                    $" go to next challenge\nClick Cancel to play again","Result",
+                    MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     currentLevel += 1;
                 }
@@ -154,34 +157,34 @@ namespace Puzzle_Image_Game
         private void chooseLevelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GameFunction.ChooseLevel(numberOfCol);
-            GameFunction.closeChooseLevelEvent += FncGame_closeChooseLevelEvent;
+            GameFunction.ChooseLvForm.CloseLevelFormEvent += ChooseLvForm_closeChooseLevelEvent;
         }
 
         [Obsolete]
-        private void FncGame_closeChooseLevelEvent(object sender, OnCloseChooseLevelFormEvent e)
+        private void ChooseLvForm_closeChooseLevelEvent(object sender, OnCloseChooseLevelFormEvent e)
         {
             currentLevel = int.Parse(e.Level);
             GameFunction.StopThreads(GameFunction.ThreadCountDown);
             UpdateRecordTable(currentLevel);
             levelCbx.Text = currentLevel.ToString();
             Start();
-            GameFunction.closeChooseLevelEvent -= FncGame_closeChooseLevelEvent;
+            GameFunction.ChooseLvForm.CloseLevelFormEvent -= ChooseLvForm_closeChooseLevelEvent;
         }
 
         [Obsolete]
         private void chooseImageToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             GameFunction.ChooseImage();
-            GameFunction.closeChooseImageEvent += FncGame_closeChooseImageEvent;
+            GameFunction.ChooseImgForm.closeChooseImgForm += ChooseImgForm_closeChooseImageEvent;
         }
 
         [Obsolete]
-        private void FncGame_closeChooseImageEvent(object sender, OnCloseChooseImageFormEvent e)
+        private void ChooseImgForm_closeChooseImageEvent(object sender, OnCloseChooseImageFormEvent e)
         {
             path = e.Path;
             GameFunction.StopThreads(GameFunction.ThreadCountDown);
             Start();
-            GameFunction.closeChooseImageEvent -= FncGame_closeChooseImageEvent;
+            GameFunction.ChooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImageEvent;
         }
 
         private void SetTimeForPowerForm()
@@ -197,26 +200,31 @@ namespace Puzzle_Image_Game
         {
             SetTimeForPowerForm();
             GameFunction.PowerModify(powerGrpBox);
-            GameFunction.closePowerFormWhenPressCancelEvent += FncGame_closePowerFormWhenPressCancelEvent;
-            GameFunction.closePowerFormWhenPressStartEvent += FncGame_closePowerFormWhenPressStartEvent;
-            GameFunction.closePowerFormWhenClosingEvent += FncGame_closePowerFormWhenClosingEvent;
+            GameFunction.PowerFm.HandleTimeWhenPressCancel += PowerFm_closePowerFormWhenPressCancelEvent;
+            GameFunction.PowerFm.HandleTimeWhenPressStart += PowerFm_closePowerFormWhenPressStartEvent;
+            GameFunction.PowerFm.HandleTimeWhenClosing += PowerFm_closePowerFormWhenClosingEvent;
 
         }
 
-        private void FncGame_closePowerFormWhenClosingEvent(object sender, OnClosePowerModifierFormEvent e)
+        private void PowerFm_closePowerFormWhenClosingEvent(
+            object sender, OnClosePowerModifierFormEvent e)
         {
             powerGrpBox.Visible = e.IsDisplay;
-            GameFunction.closePowerFormWhenClosingEvent -= FncGame_closePowerFormWhenClosingEvent;
+            GameFunction.PowerFm.HandleTimeWhenClosing
+                -= PowerFm_closePowerFormWhenClosingEvent;
         }
 
         [Obsolete]
-        private void FncGame_closePowerFormWhenPressCancelEvent(object sender, OnClosePowerModifierFormEvent e)
+        private void PowerFm_closePowerFormWhenPressCancelEvent(
+            object sender, OnClosePowerModifierFormEvent e)
         {
             GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
-            GameFunction.closePowerFormWhenPressCancelEvent -= FncGame_closePowerFormWhenPressCancelEvent;
+            GameFunction.PowerFm.HandleTimeWhenPressCancel
+                -= PowerFm_closePowerFormWhenPressCancelEvent;
         }
 
-        private void FncGame_closePowerFormWhenPressStartEvent(object sender, OnClosePowerModifierFormEvent e)
+        private void PowerFm_closePowerFormWhenPressStartEvent(
+            object sender, OnClosePowerModifierFormEvent e)
         {
             lbTxt.Text = $"    Your PC will\n {e.Mode.ToLower()} in about: ";
             lbH.Text = e.Hour;
@@ -225,7 +233,8 @@ namespace Puzzle_Image_Game
             lbNotation1.Text = ":";
             lbNotation2.Text = ":";
             GameFunction.TimeCount(lbH, lbM, lbS,true);
-            GameFunction.closePowerFormWhenPressStartEvent -= FncGame_closePowerFormWhenPressStartEvent;
+            GameFunction.PowerFm.HandleTimeWhenPressStart
+                -= PowerFm_closePowerFormWhenPressStartEvent;
         }
 
         private void Time_ChangeEvent(object sender, EventArgs e)
@@ -238,7 +247,8 @@ namespace Puzzle_Image_Game
         {
             if (lbHour.Text == "00" && lbMinute.Text == "00" && lbSecond.Text == "00")
             {
-                if (MessageBox.Show("Bạn thua rồi\nBạn có muốn chơi lại?", "Result", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                if (MessageBox.Show("Bạn thua rồi\nBạn có muốn chơi lại?"
+                    , "Result", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 {
                     Start();
                 }
@@ -246,7 +256,8 @@ namespace Puzzle_Image_Game
             GameFunction.TimeEndEvent -= CountDownTimeEvent;
         }
 
-        public List<Image> CropIntoListImgs(int NumberOfRowBoard, int NumberOfColBoard, Bitmap ImgSource, int Width, int Height)
+        public List<Image> CropIntoListImgs(int NumberOfRowBoard, int NumberOfColBoard,
+            Bitmap ImgSource, int Width, int Height)
         {
             List<Image> imgs = new List<Image>();
             int index = 0;
@@ -257,7 +268,10 @@ namespace Puzzle_Image_Game
                     var img = new Bitmap(Width / NumberOfRowBoard, Height / NumberOfColBoard);
                     using (var grp = Graphics.FromImage(img))
                     {
-                        grp.DrawImage(ImgSource, new Rectangle(0, 0, Width / NumberOfRowBoard, Height / NumberOfColBoard), new Rectangle(j * Width / NumberOfRowBoard, i * Height / NumberOfColBoard, Width / NumberOfRowBoard, Height / NumberOfColBoard), GraphicsUnit.Pixel);
+                        grp.DrawImage(ImgSource, new Rectangle(0, 0, Width / NumberOfRowBoard,
+                            Height / NumberOfColBoard), new Rectangle(j * Width / NumberOfRowBoard,
+                            i * Height / NumberOfColBoard, Width / NumberOfRowBoard,
+                            Height / NumberOfColBoard), GraphicsUnit.Pixel);
                     }
                     img.Tag = index.ToString();
                     imgs.Add(img);
@@ -281,7 +295,7 @@ namespace Puzzle_Image_Game
             {
                 if (item.Name == "MusicPlayerForm")
                 {
-                    GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.stop();
+                    GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.pause();
                     break;
                 }
             }
@@ -306,8 +320,10 @@ namespace Puzzle_Image_Game
         private void musicPlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             GameFunction.MusicPlayer();
-            GameFunction.OnPressPlayButtonMusicPlayer += GameFunction_OnPressPlayButtonMusicPlayer;
-            GameFunction.MusicPlayerForm.OnEndedMusic += MusicPlayerForm_OnEndedMusic;
+            GameFunction.MusicPlayerForm.OnPressPlayButtonMusicPlayer 
+                += MusicPlayerForm_OnPressPlayButtonMusicPlayer;
+            GameFunction.MusicPlayerForm.OnEndedMusic 
+                += MusicPlayerForm_OnEndedMusic;
         }
 
         private void MusicPlayerForm_OnEndedMusic(object sender, EventArgs e)
@@ -330,12 +346,15 @@ namespace Puzzle_Image_Game
             }
             
         }
-        private void GameFunction_OnPressPlayButtonMusicPlayer(object sender, Events.OnPressPlayButtonMusicPlayer e)
+        private void MusicPlayerForm_OnPressPlayButtonMusicPlayer(object sender,
+            Events.OnPressPlayButtonMusicPlayer e)
         {
             musicplayerPnl.Visible = true;
             playBtn.Visible = false;
             pauseBtn.Visible = true;
             songLbl.Text = e.Name;
+            GameFunction.MusicPlayerForm.OnPressPlayButtonMusicPlayer
+                -= MusicPlayerForm_OnPressPlayButtonMusicPlayer;
         }
 
         private void pauseBtn_Click(object sender, EventArgs e)
@@ -354,23 +373,29 @@ namespace Puzzle_Image_Game
 
         private void UpdataMusic(int index)
         {
-            GameFunction.MusicPlayerForm.WMPlayer.URL = Path.GetFullPath(GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path);
-            GameFunction.MusicPlayerForm.MusicPlayerManager.SongPlaying = GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path;
+            GameFunction.MusicPlayerForm.WMPlayer.URL = 
+                Path.GetFullPath(GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path);
+            GameFunction.MusicPlayerForm.MusicPlayerManager.SongPlaying =
+                GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path;
             GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying = index;
             songLbl.Text = GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Name;
+            pauseBtn.Visible = true;
+            playBtn.Visible = false;
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
             int index = GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying;
-            int nextIndex = index + 1 < GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count ? index + 1 : 0;
+            int nextIndex = index + 1 < 
+                GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count ? index + 1 : 0;
             UpdataMusic(nextIndex);
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
             int index = GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying;
-            int prevIndex = index - 1 < 0 ? GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count - 1 : index - 1;
+            int prevIndex = index - 1 < 0 ? 
+                GameFunction.MusicPlayerForm.MusicPlayerManager.Songs.Count - 1 : index - 1;
             UpdataMusic(prevIndex);
         }
         #endregion

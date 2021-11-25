@@ -39,6 +39,7 @@ namespace Puzzle_Image_Game
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.btnOKForm2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlForm2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,11 +99,11 @@ namespace Puzzle_Image_Game
             this.radioButton5.AutoSize = true;
             this.radioButton5.Location = new System.Drawing.Point(299, 18);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(151, 17);
+            this.radioButton5.Size = new System.Drawing.Size(145, 17);
             this.radioButton5.TabIndex = 0;
             this.radioButton5.TabStop = true;
             this.radioButton5.Tag = "7";
-            this.radioButton5.Text = "Plantinum (7x7) (7 minutes)";
+            this.radioButton5.Text = "Platinum (7x7) (7 minutes)";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton3
@@ -163,11 +164,23 @@ namespace Puzzle_Image_Game
             this.btnOKForm2.UseVisualStyleBackColor = true;
             this.btnOKForm2.Click += new System.EventHandler(this.btnOKForm2_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Lucida Handwriting", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.label1.Location = new System.Drawing.Point(12, 149);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(316, 124);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Level";
+            // 
             // ChooseLevelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(507, 270);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOKForm2);
             this.Controls.Add(this.pnlForm2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -175,10 +188,10 @@ namespace Puzzle_Image_Game
             this.MinimizeBox = false;
             this.Name = "ChooseLevelForm";
             this.Text = "Choose Level";
-            this.Load += new System.EventHandler(this.ChooseLevelForm_Load);
             this.pnlForm2.ResumeLayout(false);
             this.pnlForm2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -194,5 +207,6 @@ namespace Puzzle_Image_Game
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Button btnOKForm2;
+        private System.Windows.Forms.Label label1;
     }
 }

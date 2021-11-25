@@ -28,8 +28,10 @@ namespace Puzzle_Image_Game
         public void GetListPathImageFromFolder()
         {
             string pathTemp = $@"..\..\Image\";
-            if (!Directory.Exists(pathTemp)) Directory.CreateDirectory(pathTemp);
-            listPath = new List<string>(Directory.GetFiles(pathTemp));
+            if (!Directory.Exists(pathTemp))
+                Directory.CreateDirectory(pathTemp);
+            listPath = new List<string>(
+                Directory.GetFiles(pathTemp));
         }
 
         public int GetNumberImageCurrentFromFolder()
@@ -37,7 +39,8 @@ namespace Puzzle_Image_Game
             string path = $@"..\..\Image\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             var count = new List<string>(Directory.GetFiles(path));
-            int res = int.Parse(Path.GetFileNameWithoutExtension(count[count.Count - 1])) + 1;
+            int res = int.Parse(
+                Path.GetFileNameWithoutExtension(count[count.Count - 1])) + 1;
             return res;
         }
 
@@ -52,7 +55,8 @@ namespace Puzzle_Image_Game
             }
             catch
             {
-                MessageBox.Show("Vui lòng chọn file ảnh hoặc kiểm tra lại đường dẫn", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Vui lòng chọn file ảnh hoặc kiểm" +
+                    " tra lại đường dẫn", "Error", MessageBoxButtons.OK);
                 return null;
             }
         }
@@ -71,7 +75,7 @@ namespace Puzzle_Image_Game
             return dir + name;
         }
         
-        public void LoadImageBegin(ListView lsv, ImageList imgList, string path)
+        public void InitialImageList(ListView lsv, ImageList imgList, string path)
         {
             using (Image img = GetImageFromFile(path))
             {

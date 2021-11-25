@@ -71,12 +71,18 @@ namespace Puzzle_Image_Game
             Path = @"1.jpg";
             Img = Image.FromFile(Path);
             lbClientPlayer.Text = socket.PlayerName;
-            imgListServer = new List<Image>(CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard));
-            imgListClient = new List<Image>(CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard));
+            imgListServer = new List<Image>(CropIntoListImgs(NumberOfRow, NumberOfCol,
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard));
+            imgListClient = new List<Image>(CropIntoListImgs(NumberOfRow, NumberOfCol,
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard));
                         
-            ClientBoard = new BoardManager(NumberOfRow, NumberOfCol, WidthBoard, HeightBoard, new Point(this.Width / 14, this.Height / 10), new Point(this.Width / 14, this.Height / 10 + 300), imgListClient);
+            ClientBoard = new BoardManager(NumberOfRow, NumberOfCol, WidthBoard, HeightBoard,
+                new Point(this.Width / 14, this.Height / 10),
+                new Point(this.Width / 14, this.Height / 10 + 300), imgListClient);
             ClientBoard.OnFilledPictureBox += BoardManager_OnFilledPictureBox;
-            ServerBoard = new BoardManager(NumberOfRow, NumberOfCol, WidthBoard, HeightBoard, new Point(this.Width - WidthBoard * 3 / 2, this.Height / 10), new Point(this.Width - WidthBoard * 3 / 2, this.Height / 10 + 300), imgListServer);
+            ServerBoard = new BoardManager(NumberOfRow, NumberOfCol, WidthBoard, HeightBoard,
+                new Point(this.Width - WidthBoard * 3 / 2, this.Height / 10),
+                new Point(this.Width - WidthBoard * 3 / 2, this.Height / 10 + 300), imgListServer);
 
             resizedImg = new Size(WidthBoard, HeightBoard);
             
@@ -88,7 +94,8 @@ namespace Puzzle_Image_Game
                 label1.Text = "Client";
                 multiplayManager = new MultiplayManager(ClientBoard, ServerBoard, socket, this);
                 multiplayManager.Start();
-                socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs, new PlayerInfo(lbClientPlayer.Text, 0, "00:00:00")));
+                socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs,
+                    new PlayerInfo(lbClientPlayer.Text, 0, "00:00:00")));
             }
             else
             {
@@ -108,7 +115,8 @@ namespace Puzzle_Image_Game
             socket = sender as SocketManager;
             multiplayManager = new MultiplayManager(ClientBoard, ServerBoard, socket, this);
             multiplayManager.Start();
-            socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs,new PlayerInfo(lbClientPlayer.Text,0,"00:00:00")));
+            socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs,
+                new PlayerInfo(lbClientPlayer.Text,0,"00:00:00")));
             socket.OnClientConnected -= Socket_OnClientConnected;
         }
         //Check Win
@@ -117,9 +125,12 @@ namespace Puzzle_Image_Game
             if (GameFunction.IsWin(e.PtrbList, NumberOfCol * NumberOfRow, ImgListClient))
             {
                 IsWin = true;
-                string elapsedTime = GameFunction.TimeElapse(lbHour.Text, lbMinute.Text, lbSecond.Text, currentLevel);
+                string elapsedTime = GameFunction.TimeElapse(lbHour.Text,
+                    lbMinute.Text, lbSecond.Text, currentLevel);
                 clientPlayerResultLb.Text = $"Completed! Your elapsed time: {elapsedTime}";
-                int score = int.Parse(lbClientPlayerScore.Text) + GameFunction.ConvertTimeToSecond($"00:{currentLevel}:00") - GameFunction.ConvertTimeToSecond(elapsedTime);
+                int score = int.Parse(lbClientPlayerScore.Text) + 
+                    GameFunction.ConvertTimeToSecond($"00:{currentLevel}:00")
+                    - GameFunction.ConvertTimeToSecond(elapsedTime);
                 lbClientPlayerScore.Text = score.ToString();
                 PlayerInfo player = new PlayerInfo(lbClientPlayer.Text, score, elapsedTime);
                 socket.Send(new MultiplayableData(player, IsWin));
@@ -166,8 +177,10 @@ namespace Puzzle_Image_Game
             Img = Image.FromFile(path);
             NumberOfRow = NumberOfCol = CurrentLevel;
 
-            imgListServer = CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
-            imgListClient = CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
+            imgListServer = CropIntoListImgs(NumberOfRow, NumberOfCol,
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
+            imgListClient = CropIntoListImgs(NumberOfRow, NumberOfCol,
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
 
             sizeOfPtrb = imgListClient[0].Size;
             OriginPtrb.Image = new Bitmap(Img, resizedImg);
@@ -223,8 +236,6 @@ namespace Puzzle_Image_Game
             socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs));
             multiplayManager.SetEventToPtrb();
             DisablePtrbs(clientBoard);
-
-            
         }
         //End Mix
 
@@ -234,21 +245,22 @@ namespace Puzzle_Image_Game
             socket.Send(new MultiplayableData(true, $"{lbClientPlayer.Text} is choosing image..."));
             startBtn.Enabled = mixBtn.Enabled = chooseLvBtn.Enabled = false;
             GameFunction.ChooseImage();
-            GameFunction.closeChooseImageEvent += GameFunction_closeChooseImageEvent;
+            GameFunction.ChooseImgForm.closeChooseImgForm += ChooseImgForm_closeChooseImageEvent;
         }
 
         private void ProcessWhenChooseImage()
         {
             
             NumberOfRow = NumberOfCol = CurrentLevel;
-            ImgListClient = CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
+            ImgListClient = CropIntoListImgs(NumberOfRow, NumberOfCol, 
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
             OriginPtrb.Image = new Bitmap(Img, resizedImg);
             sizeOfPtrb = imgListClient[0].Size;
             SetAttribute(ClientBoard, ImgListClient);
             
         }
 
-        private void GameFunction_closeChooseImageEvent(object sender, OnCloseChooseImageFormEvent e)
+        private void ChooseImgForm_closeChooseImageEvent(object sender, OnCloseChooseImageFormEvent e)
         {
             Path = e.Path;
             Img = Image.FromFile(Path);
@@ -256,17 +268,19 @@ namespace Puzzle_Image_Game
             socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs));
             multiplayManager.SetEventToPtrb();
             Img.Dispose();
-            GameFunction.closeChooseImageEvent -= GameFunction_closeChooseImageEvent;
+            GameFunction.ChooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImageEvent;
         }
         //end choose image
 
         //Choose level
         private void chooseLvBtn_Click(object sender, EventArgs e)
         {
-            socket.Send(new MultiplayableData(true, $"{lbClientPlayer.Text} is choosing level..."));
+            socket.Send(new MultiplayableData(true, 
+                $"{lbClientPlayer.Text} is choosing level..."));
             chooseImgBtn.Enabled = mixBtn.Enabled = startBtn.Enabled = false;
             GameFunction.ChooseLevel(CurrentLevel);
-            GameFunction.closeChooseLevelEvent += GameFunction_closeChooseLevelEvent;
+            GameFunction.ChooseLvForm.CloseLevelFormEvent 
+                += ChooseLvForm_closeChooseLevelEvent;
         }
 
         private void ProcessWhenChooseLevel()
@@ -277,8 +291,10 @@ namespace Puzzle_Image_Game
 
             NumberOfRow = NumberOfCol = CurrentLevel;
 
-            imgListClient = CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
-            imgListServer = CropIntoListImgs(NumberOfRow, NumberOfCol, new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
+            imgListClient = CropIntoListImgs(NumberOfRow, NumberOfCol, 
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
+            imgListServer = CropIntoListImgs(NumberOfRow, NumberOfCol, 
+                new Bitmap(Img, WidthBoard, HeightBoard), WidthBoard, HeightBoard);
 
             sizeOfPtrb = imgListClient[0].Size;
             OriginPtrb.Image = new Bitmap(Img, resizedImg);
@@ -287,7 +303,7 @@ namespace Puzzle_Image_Game
             SetAttribute(ServerBoard, imgListServer);
         }
 
-        private void GameFunction_closeChooseLevelEvent(object sender, OnCloseChooseLevelFormEvent e)
+        private void ChooseLvForm_closeChooseLevelEvent(object sender, OnCloseChooseLevelFormEvent e)
         {
             CurrentLevel = int.Parse(e.Level);
                 
@@ -297,7 +313,8 @@ namespace Puzzle_Image_Game
             Img = Image.FromFile(path);
             ProcessWhenChooseLevel();
             socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs, ServerBoard.imgBoard.Imgs,
-                CurrentLevel, new Bitmap(Img, WidthBoard, HeightBoard), ImgListClient, ImgListServer, lbHour.Text, lbMinute.Text, lbSecond.Text));
+                CurrentLevel, new Bitmap(Img, WidthBoard, HeightBoard), ImgListClient,
+                ImgListServer, lbHour.Text, lbMinute.Text, lbSecond.Text));
             multiplayManager.SetEventToPtrb();
             
 
@@ -305,7 +322,7 @@ namespace Puzzle_Image_Game
             DisablePtrbs(serverBoard);
 
             img.Dispose();
-            GameFunction.closeChooseLevelEvent -= GameFunction_closeChooseLevelEvent;
+            GameFunction.ChooseLvForm.CloseLevelFormEvent -= ChooseLvForm_closeChooseLevelEvent;
 
         }
         //End choose level
@@ -313,14 +330,17 @@ namespace Puzzle_Image_Game
         private void MultiplayForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!socket.Client.Client.Connected) {
-                socket.NetStream.Close();
-                socket.Client.Close();
+               
+                socket.NetStream?.Close();
+                socket.Client?.Close();
                 socket.SkForm.Close();
-                return; 
+                return;
             }
 
             bool flag = false;
-            if (!IsDisconnected && MessageBox.Show("Tiến trình hiện tại của bạn sẽ không được lưu","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning) == DialogResult.OK) {
+            if (!IsDisconnected && MessageBox.Show("Tiến trình hiện tại của bạn sẽ" +
+                " không được lưu","Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning)
+                == DialogResult.OK) {
                 socket.Send(new MultiplayableData("disconnected"));
                 flag = true;
             }
@@ -339,18 +359,19 @@ namespace Puzzle_Image_Game
             IsWin = false;
             ReleasePtrbs();
             chooseLvBtn.Enabled = chooseImgBtn.Enabled = mixBtn.Enabled = startBtn.Enabled = false;
-            GameFunction.TimeCount(lbHour, lbMinute, lbSecond, false);
-            
             socket.Send(new MultiplayableData(true));
+            GameFunction.TimeCount(lbHour, lbMinute, lbSecond, false);
         }
 
         private void GameFunction_TimeEndEvent(object sender, EventArgs e)
         {
             if (IsWin) return;
-            PlayerInfo player = new PlayerInfo(lbClientPlayer.Text, 0, $"00:{GameFunction.HandleTime(currentLevel)}:00");
+            PlayerInfo player = new PlayerInfo(lbClientPlayer.Text, 0, 
+                $"00:{GameFunction.HandleTime(currentLevel)}:00");
             socket.Send(new MultiplayableData(player, false));
             DisablePtrbs(clientBoard);
-            clientPlayerResultLb.Text = $"Oh no! Poor you :(((,\nYour elapsed time: 00:{GameFunction.HandleTime(currentLevel)}:00";
+            clientPlayerResultLb.Text = $"Oh no! Poor you :(((,\nYour elapsed time" +
+                $": 00:{GameFunction.HandleTime(currentLevel)}:00";
         }
 
         [Obsolete]
@@ -370,7 +391,9 @@ namespace Puzzle_Image_Game
 
         private void aboutBtn_Click(object sender, EventArgs e)
         {
-            string msg = "Đây là chế độ chơi 2 người qua mạng LAN\nVì không có kinh nghiệm lập trình Socket\nnên có thể phát sinh nhiều lỗi thiếu xót.\n\n Trò chơi sẽ tính điểm dựa trên thời gian bạn hoàn thành\nHoàn thành càng sớm điểm càng cao.";
+            string msg = "Đây là chế độ chơi 2 người qua mạng LAN\nVì không có kinh nghiệm" +
+                " lập trình Socket\nnên có thể phát sinh nhiều lỗi thiếu xót.\n\n Trò chơi " +
+                "sẽ tính điểm dựa trên thời gian bạn hoàn thành\nHoàn thành càng sớm điểm càng cao.";
             MessageBox.Show(msg, "Infomation", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
