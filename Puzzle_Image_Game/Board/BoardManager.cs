@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -52,6 +53,13 @@ namespace Puzzle_Image_Game
             Panel panel, int index, BorderStyle style)
         {
             ptrb.AllowDrop = true;
+            ptrb.MouseDown -= Ptrb_MouseDown;
+            ptrb.DragEnter -= PtrbDropped_DragEnter;
+            ptrb.DragDrop -= PtrbDropped_DragDrop;
+
+            ptrb.MouseEnter -= Ptrb_MouseEnter;
+            ptrb.MouseLeave -= Ptrb_MouseLeave;
+
             ptrb.MouseDown += Ptrb_MouseDown;
             ptrb.DragEnter += PtrbDropped_DragEnter;
             ptrb.DragDrop += PtrbDropped_DragDrop;
@@ -101,21 +109,21 @@ namespace Puzzle_Image_Game
             }
 
         }
-        private  void PtrbDropped_DragEnter(object sender, DragEventArgs e)
+        private void PtrbDropped_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.Bitmap))
             {
                 e.Effect = DragDropEffects.Move;
             }
         }
-        public  void Reset(Panel panel)
+        public void Reset(Panel panel)
         {
             HoldImg = null;
             droppedImg = false;
             ptrbList = new List<PictureBox>();
             panel.Controls.Clear();
         }
-        public  void AddImageToPictureBox(List<Image> imgs, Panel panelImgList)
+        public void AddImageToPictureBox(List<Image> imgs, Panel panelImgList)
         {
             int index = 0;
             foreach (PictureBox item in panelImgList.Controls)
@@ -124,13 +132,13 @@ namespace Puzzle_Image_Game
             }
         }
 
-        public  void CurrPicBlank_Paint(object sender, PaintEventArgs e)
+        public void CurrPicBlank_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, e.ClipRectangle,
                 Color.White, ButtonBorderStyle.Solid);
         }
 
-        public  bool CheckFilledPanel()
+        public bool CheckFilledPanel()
         {
             foreach (PictureBox ptrb in blankBoard.PanelBlank.Controls)
             {
@@ -146,8 +154,6 @@ namespace Puzzle_Image_Game
         {
             //Start count down time
             OnClickPictureBox?.Invoke(sender, e);
-
-
             var ptr = sender as PictureBox;
             if (ptr.Image == null) return;
             droppedImg = false;
@@ -161,6 +167,7 @@ namespace Puzzle_Image_Game
 
                 OnFilledPictureBox?.Invoke(blankBoard.PanelBlank, new OnFilledImageInBlankBoardEvent(ptrbList));
             }
+
         }
     }
 }

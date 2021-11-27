@@ -12,8 +12,8 @@ namespace Puzzle_Image_Game
     {
         private Image desImg;
         private Image srcImg;
-        private int desPos;
-        private int srcPos;
+        private int desPos = -1;
+        private int srcPos = -1;
 
         private List<Image> initialImgs;
         private List<Image> mixedImgsClient;

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -47,6 +47,9 @@ namespace Puzzle_Image_Game
         {
             foreach(PictureBox ptrb in panel.Controls)
             {
+                ptrb.DragDrop -= Ptrb_DragDrop;
+                ptrb.MouseDown -= Ptrb_MouseDown;
+
                 ptrb.DragDrop += Ptrb_DragDrop;
                 ptrb.MouseDown += Ptrb_MouseDown;
             }
@@ -54,17 +57,18 @@ namespace Puzzle_Image_Game
 
         private void Ptrb_MouseDown(object sender, MouseEventArgs e)
         {
+            if (dataSend.DesPos == -1) return;
             var ptrb = sender as PictureBox;
             dataSend.SrcPos = int.Parse(ptrb.Tag.ToString());
             dataSend.InitialImgs = null;
             socket.Send(dataSend);
+            dataSend.DesPos = -1;
         }
 
         private void Ptrb_DragDrop(object sender, DragEventArgs e)
         {
             var ptrb = sender as PictureBox;
             var img = e.Data.GetData(DataFormats.Bitmap) as Bitmap;
-            
             dataSend.DesImg = img;
             dataSend.DesPos = int.Parse(ptrb.Tag.ToString());
             dataSend.SrcImg = client.HoldImg;
@@ -115,7 +119,7 @@ namespace Puzzle_Image_Game
 
         private void ListenDataReceived()
         {
-            Thread t = new Thread(() => {
+            Thread t = new Thread(() => {   
                 loop:
                 try
                 {
