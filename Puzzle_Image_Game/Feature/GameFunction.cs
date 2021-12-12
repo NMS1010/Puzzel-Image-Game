@@ -163,7 +163,7 @@ namespace Puzzle_Image_Game
             h = (int)Math.Floor(second / (Double)3600);
             m = (int)Math.Floor((second % 3600) / (Double)60);
             s = second % 3600 % 60;
-            return $"{GameFunction.HandleTime(h)}:{GameFunction.HandleTime(m)}:{GameFunction.HandleTime(s)}";
+            return $"{HandleTime(h)}:{HandleTime(m)}:{HandleTime(s)}";
         }
 
         public static string TimeElapse(string hour, string minute, string second, int currentLevel)

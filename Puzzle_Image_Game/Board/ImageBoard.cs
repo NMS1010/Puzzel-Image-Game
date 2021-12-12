@@ -22,8 +22,10 @@ namespace Puzzle_Image_Game
         public ImageBoard(int row, int col, int width, int height, Point position,
             List<Image> imgs) : base(row, col, width, height, position)
         {
-            PanelImgList = new Panel();
-            PanelImgList.Size = new Size(Width, Height);
+            PanelImgList = new Panel
+            {
+                Size = new Size(Width, Height)
+            };
             Imgs = imgs;
         }
 

@@ -12,17 +12,17 @@ namespace Puzzle_Image_Game
     public class BoardManager
     {
 
-        public  event EventHandler<OnFilledImageInBlankBoardEvent> OnFilledPictureBox;
-        public  event EventHandler OnClickPictureBox;
+        public event EventHandler<OnFilledImageInBlankBoardEvent> OnFilledPictureBox;
+        public event EventHandler OnClickPictureBox;
 
         //Đánh dấu ảnh đã được thả sang ô khác hay chưa
-        protected  bool droppedImg = false;
+        protected bool droppedImg = false;
         //Giữ ảnh cần swap
         private Image holdImg = null;
-        private  List<PictureBox> ptrbList;
+        private List<PictureBox> ptrbList;
 
-        public  ImageBoard imgBoard;
-        public  BlankBoard blankBoard;
+        public ImageBoard imgBoard;
+        public BlankBoard blankBoard;
 
         public Image HoldImg { get => holdImg; set => holdImg = value; }
 
@@ -41,7 +41,7 @@ namespace Puzzle_Image_Game
             blankBoard.DrawBoard(fm, sizeOfPtr,this);
         }
 
-        public  void AddPanelToForm(Form fm, Point pointPanel, 
+        public void AddPanelToForm(Form fm, Point pointPanel, 
             AnchorStyles style, Panel panelAdded)
         {
             panelAdded.Location = pointPanel;
@@ -49,7 +49,7 @@ namespace Puzzle_Image_Game
             fm.Controls.Add(panelAdded);
         }
 
-        public  void AddPictureBoxToPanel(Form fm, PictureBox ptrb,
+        public void AddPictureBoxToPanel(Form fm, PictureBox ptrb,
             Panel panel, int index, BorderStyle style)
         {
             ptrb.AllowDrop = true;
@@ -76,14 +76,14 @@ namespace Puzzle_Image_Game
 
         }
 
-        private  void Ptrb_MouseLeave(object sender, EventArgs e)
+        private void Ptrb_MouseLeave(object sender, EventArgs e)
         {
             var ptr = sender as PictureBox;
             ptr.Paint -= Ptrb_Paint;
             ptr.Refresh();
         }
 
-        private  void Ptrb_MouseEnter(object sender, EventArgs e)
+        private void Ptrb_MouseEnter(object sender, EventArgs e)
         {
             var ptr = sender as PictureBox;
             ptr.Paint -= Ptrb_Paint;
@@ -91,13 +91,13 @@ namespace Puzzle_Image_Game
             ptr.Refresh();
         }
 
-        private  void Ptrb_Paint(object sender, PaintEventArgs e)
+        private void Ptrb_Paint(object sender, PaintEventArgs e)
         {
             ControlPaint.DrawBorder(e.Graphics, e.ClipRectangle, 
                 Color.Red, ButtonBorderStyle.Solid);
         }
 
-        private  void PtrbDropped_DragDrop(object sender, DragEventArgs e)
+        private void PtrbDropped_DragDrop(object sender, DragEventArgs e)
         {
             var ptrb = sender as PictureBox;
             var img = e.Data.GetData(DataFormats.Bitmap) as Bitmap;

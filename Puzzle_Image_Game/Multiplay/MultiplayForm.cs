@@ -267,6 +267,7 @@ namespace Puzzle_Image_Game
             ProcessWhenChooseImage();
             socket.Send(new MultiplayableData(ClientBoard.imgBoard.Imgs));
             multiplayManager.SetEventToPtrb();
+            DisablePtrbs(clientBoard);
             Img.Dispose();
             GameFunction.ChooseImgForm.closeChooseImgForm -= ChooseImgForm_closeChooseImageEvent;
         }

@@ -22,8 +22,10 @@ namespace Puzzle_Image_Game
         public BlankBoard(int row, int col, int width, int height, Point position)
             :base(row,col,width,height,position)
         {
-            PanelBlank = new Panel();
-            PanelBlank.Size = new Size(Width, Height);
+            PanelBlank = new Panel
+            {
+                Size = new Size(Width, Height)
+            };
         }
 
         public Panel PanelBlank { get => panelBlank; set => panelBlank = value; }

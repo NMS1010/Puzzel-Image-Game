@@ -13,8 +13,6 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.PowerModifierForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.MultiplayForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.csproj.AssemblyReference.cache
-E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\Newtonsoft.Json.dll
-E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\Newtonsoft.Json.xml
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.InitialGameForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Interop.WMPLib.dll
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\AxInterop.WMPLib.dll
@@ -22,4 +20,3 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.Feature.Music_Player.MusicPlayerForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\Interop.WMPLib.dll
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Debug\AxInterop.WMPLib.dll
-E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Debug\Puzzle_Image_Game.csproj.CopyComplete
