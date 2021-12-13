@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">All</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>f6672dae-e38c-42cb-a90e-31baf6fffb9c</ProjectGuid>
+    <ProjectGuid>7b1144f4-bdd2-42d5-8b2b-118ea7bccc21</ProjectGuid>
     <OutputType>msi</OutputType>
     <ProjectHome>.</ProjectHome>
     <StartupFile>AI Setup Project.aip</StartupFile>
@@ -13,12 +13,10 @@
     <AssemblyName>AI Setup Project</AssemblyName>
     <Name>AI Setup Project</Name>
     <RootNamespace>AI Setup Project</RootNamespace>
-    <LoadFromTemplate>True</LoadFromTemplate>
+    <LoadFromTemplate>
+    </LoadFromTemplate>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'All' ">
-    <DebugSymbols>false</DebugSymbols>
-    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
-  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'DefaultBuild' " />
   <ItemGroup>
     <Compile Include="AI Setup Project.aip">
       <SubType>Code</SubType>
