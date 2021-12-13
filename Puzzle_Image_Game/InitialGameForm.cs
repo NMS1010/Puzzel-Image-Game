@@ -66,5 +66,6 @@ namespace Puzzle_Image_Game
         {
             Close();
         }
+
     }
 }

@@ -27,7 +27,7 @@ namespace Puzzle_Image_Game
 
         public void GetListPathImageFromFolder()
         {
-            string pathTemp = $@"..\..\Image\";
+            string pathTemp = $@"Image\";
             if (!Directory.Exists(pathTemp))
                 Directory.CreateDirectory(pathTemp);
             listPath = new List<string>(
@@ -36,7 +36,7 @@ namespace Puzzle_Image_Game
 
         public int GetNumberImageCurrentFromFolder()
         {
-            string path = $@"..\..\Image\";
+            string path = $@"Image\";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             var count = new List<string>(Directory.GetFiles(path));
             int res = int.Parse(
@@ -64,7 +64,7 @@ namespace Puzzle_Image_Game
         private string AddImageToFolderAndGetPath(string pth)
         {
             
-            string dir = $@"..\..\Image\";
+            string dir = $@"Image\";
             string name = $"{CountImage}.jpg";
             using (Bitmap bmp = GetImageFromFile(pth))
             {

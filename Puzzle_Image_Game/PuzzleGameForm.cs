@@ -289,18 +289,18 @@ namespace Puzzle_Image_Game
         [Obsolete]
         private void PuzzleGameForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
             GameFunction.StopThreads(GameFunction.ThreadCountDown);
             GameFunction.StopThreads(GameFunction.ThreadsOfPowerForm);
-            foreach (Form item in Application.OpenForms)
-            {
-                if (item.Name == "MusicPlayerForm")
-                {
-                    GameFunction.MusicPlayerForm.WMPlayer.Ctlcontrols.pause();
-                    break;
-                }
-            }
+            powerGrpBox.Visible = false;
             GameFunction.isPowerStartClicked = false;
+            
             startFm.Show();
+            GameFunction.ChooseImgForm?.Dispose();
+            GameFunction.MusicPlayerForm?.Dispose();
+            GameFunction.PowerFm?.Dispose();
+            GameFunction.ChooseLvForm?.Dispose();
+            Dispose();
         }
 
 

@@ -11,8 +11,12 @@ E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Imag
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.exe
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.pdb
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.SocketForm.resources
-E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Newtonsoft.Json.dll
-E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Newtonsoft.Json.xml
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.InitialGameForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.MultiplayForm.resources
 E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.PowerModifierForm.resources
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\Interop.WMPLib.dll
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\bin\Release\AxInterop.WMPLib.dll
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Interop.WMPLib.dll
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\AxInterop.WMPLib.dll
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.csproj.ResolveComReference.cache
+E:\Learning\Projects\Puzzle_Image_Game\Puzzle_Image_Game\obj\Release\Puzzle_Image_Game.Feature.Music_Player.MusicPlayerForm.resources

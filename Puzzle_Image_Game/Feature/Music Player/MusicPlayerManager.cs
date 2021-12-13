@@ -11,7 +11,7 @@ namespace Puzzle_Image_Game.Feature.Music_Player
     public class MusicPlayerManager
     {
         private List<Song> songs;
-        private static string folderPath = @"../../Music";
+        private static string folderPath = @"Music";
         private string songPlaying;
         private int indexSongPlaying;
         private string songChoosen;

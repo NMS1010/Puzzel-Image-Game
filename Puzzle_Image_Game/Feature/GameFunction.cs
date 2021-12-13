@@ -221,6 +221,7 @@ namespace Puzzle_Image_Game
                 ThreadsOfPowerForm.Add(Ts);
             else
                 ThreadCountDown.Add(Ts);
+            Ts.IsBackground = true;
             Ts.Start();
         }
         

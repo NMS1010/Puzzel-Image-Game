@@ -7,10 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Puzzle_Image_Game", "Puzzle
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|Any CPU = All|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB2177ED-4383-408A-A74D-F9B39285525C}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{BB2177ED-4383-408A-A74D-F9B39285525C}.All|Any CPU.Build.0 = Release|Any CPU
 		{BB2177ED-4383-408A-A74D-F9B39285525C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BB2177ED-4383-408A-A74D-F9B39285525C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB2177ED-4383-408A-A74D-F9B39285525C}.Release|Any CPU.ActiveCfg = Release|Any CPU

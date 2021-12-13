@@ -48,8 +48,12 @@ namespace Puzzle_Image_Game
                 chooseModeCbx.Enabled = false;
                 cancelBtn.Enabled = true;
 
+                TimeSpan countDownTime = timePicker.Value - DateTime.Now;
 
-                GameFunction.TimeCount(lbHour, lbMinute, lbSecond,true);
+                lbHour.Text = GameFunction.HandleTime(countDownTime.Hours + countDownTime.Days * 24);
+                lbMinute.Text = GameFunction.HandleTime(countDownTime.Minutes);
+                lbSecond.Text = GameFunction.HandleTime(countDownTime.Seconds);
+                GameFunction.TimeCount(lbHour, lbMinute, lbSecond, true);
                 GameFunction.TimeEndEvent += GameFunction_TimeEndEvent;
 
                 GameFunction.modePowerChosen = chooseModeCbx.Text;
