@@ -59,7 +59,7 @@ namespace Puzzle_Image_Game
         {
             string msg = "Puzzle Game là đồ án cuối kì môn OOP." +
                 "\nThành viên đóng góp:\n 1.Nguyễn Minh Sơn\n 2.Nguyễn Đức Thành";
-            MessageBox.Show(msg,"ABout",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show(msg,"About",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
 
         private void quitBtn_Click(object sender, EventArgs e)
