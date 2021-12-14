@@ -41,11 +41,11 @@ namespace Puzzle_Image_Game
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Curlz MT", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Curlz MT", 56F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(55, 18);
+            this.label1.Location = new System.Drawing.Point(136, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(280, 53);
+            this.label1.Size = new System.Drawing.Size(518, 99);
             this.label1.TabIndex = 0;
             this.label1.Text = "PUZZLE GAME";
             // 
@@ -53,11 +53,11 @@ namespace Puzzle_Image_Game
             // 
             this.singleplayBtn.BackColor = System.Drawing.Color.DarkOrange;
             this.singleplayBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.singleplayBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.singleplayBtn.ForeColor = System.Drawing.Color.ForestGreen;
-            this.singleplayBtn.Location = new System.Drawing.Point(114, 103);
+            this.singleplayBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.singleplayBtn.ForeColor = System.Drawing.Color.White;
+            this.singleplayBtn.Location = new System.Drawing.Point(216, 119);
             this.singleplayBtn.Name = "singleplayBtn";
-            this.singleplayBtn.Size = new System.Drawing.Size(152, 35);
+            this.singleplayBtn.Size = new System.Drawing.Size(347, 73);
             this.singleplayBtn.TabIndex = 1;
             this.singleplayBtn.Text = "Single Play";
             this.singleplayBtn.UseVisualStyleBackColor = false;
@@ -66,11 +66,11 @@ namespace Puzzle_Image_Game
             // multiplayBtn
             // 
             this.multiplayBtn.BackColor = System.Drawing.Color.DarkOrange;
-            this.multiplayBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.multiplayBtn.ForeColor = System.Drawing.Color.ForestGreen;
-            this.multiplayBtn.Location = new System.Drawing.Point(114, 144);
+            this.multiplayBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.multiplayBtn.ForeColor = System.Drawing.Color.White;
+            this.multiplayBtn.Location = new System.Drawing.Point(216, 198);
             this.multiplayBtn.Name = "multiplayBtn";
-            this.multiplayBtn.Size = new System.Drawing.Size(152, 35);
+            this.multiplayBtn.Size = new System.Drawing.Size(347, 79);
             this.multiplayBtn.TabIndex = 2;
             this.multiplayBtn.Text = "Multi Play (LAN)";
             this.multiplayBtn.UseVisualStyleBackColor = false;
@@ -79,11 +79,11 @@ namespace Puzzle_Image_Game
             // quitBtn
             // 
             this.quitBtn.BackColor = System.Drawing.Color.DarkOrange;
-            this.quitBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quitBtn.ForeColor = System.Drawing.Color.ForestGreen;
-            this.quitBtn.Location = new System.Drawing.Point(114, 226);
+            this.quitBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quitBtn.ForeColor = System.Drawing.Color.White;
+            this.quitBtn.Location = new System.Drawing.Point(216, 361);
             this.quitBtn.Name = "quitBtn";
-            this.quitBtn.Size = new System.Drawing.Size(152, 35);
+            this.quitBtn.Size = new System.Drawing.Size(347, 78);
             this.quitBtn.TabIndex = 4;
             this.quitBtn.Text = "Quit";
             this.quitBtn.UseVisualStyleBackColor = false;
@@ -92,11 +92,11 @@ namespace Puzzle_Image_Game
             // aboutBtn
             // 
             this.aboutBtn.BackColor = System.Drawing.Color.DarkOrange;
-            this.aboutBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.aboutBtn.ForeColor = System.Drawing.Color.ForestGreen;
-            this.aboutBtn.Location = new System.Drawing.Point(114, 185);
+            this.aboutBtn.Font = new System.Drawing.Font("MingLiU-ExtB", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aboutBtn.ForeColor = System.Drawing.Color.White;
+            this.aboutBtn.Location = new System.Drawing.Point(216, 283);
             this.aboutBtn.Name = "aboutBtn";
-            this.aboutBtn.Size = new System.Drawing.Size(152, 35);
+            this.aboutBtn.Size = new System.Drawing.Size(347, 72);
             this.aboutBtn.TabIndex = 3;
             this.aboutBtn.Text = "About";
             this.aboutBtn.UseVisualStyleBackColor = false;
@@ -107,7 +107,7 @@ namespace Puzzle_Image_Game
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(385, 273);
+            this.ClientSize = new System.Drawing.Size(791, 475);
             this.Controls.Add(this.quitBtn);
             this.Controls.Add(this.aboutBtn);
             this.Controls.Add(this.multiplayBtn);
