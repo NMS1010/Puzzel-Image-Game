@@ -59,8 +59,9 @@ namespace Puzzle_Image_Game.Feature.Music_Player
                 if (!songsLsbx.Items.Contains(names[i]) &&
                     !Songs.Contains(new Song(paths[i], names[i])))
                 {
-                    Songs.Add(new Song(paths[i], names[i]));
-                    SaveIntoFolder(paths[i], names[i],Songs[i]);
+                    Song temp = new Song(paths[i], names[i]);
+                    SaveIntoFolder(paths[i], names[i],temp);
+                    Songs.Add(temp);
                 }
             }
             

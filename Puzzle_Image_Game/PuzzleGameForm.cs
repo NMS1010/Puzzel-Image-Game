@@ -378,7 +378,7 @@ namespace Puzzle_Image_Game
             GameFunction.MusicPlayerForm.MusicPlayerManager.SongPlaying =
                 GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Path;
             GameFunction.MusicPlayerForm.MusicPlayerManager.IndexSongPlaying = index;
-            songLbl.Text = GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Name;
+            songLbl.Text = Path.GetFileNameWithoutExtension(GameFunction.MusicPlayerForm.MusicPlayerManager.Songs[index].Name);
             pauseBtn.Visible = true;
             playBtn.Visible = false;
         }

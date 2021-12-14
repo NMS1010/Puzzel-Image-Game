@@ -99,14 +99,14 @@ namespace Puzzle_Image_Game.Feature.Music_Player
         {
             WMPlayer.URL = Path.GetFullPath(MusicPlayerManager.SongChoosen);
             
-            OnPressPlayButtonMusicPlayer?.Invoke(sender,
-                new Events.OnPressPlayButtonMusicPlayer(
-                    Path.GetFileNameWithoutExtension(MusicPlayerManager.SongChoosen)));
 
             MusicPlayerManager.SongPlaying = MusicPlayerManager.SongChoosen;
             MusicPlayerManager.IndexSongPlaying
                 = MusicPlayerManager.Songs.FindIndex(
                     (obj) => obj.Path == MusicPlayerManager.SongPlaying);
+            OnPressPlayButtonMusicPlayer?.Invoke(sender,
+                new Events.OnPressPlayButtonMusicPlayer(
+                    Path.GetFileNameWithoutExtension(MusicPlayerManager.SongChoosen)));
             playBtn.Enabled = false;
             playBtn.Click -= PlayBtn_Click;
         }

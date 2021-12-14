@@ -59,8 +59,6 @@
     <ROW File="jpg" Component_="jpg" FileName="2.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Image\2.jpg" SelfReg="false"/>
     <ROW File="jpg_1" Component_="jpg" FileName="3.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Image\3.jpg" SelfReg="false"/>
     <ROW File="jpg_2" Component_="jpg" FileName="5.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Image\5.jpg" SelfReg="false"/>
-    <ROW File="jpg_3" Component_="jpg" FileName="6.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Image\6.jpg" SelfReg="false"/>
-    <ROW File="jpg_4" Component_="jpg" FileName="7.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Image\7.jpg" SelfReg="false"/>
     <ROW File="jpg_5" Component_="jpg" FileName="8.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Image\8.jpg" SelfReg="false"/>
     <ROW File="TheChainsmokersCloser_ft.Halsey.mkv" Component_="TheChainsmokersCloser_ft.Halsey.mkv" FileName="THECHA~1.MKV|The Chainsmokers - Closer_ft. Halsey.mkv" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\Music\The Chainsmokers - Closer_ft. Halsey.mkv" SelfReg="false"/>
     <ROW File="jpg_6" Component_="jpg_1" FileName="1.jpg" Attributes="0" SourcePath="..\Puzzle_Image_Game\bin\Release\1.jpg" SelfReg="false"/>

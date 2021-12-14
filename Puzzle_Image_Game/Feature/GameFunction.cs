@@ -18,10 +18,7 @@ namespace Puzzle_Image_Game
         private static ChooseLevelForm chooseLvForm;
         private static ChooseImageForm chooseImgForm;
         private static PowerModifierForm powerFm;
-        
-
         private static MusicPlayerForm musicPlayerForm;
-        
 
         private static List<Thread> threadsOfPowerForm;
         private static List<Thread> threadCountDown;
@@ -113,7 +110,6 @@ namespace Puzzle_Image_Game
             
         }
 
-
         public static void ChooseImage()
         {
             ChooseImgForm = new ChooseImageForm();
@@ -127,7 +123,6 @@ namespace Puzzle_Image_Game
                 Application.OpenForms[ChooseImgForm.Name].Focus();
             }
         }
-
 
         #region: time processing
 
@@ -232,8 +227,6 @@ namespace Puzzle_Image_Game
         public static string modePowerChosen = "Shut Down";
         public static DateTime timeSet = DateTime.Now;
 
-        
-
         [Obsolete]
         public static void PowerModify(GroupBox powerGrpBox)
         {
@@ -247,7 +240,6 @@ namespace Puzzle_Image_Game
                 Application.OpenForms[PowerFm.Name].Focus();
             }
         }
-
 
         public static bool IsWin(List<PictureBox> ptrbList, int numberOfPiecesImg, List<Image> imgList)
         {

@@ -30,6 +30,7 @@ namespace Puzzle_Image_Game
         [System.Obsolete]
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InitialGameForm));
             this.label1 = new System.Windows.Forms.Label();
             this.singleplayBtn = new System.Windows.Forms.Button();
             this.multiplayBtn = new System.Windows.Forms.Button();
@@ -113,6 +114,7 @@ namespace Puzzle_Image_Game
             this.Controls.Add(this.singleplayBtn);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "InitialGameForm";
